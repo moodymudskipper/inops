@@ -23,11 +23,11 @@
 !=(x, y) <- value
 }
 \arguments{
-\item{x}{first element of the operation}
+\item{x}{first element of the operation.}
 
-\item{y}{second element of the operation}
+\item{y}{second element of the operation.}
 
-\item{value}{replacement value}
+\item{value}{replacement value.}
 }
 \value{
 \code{x} with values for which the comparisons evaluate to TRUE replaced with \code{value}.

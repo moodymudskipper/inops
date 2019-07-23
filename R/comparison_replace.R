@@ -2,9 +2,9 @@
 #'
 #' Operators for replacing values using the standard comparison operators.
 #'
-#' @param x first element of the operation
-#' @param y second element of the operation
-#' @param value replacement value
+#' @param x first element of the operation.
+#' @param y second element of the operation.
+#' @param value replacement value.
 #'
 #' @return \code{x} with values for which the comparisons evaluate to TRUE replaced with \code{value}.
 #'
