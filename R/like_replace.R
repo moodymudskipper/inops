@@ -15,12 +15,12 @@ NULL
 #' @rdname like_replace
 #' @export
 `%like%<-` <- function (x, pattern, value) {
-  in_replace(x, `%like%`, pattern, value)
+  infix_replace(x, `%like%`, pattern, value)
 }
 
 # copy and paste from `%like%`, adding `!` to `cond` definition
 #' @rdname like_replace
 #' @export
 `%!like%<-` <- function (x, pattern, value) {
-  in_replace(x, `%!like%`, pattern, value)
+  infix_replace(x, `%!like%`, pattern, value)
 }

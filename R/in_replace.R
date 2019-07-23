@@ -31,63 +31,63 @@ NULL
 #' @rdname in_replace
 #' @export
 `%in{}%<-` <- function(x, table, value) {
-  in_replace(x, `%in{}%`, table, value)
+  infix_replace(x, `%in{}%`, table, value)
 }
 
 #' @rdname in_replace
 #' @export
 `%!in{}%<-` <- function(x, table, value) {
-  in_replace(x, `%!in{}%`, table, value)
+  infix_replace(x, `%!in{}%`, table, value)
 }
 
 
 #' @rdname in_replace
 #' @export
 `%in[]%<-` <- function(x, interval, value) {
-  in_replace(x, `%in[]%`, interval, value)
+  infix_replace(x, `%in[]%`, interval, value)
 }
 
 #' @rdname in_replace
 #' @export
 `%!in[]%<-` <- function(x, interval, value) {
-  in_replace(x, `%!in[]%`, interval, value)
+  infix_replace(x, `%!in[]%`, interval, value)
 }
 
 
 #' @rdname in_replace
 #' @export
 `%in()%<-` <- function(x, interval, value) {
-  in_replace(x, `%in()%`, interval, value)
+  infix_replace(x, `%in()%`, interval, value)
 }
 
 #' @rdname in_replace
 #' @export
 `%!in()%<-` <- function(x, interval, value) {
-  in_replace(x, `%!in()%`, interval, value)
+  infix_replace(x, `%!in()%`, interval, value)
 }
 
 
 #' @rdname in_replace
 #' @export
 `%in(]%<-` <- function(x, interval, value) {
-  in_replace(x, `%in(]%`, interval, value)
+  infix_replace(x, `%in(]%`, interval, value)
 }
 
 #' @rdname in_replace
 #' @export
 `%!in(]%<-` <- function(x, interval, value) {
-  in_replace(x, `%!in(]%`, interval, value)
+  infix_replace(x, `%!in(]%`, interval, value)
 }
 
 
 #' @rdname in_replace
 #' @export
 `%in[)%<-` <- function(x, interval, value) {
-  in_replace(x, `%in[)%`, interval, value)
+  infix_replace(x, `%in[)%`, interval, value)
 }
 
 #' @rdname in_replace
 #' @export
 `%!in[)%<-` <- function(x, interval, value) {
-  in_replace(x, `%!in[)%`, interval, value)
+  infix_replace(x, `%!in[)%`, interval, value)
 }

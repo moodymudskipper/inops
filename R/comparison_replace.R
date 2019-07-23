@@ -15,19 +15,19 @@ NULL
 #' @rdname comparison_replace
 #' @export
 `>=<-` <- function(x, y, value){
-  in_replace(x, `>=`, y, value)
+  infix_replace(x, `>=`, y, value)
 }
 
 #' @rdname comparison_replace
 #' @export
 `><-` <- function(x, y, value){
-  in_replace(x, `>`, y, value)
+  infix_replace(x, `>`, y, value)
 }
 
 #' @rdname comparison_replace
 #' @export
 `<=<-` <- function(x, y, value){
-  in_replace(x, `<=`, y, value)
+  infix_replace(x, `<=`, y, value)
 }
 
 #' @rdname comparison_replace
@@ -37,19 +37,19 @@ NULL
   if (missing(value)) {
     eval.parent(substitute(.Primitive("<<-")(x, y)))
   } else {
-    in_replace(x, `<`, y, value)
+    infix_replace(x, `<`, y, value)
   }
 }
 
 #' @rdname comparison_replace
 #' @export
 `==<-` <- function(x, y, value){
-  in_replace(x, `==`, y, value)
+  infix_replace(x, `==`, y, value)
 }
 
 #' @rdname comparison_replace
 #' @export
 `!=<-` <- function(x, y, value){
-  in_replace(x, `!=`, y, value)
+  infix_replace(x, `!=`, y, value)
 }
 

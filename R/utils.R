@@ -1,5 +1,5 @@
-# helper function for performing replacements with `in` operators
-in_replace <- function(x, fun, template, value) {
+# helper function for performing replacements with infix operators
+infix_replace <- function(x, fun, template, value) {
   if(is.factor(x)) {
     cond <- fun(levels(x), template)
     cond <- simplify2array(cond)
