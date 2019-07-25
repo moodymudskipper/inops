@@ -38,7 +38,7 @@ NULL
   }
   attributes(res) <- attributes(x)
   res[is.na(x)] <- NA
-  res
+  simplify2array(res)
 }
 
 #' @rdname in_check
