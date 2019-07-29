@@ -29,12 +29,14 @@ NULL
 
 
 #' @rdname in_replace
+#' @usage x %in{}% table <- value
 #' @export
 `%in{}%<-` <- function(x, table, value) {
   infix_replace(x, `%in{}%`, table, value)
 }
 
 #' @rdname in_replace
+#' @usage x %!in{}% table <- value
 #' @export
 `%!in{}%<-` <- function(x, table, value) {
   infix_replace(x, `%!in{}%`, table, value)
@@ -42,12 +44,14 @@ NULL
 
 
 #' @rdname in_replace
+#' @usage x %in[]% table <- value
 #' @export
 `%in[]%<-` <- function(x, interval, value) {
   infix_replace(x, `%in[]%`, interval, value)
 }
 
 #' @rdname in_replace
+#' @usage x %!in[]% table <- value
 #' @export
 `%!in[]%<-` <- function(x, interval, value) {
   infix_replace(x, `%!in[]%`, interval, value)
@@ -55,12 +59,14 @@ NULL
 
 
 #' @rdname in_replace
+#' @usage x %in()% table <- value
 #' @export
 `%in()%<-` <- function(x, interval, value) {
   infix_replace(x, `%in()%`, interval, value)
 }
 
 #' @rdname in_replace
+#' @usage x %!in()% table <- value
 #' @export
 `%!in()%<-` <- function(x, interval, value) {
   infix_replace(x, `%!in()%`, interval, value)
@@ -68,12 +74,14 @@ NULL
 
 
 #' @rdname in_replace
+#' @usage x %in(]% table <- value
 #' @export
 `%in(]%<-` <- function(x, interval, value) {
   infix_replace(x, `%in(]%`, interval, value)
 }
 
 #' @rdname in_replace
+#' @usage x %!in(]% table <- value
 #' @export
 `%!in(]%<-` <- function(x, interval, value) {
   infix_replace(x, `%!in(]%`, interval, value)
@@ -81,12 +89,14 @@ NULL
 
 
 #' @rdname in_replace
+#' @usage x %in[)% table <- value
 #' @export
 `%in[)%<-` <- function(x, interval, value) {
   infix_replace(x, `%in[)%`, interval, value)
 }
 
 #' @rdname in_replace
+#' @usage x %!in[)% table <- value
 #' @export
 `%!in[)%<-` <- function(x, interval, value) {
   infix_replace(x, `%!in[)%`, interval, value)

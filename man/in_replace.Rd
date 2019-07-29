@@ -14,25 +14,25 @@
 \alias{\%!in[)\%<-}
 \title{Replacing Values and Intervals}
 \usage{
-\%in{}\%(x, table) <- value
+x %in{}% table <- value
 
-\%!in{}\%(x, table) <- value
+x %!in{}% table <- value
 
-\%in[]\%(x, interval) <- value
+x %in[]% table <- value
 
-\%!in[]\%(x, interval) <- value
+x %!in[]% table <- value
 
-\%in()\%(x, interval) <- value
+x %in()% table <- value
 
-\%!in()\%(x, interval) <- value
+x %!in()% table <- value
 
-\%in(]\%(x, interval) <- value
+x %in(]% table <- value
 
-\%!in(]\%(x, interval) <- value
+x %!in(]% table <- value
 
-\%in[)\%(x, interval) <- value
+x %in[)% table <- value
 
-\%!in[)\%(x, interval) <- value
+x %!in[)% table <- value
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
