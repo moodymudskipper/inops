@@ -13,24 +13,28 @@
 NULL
 
 #' @rdname comparison_replace
+#' @usage x >= y <- value
 #' @export
 `>=<-` <- function(x, y, value){
   infix_replace(x, `>=`, y, value)
 }
 
 #' @rdname comparison_replace
+#' @usage x > y <- value
 #' @export
 `><-` <- function(x, y, value){
   infix_replace(x, `>`, y, value)
 }
 
 #' @rdname comparison_replace
+#' @usage x <= y <- value
 #' @export
 `<=<-` <- function(x, y, value){
   infix_replace(x, `<=`, y, value)
 }
 
 #' @rdname comparison_replace
+#' @usage x < y <- value
 #' @export
 `<<-` <- function(x, y, value){
   # this one needs extra care so standard base::`<<-` still works
@@ -42,12 +46,14 @@ NULL
 }
 
 #' @rdname comparison_replace
+#' @usage x == y <- value
 #' @export
 `==<-` <- function(x, y, value){
   infix_replace(x, `==`, y, value)
 }
 
 #' @rdname comparison_replace
+#' @usage x != y <- value
 #' @export
 `!=<-` <- function(x, y, value){
   infix_replace(x, `!=`, y, value)

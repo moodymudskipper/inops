@@ -10,17 +10,17 @@
 \alias{!=<-}
 \title{Replacing Values by Comparison}
 \usage{
->=(x, y) <- value
+x >= y <- value
 
->(x, y) <- value
+x > y <- value
 
-<=(x, y) <- value
+x <= y <- value
 
-<(x, y) <- value
+x < y <- value
 
-==(x, y) <- value
+x == y <- value
 
-!=(x, y) <- value
+x != y <- value
 }
 \arguments{
 \item{x}{first element of the operation.}
