@@ -6,9 +6,9 @@
 \alias{\%!like\%<-}
 \title{Pattern Matching Replace Operators}
 \usage{
-x %like% pattern <- value
+x \%like\% pattern <- value
 
-x %!like% pattern <- value
+x \%!like\% pattern <- value
 }
 \arguments{
 \item{x}{an object where matches will be sought.}
