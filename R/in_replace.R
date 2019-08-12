@@ -8,6 +8,7 @@
 #' \code{\%in()\%} - open numeric interval\cr
 #' \code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
 #' \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
+#' \code{\%in~\%} - using a regular expression\cr
 #
 #' Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
 #'
@@ -100,4 +101,19 @@ NULL
 #' @export
 `%!in[)%<-` <- function(x, interval, value) {
   infix_replace(x, `%!in[)%`, interval, value)
+}
+
+
+#' @rdname in_replace
+#' @usage x \%in~\% pattern <- value
+#' @export
+`%in~%<-` <- function (x, pattern, value) {
+  infix_replace(x, `%in~%`, pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%!in~\% pattern <- value
+#' @export
+`%!in~%<-` <- function (x, pattern, value) {
+  infix_replace(x, `%!in~%`, pattern, value)
 }

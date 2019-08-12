@@ -12,6 +12,8 @@
 \alias{\%!in(]\%}
 \alias{\%in[)\%}
 \alias{\%!in[)\%}
+\alias{\%in~\%}
+\alias{\%!in~\%}
 \title{Matching Values and Intervals}
 \usage{
 x \%in{}\% table
@@ -33,6 +35,10 @@ x \%!in(]\% interval
 x \%in[)\% interval
 
 x \%!in[)\% interval
+
+x \%in~\% pattern
+
+x \%!in~\% pattern
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -40,6 +46,8 @@ x \%!in[)\% interval
 \item{table}{vector or list to be matched against.}
 
 \item{interval}{numeric vector defining a range to be matched against.}
+
+\item{pattern}{character string containing regular expression to be matched.}
 }
 \value{
 a logical vector or an array of the same dimensions as \code{x}
@@ -55,6 +63,7 @@ Parentheses of each operator define the type of matching template:\cr
 \code{\%in()\%} - open numeric interval\cr
 \code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
 \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
+\code{\%in~\%} - using a regular expression\cr
 Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
 
 The \code{\%in\{\}\%} operator is a reimplementation of \code{\%in\%} that preserves the dimensions of \code{x} (see examples).

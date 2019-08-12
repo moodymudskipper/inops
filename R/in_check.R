@@ -8,6 +8,7 @@
 #' \code{\%in()\%} - open numeric interval\cr
 #' \code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
 #' \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
+#' \code{\%in~\%} - using a regular expression\cr
 #
 #' Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
 #'
@@ -20,6 +21,7 @@
 #' @param x vector or array of values to be matched.
 #' @param table vector or list to be matched against.
 #' @param interval numeric vector defining a range to be matched against.
+#' @param pattern character string containing regular expression to be matched.
 #'
 #' @return a logical vector or an array of the same dimensions as \code{x}
 #' indicating if each value of \code{x} is within the defined subset.
@@ -31,7 +33,10 @@ NULL
 #' @rdname in_check
 #' @export
 `%in{}%` <- function(x, table) {
-  if (is.atomic(x)) {
+  if(is.factor(x)) {
+    x <- levels(x)[x]
+  }
+  if(is.atomic(x)) {
     res <- x %in% table
   } else {
     res <- lapply(x, `%in%`, table)
@@ -103,3 +108,25 @@ NULL
   !(x %in[)% interval)
 }
 
+
+#' @rdname in_check
+#' @export
+`%in~%` <- function(x , pattern) {
+  if(is.factor(x)) {
+    x <- levels(x)[x]
+  }
+  if(is.atomic(x)) {
+    res <- grepl(pattern, x)
+  } else {
+    res <- Map(grepl, list(pattern), x)
+  }
+  attributes(res) <- attributes(x)
+  res[is.na(x)] <- NA
+  simplify2array(res)
+}
+
+#' @rdname in_check
+#' @export
+`%!in~%` <- function(x, pattern) {
+  !x %in~% pattern
+}
