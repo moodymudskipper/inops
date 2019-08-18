@@ -48,6 +48,8 @@ x \%!in~\% pattern <- value
 \item{value}{replacement value.}
 
 \item{interval}{numeric vector defining a range to be matched against.}
+
+\item{pattern}{pattern to be matched against.}
 }
 \value{
 \code{x} with specified values replaced with \code{value}.

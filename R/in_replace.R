@@ -20,6 +20,7 @@
 #' @param x vector or array of values to be matched.
 #' @param table vector or list to be matched against.
 #' @param interval numeric vector defining a range to be matched against.
+#' @param pattern pattern to be matched against.
 #' @param value replacement value.
 #'
 #' @return \code{x} with specified values replaced with \code{value}.
