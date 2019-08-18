@@ -33,10 +33,22 @@ NULL
 #' @rdname in_check
 #' @export
 `%in{}%` <- function(x, table) {
-  if(is.factor(x)) {
-    x <- levels(x)[x]
+  table <- unlist(table)
+  if (is.list(x) && !is.data.frame(x)) {
+    x <- switch(
+      typeof(table),
+      logical = as.logical(x),
+      integer = as.integer(x),
+      double = as.double(x),
+      complex = as.complex(x),
+      character = as.character(x),
+      raw = as.raw(x))
   }
-  if(is.atomic(x)) {
+
+  if (is.factor(table)) {
+    table <- levels(table)[table]
+  }
+  if (is.atomic(x)) {
     res <- x %in% table
   } else {
     res <- lapply(x, `%in%`, table)
@@ -56,7 +68,7 @@ NULL
 #' @rdname in_check
 #' @export
 `%in[]%` <- function(x, interval) {
-  interval <- range(interval, na.rm=TRUE)
+  interval <- range(interval, na.rm = TRUE)
   x >= interval[1] & x <= interval[2]
 }
 
@@ -70,7 +82,7 @@ NULL
 #' @rdname in_check
 #' @export
 `%in()%` <- function(x, interval) {
-  interval <- range(interval, na.rm=TRUE)
+  interval <- range(interval, na.rm = TRUE)
   x > interval[1] & x < interval[2]
 }
 
@@ -84,7 +96,7 @@ NULL
 #' @rdname in_check
 #' @export
 `%in(]%` <- function(x, interval) {
-  interval <- range(interval, na.rm=TRUE)
+  interval <- range(interval, na.rm = TRUE)
   x > interval[1] & x <= interval[2]
 }
 
@@ -98,7 +110,7 @@ NULL
 #' @rdname in_check
 #' @export
 `%in[)%` <- function(x, interval) {
-  interval <- range(interval, na.rm=TRUE)
+  interval <- range(interval, na.rm = TRUE)
   x >= interval[1] & x < interval[2]
 }
 
@@ -112,10 +124,10 @@ NULL
 #' @rdname in_check
 #' @export
 `%in~%` <- function(x , pattern) {
-  if(is.factor(x)) {
+  if (is.factor(x)) {
     x <- levels(x)[x]
   }
-  if(is.atomic(x)) {
+  if (is.atomic(x)) {
     res <- grepl(pattern, x)
   } else {
     res <- Map(grepl, list(pattern), x)
