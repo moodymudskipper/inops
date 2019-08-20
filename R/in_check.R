@@ -3,25 +3,20 @@
 #' Operators for checking which values are within a given interval or set.
 #'
 #' Parentheses of each operator define the type of matching template:
-#' `%in{}%` - set of all elements that will be matched against
-#' `%in[]%` - closed numeric interval
-#' `%in()%` - open numeric interval
-#' `%in(]%` - interval that is is open on the left and closed on the right
-#' `%in[)%` - interval that is closed on the left and open on the right
-#' `%in~%` - using a regular expression
+#' * `%in{}%` detects the elements of x found in the set of all given by the `table`
+#'   argument. It is a reimplementation of `%in%` that behaves more
+#'   consistently to equality and comparison operators. Like the latter, and
+#'   like the other operators described here it preserves the dimensions of `x`
+#'   and the missing values.
+#' * `%in()%`, `%in[]%`, `%in(]%` and `%in[)%` detect the elements of x included in
+#'   a range computed from the `interval` argument,using `range(interval)`, this range being
+#'   respectively closed, open, open on the left and closed on the right, or
+#'   closed on the left and open on the right
+#' * `%in~%`, `%in~p%` and `%in~f%` detect the elements of x which match the
+#'   regular expression given by `pattern`, they wrap `grepl()` respectively
+#'   with default parameters, with `pearl = TRUE`, and with `fiwed = TRUE`
 #
 #' Operators of the form `%out<suffix>%` return the negation of `%in<suffix>%`
-#'
-#' The `%in{}%` operator is a reimplementation of `%in%` that behaves more
-#' consistently to equality and comparison operators. Like the latter, and
-#' like the other operators described here it preserves the dimensions of `x`
-#' and the missing values. (see examples).
-#'
-#' `%in()%`, `%in[]%`, `%in(]%` and `%in[)%` compute a `range()` from the
-#' `interval` argument and test the inclusion of `x` in this range.
-#'
-#' \code{interval} can be specified as a numeric vector of any length.
-#' In such cases \code{range} will be used in order to obtain the endpoints.
 #'
 #' @param x vector or array of values to be matched.
 #' @param table vector or list to be matched against.
