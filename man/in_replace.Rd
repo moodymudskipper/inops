@@ -47,7 +47,9 @@ x \%out~\% pattern <- value
 
 \item{value}{replacement value.}
 
-\item{interval}{numeric vector defining a range to be matched against.}
+\item{interval}{numeric vector defining a range to be matched against.
+\code{as.numeric()} is used on lists, it will succeed on flat lists but fail on
+nested lists}
 
 \item{pattern}{pattern to be matched against.}
 }
@@ -56,21 +58,6 @@ x \%out~\% pattern <- value
 }
 \description{
 Operators for replacing values within a given interval or set.
-}
-\details{
-Parentheses of each operator define the type of matching template:\cr
-\code{\%in\{\}\%} - set of all elements that will be matched against\cr
-\code{\%in[]\%} - closed numeric interval\cr
-\code{\%in()\%} - open numeric interval\cr
-\code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
-\code{\%in[)\%} - interval that is closed on the left and open on the right\cr
-\code{\%in~\%} - using a regular expression\cr
-Operators starting with a bang (i.e. \code{\%out\{\}\%}) specify negation.
-
-Operations using numeric intervals are a convenient short hand form of\cr\code{x[x > interval[1] & x < interval[2]] <- value}.
-
-\code{interval} can be specified as a numeric vector of any length.
-In such cases \code{range} will be used in order to obtain the endpoints.
 }
 \seealso{
 \code{\%in{}\%}
