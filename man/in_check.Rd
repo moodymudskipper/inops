@@ -45,9 +45,13 @@ x \%out~\% pattern
 
 \item{table}{vector or list to be matched against.}
 
-\item{interval}{numeric vector defining a range to be matched against.}
+\item{interval}{numeric vector defining a range to be matched against.
+\code{as.numeric()} is used on lists, it will succeed on flat lists but fail on
+nested lists}
 
-\item{pattern}{character string containing regular expression to be matched.}
+\item{pattern}{pattern to be matched against.}
+
+\item{value}{replacement value.}
 }
 \value{
 a logical vector or an array of the same dimensions as \code{x}
@@ -57,17 +61,22 @@ indicating if each value of \code{x} is within the defined subset.
 Operators for checking which values are within a given interval or set.
 }
 \details{
-Parentheses of each operator define the type of matching template:\cr
-\code{\%in\{\}\%} - set of all elements that will be matched against\cr
-\code{\%in[]\%} - closed numeric interval\cr
-\code{\%in()\%} - open numeric interval\cr
-\code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
-\code{\%in[)\%} - interval that is closed on the left and open on the right\cr
-\code{\%in~\%} - using a regular expression\cr
-Operators starting with a bang (i.e. \code{\%out\{\}\%}) specify negation.
+Parentheses of each operator define the type of matching template:
+\code{\%in{}\%} - set of all elements that will be matched against
+\code{\%in[]\%} - closed numeric interval
+\code{\%in()\%} - open numeric interval
+\code{\%in(]\%} - interval that is is open on the left and closed on the right
+\code{\%in[)\%} - interval that is closed on the left and open on the right
+\code{\%in~\%} - using a regular expression
+Operators of the form \code{\%out<suffix>\%} return the negation of \code{\%in<suffix>\%}
 
-The \code{\%in\{\}\%} operator is a reimplementation of \code{\%in\%} that preserves the dimensions of \code{x} (see examples).
-Operations using numeric intervals are a convenient short hand form of\cr\code{x > interval[1] & x < interval[2]}.
+The \code{\%in{}\%} operator is a reimplementation of \code{\%in\%} that behaves more
+consistently to equality and comparison operators. Like the latter, and
+like the other operators described here it preserves the dimensions of \code{x}
+and the missing values. (see examples).
+
+\code{\%in()\%}, \code{\%in[]\%}, \code{\%in(]\%} and \code{\%in[)\%} compute a \code{range()} from the
+\code{interval} argument and test the inclusion of \code{x} in this range.
 
 \code{interval} can be specified as a numeric vector of any length.
 In such cases \code{range} will be used in order to obtain the endpoints.
