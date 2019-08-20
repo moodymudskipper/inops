@@ -10,7 +10,7 @@
 #' \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
 #' \code{\%in~\%} - using a regular expression\cr
 #
-#' Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
+#' Operators starting with a bang (i.e. \code{\%out\{\}\%}) specify negation.
 #'
 #' Operations using numeric intervals are a convenient short hand form of\cr\code{x[x > interval[1] & x < interval[2]] <- value}.
 #'
@@ -38,10 +38,10 @@ NULL
 }
 
 #' @rdname in_replace
-#' @usage x \%!in{}\% table <- value
+#' @usage x \%out{}\% table <- value
 #' @export
-`%!in{}%<-` <- function(x, table, value) {
-  infix_replace(x, `%!in{}%`, table, value)
+`%out{}%<-` <- function(x, table, value) {
+  infix_replace(x, `%out{}%`, table, value)
 }
 
 
@@ -53,10 +53,10 @@ NULL
 }
 
 #' @rdname in_replace
-#' @usage x \%!in[]\% interval <- value
+#' @usage x \%out[]\% interval <- value
 #' @export
-`%!in[]%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in[]%`, interval, value)
+`%out[]%<-` <- function(x, interval, value) {
+  infix_replace(x, `%out[]%`, interval, value)
 }
 
 
@@ -68,10 +68,10 @@ NULL
 }
 
 #' @rdname in_replace
-#' @usage x \%!in()\% interval <- value
+#' @usage x \%out()\% interval <- value
 #' @export
-`%!in()%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in()%`, interval, value)
+`%out()%<-` <- function(x, interval, value) {
+  infix_replace(x, `%out()%`, interval, value)
 }
 
 
@@ -83,10 +83,10 @@ NULL
 }
 
 #' @rdname in_replace
-#' @usage x \%!in(]\% interval <- value
+#' @usage x \%out(]\% interval <- value
 #' @export
-`%!in(]%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in(]%`, interval, value)
+`%out(]%<-` <- function(x, interval, value) {
+  infix_replace(x, `%out(]%`, interval, value)
 }
 
 
@@ -98,10 +98,10 @@ NULL
 }
 
 #' @rdname in_replace
-#' @usage x \%!in[)\% interval <- value
+#' @usage x \%out[)\% interval <- value
 #' @export
-`%!in[)%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in[)%`, interval, value)
+`%out[)%<-` <- function(x, interval, value) {
+  infix_replace(x, `%out[)%`, interval, value)
 }
 
 
@@ -113,8 +113,8 @@ NULL
 }
 
 #' @rdname in_replace
-#' @usage x \%!in~\% pattern <- value
+#' @usage x \%out~\% pattern <- value
 #' @export
-`%!in~%<-` <- function (x, pattern, value) {
-  infix_replace(x, `%!in~%`, pattern, value)
+`%out~%<-` <- function (x, pattern, value) {
+  infix_replace(x, `%out~%`, pattern, value)
 }

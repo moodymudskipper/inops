@@ -3,42 +3,42 @@
 \name{in_check}
 \alias{in_check}
 \alias{\%in{}\%}
-\alias{\%!in{}\%}
+\alias{\%out{}\%}
 \alias{\%in[]\%}
-\alias{\%!in[]\%}
+\alias{\%out[]\%}
 \alias{\%in()\%}
-\alias{\%!in()\%}
+\alias{\%out()\%}
 \alias{\%in(]\%}
-\alias{\%!in(]\%}
+\alias{\%out(]\%}
 \alias{\%in[)\%}
-\alias{\%!in[)\%}
+\alias{\%out[)\%}
 \alias{\%in~\%}
-\alias{\%!in~\%}
+\alias{\%out~\%}
 \title{Matching Values and Intervals}
 \usage{
 x \%in{}\% table
 
-x \%!in{}\% table
+x \%out{}\% table
 
 x \%in[]\% interval
 
-x \%!in[]\% interval
+x \%out[]\% interval
 
 x \%in()\% interval
 
-x \%!in()\% interval
+x \%out()\% interval
 
 x \%in(]\% interval
 
-x \%!in(]\% interval
+x \%out(]\% interval
 
 x \%in[)\% interval
 
-x \%!in[)\% interval
+x \%out[)\% interval
 
 x \%in~\% pattern
 
-x \%!in~\% pattern
+x \%out~\% pattern
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -64,7 +64,7 @@ Parentheses of each operator define the type of matching template:\cr
 \code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
 \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
 \code{\%in~\%} - using a regular expression\cr
-Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
+Operators starting with a bang (i.e. \code{\%out\{\}\%}) specify negation.
 
 The \code{\%in\{\}\%} operator is a reimplementation of \code{\%in\%} that preserves the dimensions of \code{x} (see examples).
 Operations using numeric intervals are a convenient short hand form of\cr\code{x > interval[1] & x < interval[2]}.

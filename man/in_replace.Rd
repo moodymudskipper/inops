@@ -3,42 +3,42 @@
 \name{in_replace}
 \alias{in_replace}
 \alias{\%in{}\%<-}
-\alias{\%!in{}\%<-}
+\alias{\%out{}\%<-}
 \alias{\%in[]\%<-}
-\alias{\%!in[]\%<-}
+\alias{\%out[]\%<-}
 \alias{\%in()\%<-}
-\alias{\%!in()\%<-}
+\alias{\%out()\%<-}
 \alias{\%in(]\%<-}
-\alias{\%!in(]\%<-}
+\alias{\%out(]\%<-}
 \alias{\%in[)\%<-}
-\alias{\%!in[)\%<-}
+\alias{\%out[)\%<-}
 \alias{\%in~\%<-}
-\alias{\%!in~\%<-}
+\alias{\%out~\%<-}
 \title{Replacing Values and Intervals}
 \usage{
 x \%in{}\% table <- value
 
-x \%!in{}\% table <- value
+x \%out{}\% table <- value
 
 x \%in[]\% interval <- value
 
-x \%!in[]\% interval <- value
+x \%out[]\% interval <- value
 
 x \%in()\% interval <- value
 
-x \%!in()\% interval <- value
+x \%out()\% interval <- value
 
 x \%in(]\% interval <- value
 
-x \%!in(]\% interval <- value
+x \%out(]\% interval <- value
 
 x \%in[)\% interval <- value
 
-x \%!in[)\% interval <- value
+x \%out[)\% interval <- value
 
 x \%in~\% pattern <- value
 
-x \%!in~\% pattern <- value
+x \%out~\% pattern <- value
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -65,7 +65,7 @@ Parentheses of each operator define the type of matching template:\cr
 \code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
 \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
 \code{\%in~\%} - using a regular expression\cr
-Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
+Operators starting with a bang (i.e. \code{\%out\{\}\%}) specify negation.
 
 Operations using numeric intervals are a convenient short hand form of\cr\code{x[x > interval[1] & x < interval[2]] <- value}.
 

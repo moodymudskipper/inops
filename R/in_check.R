@@ -10,7 +10,7 @@
 #' \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
 #' \code{\%in~\%} - using a regular expression\cr
 #
-#' Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
+#' Operators starting with a bang (i.e. \code{\%out\{\}\%}) specify negation.
 #'
 #' The \code{\%in\{\}\%} operator is a reimplementation of \code{\%in\%} that preserves the dimensions of \code{x} (see examples).
 #' Operations using numeric intervals are a convenient short hand form of\cr\code{x > interval[1] & x < interval[2]}.
@@ -60,7 +60,7 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%!in{}%` <- function(x, table) {
+`%out{}%` <- function(x, table) {
   !(x %in{}% table)
 }
 
@@ -74,7 +74,7 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%!in[]%` <- function(x, interval) {
+`%out[]%` <- function(x, interval) {
   !(x %in[]% interval)
 }
 
@@ -88,10 +88,10 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%!in()%` <- function(x, interval) {
+`%out()%` <- function(x, interval) {
   !(x %in()% interval)
 }
-
+F
 
 #' @rdname in_check
 #' @export
@@ -102,7 +102,7 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%!in(]%` <- function(x, interval) {
+`%out(]%` <- function(x, interval) {
   !(x %in(]% interval)
 }
 
@@ -116,7 +116,7 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%!in[)%` <- function(x, interval) {
+`%out[)%` <- function(x, interval) {
   !(x %in[)% interval)
 }
 
@@ -139,6 +139,6 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%!in~%` <- function(x, pattern) {
+`%out~%` <- function(x, pattern) {
   !x %in~% pattern
 }
