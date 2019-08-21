@@ -100,3 +100,33 @@ NULL
 `%out~%<-` <- function(x, pattern, value) {
   replace(x, x %out~% pattern, value)
 }
+
+#' @rdname in_replace
+#' @usage x \%in~f\% pattern <- value
+#' @export
+`%in~f%<-` <- function(x, pattern, value) {
+  replace(x, x %in~f% pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%out~f\% pattern <- value
+#' @export
+`%out~f%<-` <- function(x, pattern, value) {
+  replace(x, x %out~f% pattern, value)
+}
+
+
+#' @rdname in_replace
+#' @usage x \%in~p\% pattern <- value
+#' @export
+`%in~p%<-` <- function(x, pattern, value) {
+  replace(x, x %in~p% pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%out~p\% pattern <- value
+#' @export
+`%out~p%<-` <- function(x, pattern, value) {
+  replace(x, x %out~p% pattern, value)
+}
+

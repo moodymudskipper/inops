@@ -14,6 +14,10 @@
 \alias{\%out[)\%}
 \alias{\%in~\%}
 \alias{\%out~\%}
+\alias{\%in~p\%}
+\alias{\%out~p\%}
+\alias{\%in~f\%}
+\alias{\%out~f\%}
 \title{Matching Values and Intervals}
 \usage{
 x \%in{}\% table
@@ -39,6 +43,14 @@ x \%out[)\% interval
 x \%in~\% pattern
 
 x \%out~\% pattern
+
+x \%in~p\% pattern
+
+x \%out~p\% pattern
+
+x \%in~f\% pattern
+
+x \%out~f\% pattern
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -62,24 +74,21 @@ Operators for checking which values are within a given interval or set.
 }
 \details{
 Parentheses of each operator define the type of matching template:
-\code{\%in{}\%} - set of all elements that will be matched against
-\code{\%in[]\%} - closed numeric interval
-\code{\%in()\%} - open numeric interval
-\code{\%in(]\%} - interval that is is open on the left and closed on the right
-\code{\%in[)\%} - interval that is closed on the left and open on the right
-\code{\%in~\%} - using a regular expression
-Operators of the form \code{\%out<suffix>\%} return the negation of \code{\%in<suffix>\%}
-
-The \code{\%in{}\%} operator is a reimplementation of \code{\%in\%} that behaves more
+\itemize{
+\item \code{\%in{}\%} detects the elements of x found in the set of all given by the \code{table}
+argument. It is a reimplementation of \code{\%in\%} that behaves more
 consistently to equality and comparison operators. Like the latter, and
 like the other operators described here it preserves the dimensions of \code{x}
-and the missing values. (see examples).
-
-\code{\%in()\%}, \code{\%in[]\%}, \code{\%in(]\%} and \code{\%in[)\%} compute a \code{range()} from the
-\code{interval} argument and test the inclusion of \code{x} in this range.
-
-\code{interval} can be specified as a numeric vector of any length.
-In such cases \code{range} will be used in order to obtain the endpoints.
+and the missing values.
+\item \code{\%in()\%}, \code{\%in[]\%}, \code{\%in(]\%} and \code{\%in[)\%} detect the elements of x included in
+a range computed from the \code{interval} argument,using \code{range(interval)}, this range being
+respectively closed, open, open on the left and closed on the right, or
+closed on the left and open on the right
+\item \code{\%in~\%}, \code{\%in~p\%} and \code{\%in~f\%} detect the elements of x which match the
+regular expression given by \code{pattern}, they wrap \code{grepl()} respectively
+with default parameters, with \code{perl = TRUE}, and with \code{fixed = TRUE}
+Operators of the form \code{\%out<suffix>\%} return the negation of \code{\%in<suffix>\%}
+}
 }
 \seealso{
 \code{\%in\%}

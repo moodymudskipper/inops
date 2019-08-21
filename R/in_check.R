@@ -14,7 +14,7 @@
 #'   closed on the left and open on the right
 #' * `%in~%`, `%in~p%` and `%in~f%` detect the elements of x which match the
 #'   regular expression given by `pattern`, they wrap `grepl()` respectively
-#'   with default parameters, with `pearl = TRUE`, and with `fiwed = TRUE`
+#'   with default parameters, with `perl = TRUE`, and with `fixed = TRUE`
 #
 #' Operators of the form `%out<suffix>%` return the negation of `%in<suffix>%`
 #'
@@ -48,17 +48,19 @@ NULL
       raw = as.raw(x))
   }
 
+  # convert to character
   if (is.factor(table)) {
     table <- levels(table)[table]
   }
-  if (is.atomic(x)) {
-    res <- x %in% table
+  if (is.data.frame(x)){
+      res <- sapply(x, `%in%`, table)
+    } else if (is.matrix(x)){
+    res <- apply(x, 2, `%in%`, table)
   } else {
-    res <- lapply(x, `%in%`, table)
+    res <- x %in% table
   }
-  attributes(res) <- attributes(x)
   res[is.na(x)] <- NA
-  simplify2array(res)
+  res
 }
 
 #' @rdname in_check
@@ -71,6 +73,8 @@ NULL
 #' @rdname in_check
 #' @export
 `%in[]%` <- function(x, interval) {
+  # fail on nested lists
+  if (is.list(interval)) interval <- as.numeric(interval)
   interval <- range(interval, na.rm = TRUE)
   x >= interval[1] & x <= interval[2]
 }
@@ -85,6 +89,8 @@ NULL
 #' @rdname in_check
 #' @export
 `%in()%` <- function(x, interval) {
+  # fail on nested lists
+  if (is.list(interval)) interval <- as.numeric(interval)
   interval <- range(interval, na.rm = TRUE)
   x > interval[1] & x < interval[2]
 }
@@ -99,6 +105,8 @@ F
 #' @rdname in_check
 #' @export
 `%in(]%` <- function(x, interval) {
+  # fail on nested lists
+  if (is.list(interval)) interval <- as.numeric(interval)
   interval <- range(interval, na.rm = TRUE)
   x > interval[1] & x <= interval[2]
 }
@@ -123,25 +131,54 @@ F
   !(x %in[)% interval)
 }
 
+in_regex <- function(x , pattern, ...) {
+  # convert to character
+  if (is.factor(x)) {
+    x <- levels(x)[x]
+  }
+  if (is.matrix(x) || is.data.frame(x)) {
+    apply(x, 2, grepl, pattern = pattern, ...)
+  } else {
+    # conversion from list to character is done automatically by `==`
+    # so we implement it as well here
+    if (is.list(x) && !is.data.frame(x))
+      x <- as.character(x)
+    grepl(pattern, x, ...)
+  }
+}
 
 #' @rdname in_check
 #' @export
 `%in~%` <- function(x , pattern) {
-  if (is.factor(x)) {
-    x <- levels(x)[x]
-  }
-  if (is.atomic(x)) {
-    res <- grepl(pattern, x)
-  } else {
-    res <- Map(grepl, list(pattern), x)
-  }
-  attributes(res) <- attributes(x)
-  res[is.na(x)] <- NA
-  simplify2array(res)
+  in_regex(x, pattern)
 }
 
 #' @rdname in_check
 #' @export
 `%out~%` <- function(x, pattern) {
   !x %in~% pattern
+}
+
+#' @rdname in_check
+#' @export
+`%in~p%` <- function(x , pattern) {
+  in_regex(x, pattern, perl = TRUE)
+}
+
+#' @rdname in_check
+#' @export
+`%out~p%` <- function(x, pattern) {
+  !x %in~p% pattern
+}
+
+#' @rdname in_check
+#' @export
+`%in~f%` <- function(x , pattern) {
+  in_regex(x, pattern, fixed = TRUE)
+}
+
+#' @rdname in_check
+#' @export
+`%out~f%` <- function(x, pattern) {
+  !x %in~p% pattern
 }
