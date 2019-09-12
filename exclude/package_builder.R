@@ -1,6 +1,6 @@
 usethis::use_directory("exclude", ignore = TRUE)
 usethis::use_build_ignore("exclude")
-usethis::use_build_ignore("setops.Rproj")
+usethis::use_build_ignore("rangeops.Rproj")
 usethis::use_package("rlang", "Suggests")
 usethis::use_gpl3_license("GPL-3")
 usethis::use_git()
@@ -15,3 +15,7 @@ usethis::use_readme_rmd()
 usethis::use_testthat()
 usethis::use_version()
 usethis::use_news_md()
+
+
+shell("git checkout master")
+shell("git remote -v")
