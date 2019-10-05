@@ -2,6 +2,7 @@ usethis::use_directory("exclude", ignore = TRUE)
 usethis::use_build_ignore("exclude")
 usethis::use_build_ignore("rangeops.Rproj")
 usethis::use_package("rlang", "Suggests")
+usethis::use_package("purrr", "Suggests")
 usethis::use_gpl3_license("GPL-3")
 usethis::use_git()
 

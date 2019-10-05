@@ -2,28 +2,12 @@
 #'
 #' Operators for replacing values within a given interval or set.
 #'
-#' Parentheses of each operator define the type of matching template:\cr
-#' \code{\%in\{\}\%} - set of all elements that will be matched against\cr
-#' \code{\%in[]\%} - closed numeric interval\cr
-#' \code{\%in()\%} - open numeric interval\cr
-#' \code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
-#' \code{\%in[)\%} - interval that is closed on the left and open on the right\cr
-#
-#' Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
-#'
-#' Operations using numeric intervals are a convenient short hand form of\cr\code{x[x > interval[1] & x < interval[2]] <- value}.
-#'
-#' \code{interval} can be specified as a numeric vector of any length.
-#' In such cases \code{range} will be used in order to obtain the endpoints.
-#'
-#' @param x vector or array of values to be matched.
-#' @param table vector or list to be matched against.
-#' @param interval numeric vector defining a range to be matched against.
+#' @inheritParams in_check
 #' @param value replacement value.
 #'
-#' @return \code{x} with specified values replaced with \code{value}.
+#' @return `x` with specified values replaced with `value`.
 #'
-#' @seealso \code{\%in{}\%}
+#' @seealso `%in{}%`
 #' @name in_replace
 NULL
 
@@ -32,14 +16,14 @@ NULL
 #' @usage x \%in{}\% table <- value
 #' @export
 `%in{}%<-` <- function(x, table, value) {
-  infix_replace(x, `%in{}%`, table, value)
+  replace(x, x %in{}% table, value)
 }
 
 #' @rdname in_replace
-#' @usage x \%!in{}\% table <- value
+#' @usage x \%out{}\% table <- value
 #' @export
-`%!in{}%<-` <- function(x, table, value) {
-  infix_replace(x, `%!in{}%`, table, value)
+`%out{}%<-` <- function(x, table, value) {
+  replace(x, x %out{}% table, value)
 }
 
 
@@ -47,14 +31,14 @@ NULL
 #' @usage x \%in[]\% interval <- value
 #' @export
 `%in[]%<-` <- function(x, interval, value) {
-  infix_replace(x, `%in[]%`, interval, value)
+  replace(x, x %in[]% interval, value)
 }
 
 #' @rdname in_replace
-#' @usage x \%!in[]\% interval <- value
+#' @usage x \%out[]\% interval <- value
 #' @export
-`%!in[]%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in[]%`, interval, value)
+`%out[]%<-` <- function(x, interval, value) {
+  replace(x, x %out[]% interval, value)
 }
 
 
@@ -62,14 +46,14 @@ NULL
 #' @usage x \%in()\% interval <- value
 #' @export
 `%in()%<-` <- function(x, interval, value) {
-  infix_replace(x, `%in()%`, interval, value)
+  replace(x, x %in()% interval, value)
 }
 
 #' @rdname in_replace
-#' @usage x \%!in()\% interval <- value
+#' @usage x \%out()\% interval <- value
 #' @export
-`%!in()%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in()%`, interval, value)
+`%out()%<-` <- function(x, interval, value) {
+  replace(x, x %out()% interval, value)
 }
 
 
@@ -77,14 +61,14 @@ NULL
 #' @usage x \%in(]\% interval <- value
 #' @export
 `%in(]%<-` <- function(x, interval, value) {
-  infix_replace(x, `%in(]%`, interval, value)
+  replace(x, x %in(]% interval, value)
 }
 
 #' @rdname in_replace
-#' @usage x \%!in(]\% interval <- value
+#' @usage x \%out(]\% interval <- value
 #' @export
-`%!in(]%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in(]%`, interval, value)
+`%out(]%<-` <- function(x, interval, value) {
+  replace(x, x %out(]% interval, value)
 }
 
 
@@ -92,12 +76,57 @@ NULL
 #' @usage x \%in[)\% interval <- value
 #' @export
 `%in[)%<-` <- function(x, interval, value) {
-  infix_replace(x, `%in[)%`, interval, value)
+  replace(x, x %in[)% interval, value)
 }
 
 #' @rdname in_replace
-#' @usage x \%!in[)\% interval <- value
+#' @usage x \%out[)\% interval <- value
 #' @export
-`%!in[)%<-` <- function(x, interval, value) {
-  infix_replace(x, `%!in[)%`, interval, value)
+`%out[)%<-` <- function(x, interval, value) {
+  replace(x, x %out[)% interval, value)
 }
+
+
+#' @rdname in_replace
+#' @usage x \%in~\% pattern <- value
+#' @export
+`%in~%<-` <- function(x, pattern, value) {
+  replace(x, x %in~% pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%out~\% pattern <- value
+#' @export
+`%out~%<-` <- function(x, pattern, value) {
+  replace(x, x %out~% pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%in~f\% pattern <- value
+#' @export
+`%in~f%<-` <- function(x, pattern, value) {
+  replace(x, x %in~f% pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%out~f\% pattern <- value
+#' @export
+`%out~f%<-` <- function(x, pattern, value) {
+  replace(x, x %out~f% pattern, value)
+}
+
+
+#' @rdname in_replace
+#' @usage x \%in~p\% pattern <- value
+#' @export
+`%in~p%<-` <- function(x, pattern, value) {
+  replace(x, x %in~p% pattern, value)
+}
+
+#' @rdname in_replace
+#' @usage x \%out~p\% pattern <- value
+#' @export
+`%out~p%<-` <- function(x, pattern, value) {
+  replace(x, x %out~p% pattern, value)
+}
+

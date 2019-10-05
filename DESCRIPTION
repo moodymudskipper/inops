@@ -1,12 +1,19 @@
 Package: rangeops
-Title: What the Package Does (one line, title case)
+Title: Infix Operators for Detection, Subsetting and Replacement
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.6.0)
+Authors@R: c(
+    person("Antoine", "Fabri", email = "antoine.fabri@gmail.com", role = c("aut", "cre")),
+    person("Karolis", "Koncevi\u00e7ius", email = "karolis.koncevicius@gmail.com", role = "aut")
+    )
+Description: Provides infix operators to detect, subset, and replace the elements matched by a given condition.
+  The functions have several variants of operator types, including subsets, ranges, regular expressions and others.
+  Implemented operators work on vectors, matrices, and lists.
+Depends: R (>= 3.1.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Suggests: 
-    rlang
+    testthat,
+    purrr
+Roxygen: list(markdown = TRUE)

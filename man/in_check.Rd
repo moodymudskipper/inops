@@ -3,43 +3,67 @@
 \name{in_check}
 \alias{in_check}
 \alias{\%in{}\%}
-\alias{\%!in{}\%}
+\alias{\%out{}\%}
 \alias{\%in[]\%}
-\alias{\%!in[]\%}
+\alias{\%out[]\%}
 \alias{\%in()\%}
-\alias{\%!in()\%}
+\alias{\%out()\%}
 \alias{\%in(]\%}
-\alias{\%!in(]\%}
+\alias{\%out(]\%}
 \alias{\%in[)\%}
-\alias{\%!in[)\%}
+\alias{\%out[)\%}
+\alias{\%in~\%}
+\alias{\%out~\%}
+\alias{\%in~p\%}
+\alias{\%out~p\%}
+\alias{\%in~f\%}
+\alias{\%out~f\%}
 \title{Matching Values and Intervals}
 \usage{
 x \%in{}\% table
 
-x \%!in{}\% table
+x \%out{}\% table
 
 x \%in[]\% interval
 
-x \%!in[]\% interval
+x \%out[]\% interval
 
 x \%in()\% interval
 
-x \%!in()\% interval
+x \%out()\% interval
 
 x \%in(]\% interval
 
-x \%!in(]\% interval
+x \%out(]\% interval
 
 x \%in[)\% interval
 
-x \%!in[)\% interval
+x \%out[)\% interval
+
+x \%in~\% pattern
+
+x \%out~\% pattern
+
+x \%in~p\% pattern
+
+x \%out~p\% pattern
+
+x \%in~f\% pattern
+
+x \%out~f\% pattern
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
 
 \item{table}{vector or list to be matched against.}
 
-\item{interval}{numeric vector defining a range to be matched against.}
+\item{interval}{numeric vector defining a range to be matched against.
+\code{as.numeric()} is used on lists, it will succeed on flat lists but fail on
+nested lists}
+
+\item{pattern}{pattern to be matched against.}
+
+\item{value}{replacement value.}
 }
 \value{
 a logical vector or an array of the same dimensions as \code{x}
@@ -49,19 +73,22 @@ indicating if each value of \code{x} is within the defined subset.
 Operators for checking which values are within a given interval or set.
 }
 \details{
-Parentheses of each operator define the type of matching template:\cr
-\code{\%in\{\}\%} - set of all elements that will be matched against\cr
-\code{\%in[]\%} - closed numeric interval\cr
-\code{\%in()\%} - open numeric interval\cr
-\code{\%in(]\%} - interval that is is open on the left and closed on the right\cr
-\code{\%in[)\%} - interval that is closed on the left and open on the right\cr
-Operators starting with a bang (i.e. \code{\%!in\{\}\%}) specify negation.
-
-The \code{\%in\{\}\%} operator is a reimplementation of \code{\%in\%} that preserves the dimensions of \code{x} (see examples).
-Operations using numeric intervals are a convenient short hand form of\cr\code{x > interval[1] & x < interval[2]}.
-
-\code{interval} can be specified as a numeric vector of any length.
-In such cases \code{range} will be used in order to obtain the endpoints.
+Parentheses of each operator define the type of matching template:
+\itemize{
+\item \code{\%in{}\%} detects the elements of x found in the set of all given by the \code{table}
+argument. It is a reimplementation of \code{\%in\%} that behaves more
+consistently to equality and comparison operators. Like the latter, and
+like the other operators described here it preserves the dimensions of \code{x}
+and the missing values.
+\item \code{\%in()\%}, \code{\%in[]\%}, \code{\%in(]\%} and \code{\%in[)\%} detect the elements of x included in
+a range computed from the \code{interval} argument,using \code{range(interval)}, this range being
+respectively closed, open, open on the left and closed on the right, or
+closed on the left and open on the right
+\item \code{\%in~\%}, \code{\%in~p\%} and \code{\%in~f\%} detect the elements of x which match the
+regular expression given by \code{pattern}, they wrap \code{grepl()} respectively
+with default parameters, with \code{perl = TRUE}, and with \code{fixed = TRUE}
+Operators of the form \code{\%out<suffix>\%} return the negation of \code{\%in<suffix>\%}
+}
 }
 \seealso{
 \code{\%in\%}
