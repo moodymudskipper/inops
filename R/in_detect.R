@@ -1,3 +1,12 @@
+#' Detect values that don't match
+#'
+#' `%out%` is the negation of `%in%`, so typing `x %out% y` is equivalent to
+#' `! x %in% y`
+#' @export
+`%out%` <- function(x, table) {
+  !x %in% table
+}
+
 #' Matching Values and Intervals
 #'
 #' Operators for checking which values are within a given interval or set.

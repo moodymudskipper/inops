@@ -2,6 +2,9 @@
 #'
 #' Operators for replacing values within a given interval or set.
 #'
+#' For each `%[*%` operator of this package `x %[*% y` is a shorthand for
+#' `x[x %*% y]`.
+#'
 #' @inheritParams in_check
 #'
 #' @return `x` with specified values replaced with `value`.
@@ -86,4 +89,16 @@ NULL
 #' @export
 `%[out~%` <- function(x, pattern) {
   x[ x %out~% pattern]
+}
+
+#' @rdname in_subset
+#' @export
+`%[in%` <- function(x, table) {
+  x[x %in% table]
+}
+
+#' @rdname in_subset
+#' @export
+`%[out%` <- function(x, table) {
+  x[x %out% table]
 }

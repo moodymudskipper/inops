@@ -2,6 +2,9 @@
 #'
 #' Operators for replacing values within a given interval or set.
 #'
+#' For each `%*%<-` operator of this package `x %*% y <- value` is a shorthand for
+#' `x[x %*% y] <- value`.
+#'
 #' @inheritParams in_check
 #' @param value replacement value.
 #'
@@ -128,5 +131,21 @@ NULL
 #' @export
 `%out~p%<-` <- function(x, pattern, value) {
   replace(x, x %out~p% pattern, value)
+}
+
+
+#' @rdname in_replace
+#' @usage x \%in\% table <- value
+#' @export
+`%in%<-`  <- function(x, table, value) {
+  replace(x, x %in% table, value)
+}
+
+
+#' @rdname in_replace
+#' @usage x \%out\% table <- value
+#' @export
+`%out%<-`  <- function(x, table, value) {
+  replace(x, x %out% table, value)
 }
 
