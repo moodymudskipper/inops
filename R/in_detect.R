@@ -73,8 +73,15 @@ NULL
     else
       res <- x %in% table
   } else {
-    res <- sapply(x, function(a,b)
-      if(is.language(a)) any(a == b) else a %in% b, table)
+    if(is.language(x)){
+      if(is.language(table))
+        res <- x == table
+      else
+        res <- any(sapply(table, function(a,b)
+          if(is.language(a)) a == b else a %in% b, x))
+    }else
+      res <- sapply(x, function(a,b)
+        if(is.language(a)) any(a == b) else a %in% b, table)
   }
 
   if (!is.language(x)) res[is.na(x)] <- NA
