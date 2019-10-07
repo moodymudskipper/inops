@@ -2,6 +2,12 @@
 #'
 #' Operators for replacing values using the standard comparison operators.
 #'
+#' Thanks to these operators :
+#' * `x == y <- value` is equivalent to `x[x == y] <- value`
+#' * `x == y <- value` is equivalent to `x[x == y] <- value`
+#' * `x == y <- value` is equivalent to `x[x == y] <- value`
+#' * `x == y <- value` is equivalent to `x[x == y] <- value`
+#'
 #' @param x first element of the operation.
 #' @param y second element of the operation.
 #' @param value replacement value.
@@ -16,21 +22,21 @@ NULL
 #' @usage x >= y <- value
 #' @export
 `>=<-` <- function(x, y, value){
-  infix_replace(x, `>=`, y, value)
+  replace(x, x >= y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x > y <- value
 #' @export
 `><-` <- function(x, y, value){
-  infix_replace(x, `>`, y, value)
+  replace(x, x > y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x <= y <- value
 #' @export
 `<=<-` <- function(x, y, value){
-  infix_replace(x, `<=`, y, value)
+  replace(x, x <= y, value)
 }
 
 #' @rdname comparison_replace
@@ -41,7 +47,7 @@ NULL
   if (missing(value)) {
     eval.parent(substitute(.Primitive("<<-")(x, y)))
   } else {
-    infix_replace(x, `<`, y, value)
+    replace(x, x < y, value)
   }
 }
 
@@ -49,13 +55,13 @@ NULL
 #' @usage x == y <- value
 #' @export
 `==<-` <- function(x, y, value){
-  infix_replace(x, `==`, y, value)
+  replace(x, x == y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x != y <- value
 #' @export
 `!=<-` <- function(x, y, value){
-  infix_replace(x, `!=`, y, value)
+  replace(x, x != y, value)
 }
 
