@@ -93,6 +93,30 @@ NULL
 
 #' @rdname in_subset
 #' @export
+`%[in~p%` <- function(x, pattern) {
+  x[ x %in~p% pattern]
+}
+
+#' @rdname in_subset
+#' @export
+`%[out~p%` <- function(x, pattern) {
+  x[ x %out~p% pattern]
+}
+
+#' @rdname in_subset
+#' @export
+`%[in~f%` <- function(x, pattern) {
+  x[ x %in~f% pattern]
+}
+
+#' @rdname in_subset
+#' @export
+`%[out~f%` <- function(x, pattern) {
+  x[ x %out~f% pattern]
+}
+
+#' @rdname in_subset
+#' @export
 `%[in%` <- function(x, table) {
   x[x %in% table]
 }
