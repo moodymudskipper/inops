@@ -5,7 +5,7 @@
 #' For each `%[*%` operator of this package `x %[*% y` is a shorthand for
 #' `x[x %*% y]`.
 #'
-#' @inheritParams in_check
+#' @inheritParams in_detect
 #'
 #' @return `x` with specified values replaced with `value`.
 #'

@@ -47,10 +47,10 @@
 #' indicating if each value of `x` is within the defined subset.
 #'
 #' @seealso `%in%`
-#' @name in_check
+#' @name in_detect
 NULL
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in{}%` <- function(x, table){
   if(is.language(table)) return(x == table)
@@ -102,14 +102,14 @@ NULL
 #   res
 # }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out{}%` <- function(x, table) {
   !(x %in{}% table)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in[]%` <- function(x, interval) {
   # fail on nested lists
@@ -118,14 +118,14 @@ NULL
   x >= interval[1] & x <= interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out[]%` <- function(x, interval) {
   !(x %in[]% interval)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in()%` <- function(x, interval) {
   # fail on nested lists
@@ -134,14 +134,14 @@ NULL
   x > interval[1] & x < interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out()%` <- function(x, interval) {
   !(x %in()% interval)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in(]%` <- function(x, interval) {
   # fail on nested lists
@@ -150,21 +150,21 @@ NULL
   x > interval[1] & x <= interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out(]%` <- function(x, interval) {
   !(x %in(]% interval)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in[)%` <- function(x, interval) {
   interval <- range(interval, na.rm = TRUE)
   x >= interval[1] & x < interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out[)%` <- function(x, interval) {
   !(x %in[)% interval)
@@ -187,37 +187,37 @@ in_regex <- function(x , pattern, ...) {
   }
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in~%` <- function(x , pattern) {
   in_regex(x, pattern)
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out~%` <- function(x, pattern) {
   !x %in~% pattern
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in~p%` <- function(x , pattern) {
   in_regex(x, pattern, perl = TRUE)
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out~p%` <- function(x, pattern) {
   !x %in~p% pattern
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in~f%` <- function(x , pattern) {
   in_regex(x, pattern, fixed = TRUE)
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out~f%` <- function(x, pattern) {
   !x %in~p% pattern
