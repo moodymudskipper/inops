@@ -14,6 +14,31 @@
 #'
 #' @seealso `%in%`
 #'
+#' @examples
+#' # difference in behaviour with dimensions when compared to %in%
+#' iris[1:10,] %in% "setosa"
+#' iris[1:10,] == "setosa"
+#' iris[1:10,] %in{}% "setosa"
+#'
+#' # difference in behaviour with missing values when compared to %in%
+#' x <- c(1,2,3,NA,4)
+#' x %in% c(1,2,3)
+#' x %in{}% c(1,2,3)
+#'
+#' # other interval oparators
+#' x <- 1:10
+#' x %in[]% c(3,4,5,6,7)
+#' x %in()% c(3,4,5,6,7)
+#' x %in(]% c(3,4,5,6,7)
+#' x %in[)% c(3,4,5,6,7)
+#' x %out[]% c(3,4,5,6,7)
+#'
+#' # matching according to regular expressions
+#' iris$Species %in~% "^v"
+#' iris$Species %in~f% "^v"
+#' iris$Species %in~f% "versicolor"
+#' iris$Species %in~f% c("versicolor", "virginica")
+#'
 #' @name out
 #' @export
 `%out%` <- function(x, table) {
