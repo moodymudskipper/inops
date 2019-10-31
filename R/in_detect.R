@@ -33,6 +33,11 @@
 #' x %in[)% c(3,7)
 #' x %out[]% c(3,7)
 #'
+#' # when more than 2 numbers are provided for the interval - range is used
+#' x <- 1:10
+#' all.equal(x %in[]% c(2,4), x %in[]% c(2,3,4))
+#' all.equal(x %in[]% c(2,4), x %in[]% range(c(2,3,4)))
+#'
 #' # matching according to regular expressions
 #' iris$Species %in~% "^v"
 #' iris$Species %in~f% "^v"
