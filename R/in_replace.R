@@ -13,15 +13,15 @@
 #' @examples
 #' # interval replacement operators
 #' x <- 1:10
-#' x %in[]% c(3,4,5,6,7) <- 0
+#' x %in[]% c(3,7) <- 0
 #' x
 #'
 #' x <- 1:10
-#' x %in[)% c(3,4,5,6,7) <- NA
+#' x %in[)% c(3,7) <- NA
 #' x
 #'
 #' x <- 1:10
-#' x %out[)% c(3,4,5,6,7) <- x
+#' x %out[)% c(3,7) <- x
 #' x
 #'
 #' # regular expression replacement operators
