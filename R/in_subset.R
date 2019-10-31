@@ -67,7 +67,6 @@ NULL
 
 
 #' @rdname in_subset
-#' @usage x \%in[)\% interval <- value
 #' @export
 `%[in[)%` <- function(x, interval) {
   x[ x %in[)% interval]

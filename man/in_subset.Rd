@@ -38,7 +38,7 @@ x \%[in(]\% interval
 
 x \%[out(]\% interval
 
-x \%in[)\% interval <- value
+x \%[in[)\% interval
 
 x \%[out[)\% interval
 
