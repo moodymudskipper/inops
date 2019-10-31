@@ -1,9 +1,9 @@
-expect_same_behavior <- function(object, expected, ...){
-  object_chr <- deparse(substitute(object))
+expect_same_behavior <- function(object, expected, ...) {
+  object_chr   <- deparse(substitute(object))
   expected_chr <- deparse(substitute(expected))
-  quiet <- purrr::safely(purrr::quietly(identity))
-  object   <- eval(substitute(quiet(object)))
-  expected <- eval(substitute(quiet(expected)))
+  quiet        <- purrr::safely(purrr::quietly(identity))
+  object       <- eval(substitute(quiet(object)))
+  expected     <- eval(substitute(quiet(expected)))
   testthat::expect(
     identical(object$result$result, expected$result$result, ...),
     sprintf("`%s` and `%s` don't return the same result.", object_chr, expected_chr))
@@ -71,7 +71,6 @@ test_that("regex ops work with matrices", {
   expect_identical(matrix(c("abababa","c","d","e"),2) %in~% "^ab",
                    matrix(c(T,F,F,F),2))
 })
-
 
 test_that("regex ops work with factors", {
   expect_true("a" %in~% factor("a"))

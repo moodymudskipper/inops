@@ -1,7 +1,16 @@
 #' Detect values that don't match
 #'
-#' `%out%` is the negation of `%in%`, so typing `x %out% y` is equivalent to
-#' `! x %in% y`
+#' `%out%` is the negation of `%in%`, so `x %out% y` is equivalent to `! x %in% y`.
+#'
+#' @param x vector of values to be matched.
+#' @param table vector or list to be matched against.
+#'
+#' @return a logical vector or of the same length as `x`
+#' indicating if each value of `x` is within the defined subset.
+#'
+#' @seealso `%in%`
+#'
+#' @name out
 #' @export
 `%out%` <- function(x, table) {
   !x %in% table
@@ -33,16 +42,15 @@
 #' `as.numeric()` is used on lists, it will succeed on flat lists but fail on
 #' nested lists
 #' @param pattern pattern to be matched against.
-#' @param value replacement value.
 #'
 #' @return a logical vector or an array of the same dimensions as `x`
 #' indicating if each value of `x` is within the defined subset.
 #'
 #' @seealso `%in%`
-#' @name in_check
+#' @name in_detect
 NULL
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in{}%` <- function(x, table){
   if(is.language(table)) return(x == table)
@@ -94,14 +102,14 @@ NULL
 #   res
 # }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out{}%` <- function(x, table) {
   !(x %in{}% table)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in[]%` <- function(x, interval) {
   # fail on nested lists
@@ -110,14 +118,14 @@ NULL
   x >= interval[1] & x <= interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out[]%` <- function(x, interval) {
   !(x %in[]% interval)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in()%` <- function(x, interval) {
   # fail on nested lists
@@ -126,14 +134,14 @@ NULL
   x > interval[1] & x < interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out()%` <- function(x, interval) {
   !(x %in()% interval)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in(]%` <- function(x, interval) {
   # fail on nested lists
@@ -142,21 +150,21 @@ NULL
   x > interval[1] & x <= interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out(]%` <- function(x, interval) {
   !(x %in(]% interval)
 }
 
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in[)%` <- function(x, interval) {
   interval <- range(interval, na.rm = TRUE)
   x >= interval[1] & x < interval[2]
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out[)%` <- function(x, interval) {
   !(x %in[)% interval)
@@ -179,37 +187,37 @@ in_regex <- function(x , pattern, ...) {
   }
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in~%` <- function(x , pattern) {
   in_regex(x, pattern)
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out~%` <- function(x, pattern) {
   !x %in~% pattern
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in~p%` <- function(x , pattern) {
   in_regex(x, pattern, perl = TRUE)
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out~p%` <- function(x, pattern) {
   !x %in~p% pattern
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%in~f%` <- function(x , pattern) {
   in_regex(x, pattern, fixed = TRUE)
 }
 
-#' @rdname in_check
+#' @rdname in_detect
 #' @export
 `%out~f%` <- function(x, pattern) {
   !x %in~p% pattern

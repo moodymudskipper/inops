@@ -5,7 +5,7 @@
 #' For each `%*%<-` operator of this package `x %*% y <- value` is a shorthand for
 #' `x[x %*% y] <- value`.
 #'
-#' @inheritParams in_check
+#' @inheritParams in_detect
 #' @param value replacement value.
 #'
 #' @return `x` with specified values replaced with `value`.

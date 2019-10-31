@@ -1,11 +1,11 @@
 #' Subsetting Values and Intervals
 #'
-#' Operators for replacing values within a given interval or set.
+#' Operators for subsetting values within a given interval or set.
 #'
 #' For each `%[*%` operator of this package `x %[*% y` is a shorthand for
 #' `x[x %*% y]`.
 #'
-#' @inheritParams in_check
+#' @inheritParams in_detect
 #'
 #' @return `x` with specified values replaced with `value`.
 #'
@@ -67,7 +67,6 @@ NULL
 
 
 #' @rdname in_subset
-#' @usage x \%in[)\% interval <- value
 #' @export
 `%[in[)%` <- function(x, interval) {
   x[ x %in[)% interval]
