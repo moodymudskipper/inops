@@ -4,9 +4,11 @@
 #'
 #' Thanks to these operators :
 #' * `x == y <- value` is equivalent to `x[x == y] <- value`
-#' * `x == y <- value` is equivalent to `x[x == y] <- value`
-#' * `x == y <- value` is equivalent to `x[x == y] <- value`
-#' * `x == y <- value` is equivalent to `x[x == y] <- value`
+#' * `x != y <- value` is equivalent to `x[x != y] <- value`
+#' * `x <= y <- value` is equivalent to `x[x <= y] <- value`
+#' * `x >= y <- value` is equivalent to `x[x >= y] <- value`
+#' * `x < y <- value` is equivalent to `x[x < y] <- value`
+#' * `x > y <- value` is equivalent to `x[x > y] <- value`
 #'
 #' @param x first element of the operation.
 #' @param y second element of the operation.

@@ -35,6 +35,17 @@ x != y <- value
 \description{
 Operators for replacing values using the standard comparison operators.
 }
+\details{
+Thanks to these operators :
+\itemize{
+\item \code{x == y <- value} is equivalent to \code{x[x == y] <- value}
+\item \code{x != y <- value} is equivalent to \code{x[x != y] <- value}
+\item \code{x <= y <- value} is equivalent to \code{x[x <= y] <- value}
+\item \code{x >= y <- value} is equivalent to \code{x[x >= y] <- value}
+\item \code{x < y <- value} is equivalent to \code{x[x < y] <- value}
+\item \code{x > y <- value} is equivalent to \code{x[x > y] <- value}
+}
+}
 \seealso{
 \code{`==`}
 }

@@ -14,31 +14,49 @@
 \alias{\%[out[)\%}
 \alias{\%[in~\%}
 \alias{\%[out~\%}
+\alias{\%[in~p\%}
+\alias{\%[out~p\%}
+\alias{\%[in~f\%}
+\alias{\%[out~f\%}
+\alias{\%[in\%}
+\alias{\%[out\%}
 \title{Subsetting Values and Intervals}
 \usage{
-x \%in{}\% table <- value
+x \%[in{}\% table
 
-x \%out{}\% table <- value
+x \%[out{}\% table
 
-x \%in[]\% interval <- value
+x \%[in[]\% interval
 
-x \%out[]\% interval <- value
+x \%[out[]\% interval
 
-x \%in()\% interval <- value
+x \%[in()\% interval
 
-x \%out()\% interval <- value
+x \%[out()\% interval
 
-x \%in(]\% interval <- value
+x \%[in(]\% interval
 
-x \%out(]\% interval <- value
+x \%[out(]\% interval
 
 x \%in[)\% interval <- value
 
-x \%out[)\% interval <- value
+x \%[out[)\% interval
 
-x \%in~\% pattern <- value
+x \%[in~\% pattern
 
-x \%out~\% pattern <- value
+x \%[out~\% pattern
+
+x \%[in~p\% pattern
+
+x \%[out~p\% pattern
+
+x \%[in~f\% pattern
+
+x \%[out~f\% pattern
+
+x \%[in\% table
+
+x \%[out\% table
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -56,6 +74,10 @@ nested lists}
 }
 \description{
 Operators for replacing values within a given interval or set.
+}
+\details{
+For each \code{\%[*\%} operator of this package \code{x \%[*\% y} is a shorthand for
+\code{x[x \%*\% y]}.
 }
 \seealso{
 \code{\%in{}\%}

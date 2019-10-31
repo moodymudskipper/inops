@@ -18,6 +18,8 @@
 \alias{\%out~f\%<-}
 \alias{\%in~p\%<-}
 \alias{\%out~p\%<-}
+\alias{\%in\%<-}
+\alias{\%out\%<-}
 \title{Replacing Values and Intervals}
 \usage{
 x \%in{}\% table <- value
@@ -51,6 +53,10 @@ x \%out~f\% pattern <- value
 x \%in~p\% pattern <- value
 
 x \%out~p\% pattern <- value
+
+x \%in\% table <- value
+
+x \%out\% table <- value
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -70,6 +76,10 @@ nested lists}
 }
 \description{
 Operators for replacing values within a given interval or set.
+}
+\details{
+For each \code{\%*\%<-} operator of this package \code{x \%*\% y <- value} is a shorthand for
+\code{x[x \%*\% y] <- value}.
 }
 \seealso{
 \code{\%in{}\%}
