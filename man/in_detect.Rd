@@ -62,8 +62,6 @@ x \%out~f\% pattern
 nested lists}
 
 \item{pattern}{pattern to be matched against.}
-
-\item{value}{replacement value.}
 }
 \value{
 a logical vector or an array of the same dimensions as \code{x}

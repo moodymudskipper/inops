@@ -41,7 +41,6 @@
 #' `as.numeric()` is used on lists, it will succeed on flat lists but fail on
 #' nested lists
 #' @param pattern pattern to be matched against.
-#' @param value replacement value.
 #'
 #' @return a logical vector or an array of the same dimensions as `x`
 #' indicating if each value of `x` is within the defined subset.
