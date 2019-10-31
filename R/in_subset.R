@@ -1,6 +1,6 @@
 #' Subsetting Values and Intervals
 #'
-#' Operators for replacing values within a given interval or set.
+#' Operators for subsetting values within a given interval or set.
 #'
 #' For each `%[*%` operator of this package `x %[*% y` is a shorthand for
 #' `x[x %*% y]`.

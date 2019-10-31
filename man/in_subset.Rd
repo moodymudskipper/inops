@@ -73,7 +73,7 @@ nested lists}
 \code{x} with specified values replaced with \code{value}.
 }
 \description{
-Operators for replacing values within a given interval or set.
+Operators for subsetting values within a given interval or set.
 }
 \details{
 For each \code{\%[*\%} operator of this package \code{x \%[*\% y} is a shorthand for
