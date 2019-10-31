@@ -15,42 +15,38 @@ knitr::opts_chunk$set(
 
 # inops
 
-The package *inops* provides operators which expand to sets, ranges and regular
-expressions the functionality provided by the `%in%` infix operator, while keeping
-their behavior close to the one of equality, inequality and comparison operators
-(see dedicated section).
+R package implementing additional infix operators that fall into 3 distinct types:
 
-Operators can be categorized as follow :
+* **set operators** for dealing with sets.
+* **range operators** for dealing with ranges.
+* **regular expression operators** for dealing with regular expressions.
 
-* **detection operators** return a logical output (as `%in%` does)
-* **subsetting operators** return a subset of the input.
-* **assignment operators** overwrite the values of the input matches by the set, range, or regular expression. 
-
-Install with:
+Install using the `remotes` package:
 
 ```
 remotes::install_github("moodymudskipper/inops")
 ```
 
-## Detection operators
+## Operators
 
-Detection operators are the most important as subsetting and assignment operators
-are simple wrappers around them, they are of the form `%<in or out><suffix>%`.
+Introduction to operator behaviour and design.
 
-### Set operations with `%in{}%`
+### Form ###
 
-`%in{}%` is very similar with `%in%` at first sight.
+All operators have the same form composed of two distinct parts: `%<operation><type>%`.
 
-```{r}
-library(rangeops)
-8:11 %in{}% 1:10
-```
+* `[operation]` specifies the performed operation and can be either `in`, `out, `[in`, `[out].
+* `[type]` specifies the type of operation and can be one of `{}`, `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`.
 
-The difference is that it behaves consistently with `==`, which means that it
-can be used on object of different types or classes and the output will be of the
-same shape.
+To understand what each combination does see the table below.
 
-For instance we can use `%in{}%` on data frames :
+### Behaviour ###
+
+The operators implemented here try to be consistent with the default comparison operators like `==` and `<`.
+Therefore in some scenarios their behaviour differs from `%in%`.
+For instance:
+
+1) `%in{}%` can be used on on data frames.
 
 ```{r}
 df1 <- data.frame(a = 1:3, b = 2:4, c=letters[1:3])
@@ -60,83 +56,93 @@ df1 %in{}% 2
 df1 %in{}% 2:3
 ```
 
-Missing values are not turned to `FALSE` :
+2) missing values are not considered as not matching.
 
 ```{r}
 NA == 1
 NA %in% 1
 NA %in{}% 1
-c(1,NA, 3) %in{}% 1:10
+c(1, NA, 3) %in{}% 1:10
 ```
 
-All "in" operators of this package come with a "out" counterpart.
+### Operations ###
 
-```{r}
-c(1,NA, 3) %out{}% 1:10
+Operators permit three distinct operations:
+
+1. Detect: `x %in{}% set`
+2. Subset: `x %[in{}% set`
+3. Replace: `x %in{}% set <- value`
+
+## Operator List ##
+
+Below is a full table listing all the implemented operators along with their usage examples.
+
+```
+|-----------|-----------------------------------------------------------|---------------------------------------------|
+|  Form     |                    Description                            |             Example                         |
+|-----------|-----------------------------------------------------------|---------------------------------------------|
+| %in{}%    | is element inside a set                                   | letters %in{}% "a"                          |
+| %in[]%    | is element inside a closed interval                       | rivers %in[]% c(500,1000)                   |
+| %in()%    | is element inside an open interval                        | rivers %in()% c(500,1000)                   |
+| %in[)%    | is element inside an interval open on the right           | rivers %in[)% c(500,1000)                   |
+| %in(]%    | is element inside an interval open on the left            | rivers %in(]% c(500,1000)                   |
+| %in~%     | does element match a regular expression                   | state.region %in~% "^N"                     |
+| %in~p%    | does element match a regular perl expression              | state.region %in~p% "^N"                    |
+| %in~f%    | does element match a regular fixed expression             | state.region %in~f% "North"                 |
+| %out%     | is element outside a set (same as ! x %in% y)             | letters %out% "a"                           |
+| %out{}%   | is element outside a set                                  | letters %out{}% "a"                         |
+| %out[]%   | is element outside a closed interval                      | rivers %out[]% c(500,1000)                  |
+| %out()%   | is element outside an open interval                       | rivers %out()% c(500,1000)                  |
+| %out[)%   | is element outside an interval open on the right          | rivers %out[)% c(500,1000)                  |
+| %out(]%   | is element outside an interval open on the left           | rivers %out(]% c(500,1000)                  |
+| %out~%    | does element not match a regular expression               | state.region %out~% "^N"                    |
+| %out~p%   | does element not match a regular perl expression          | state.region %out~p% "^N"                   |
+| %out~f%   | does element not match a regular fixed expression         | state.region %out~f% "North"                |
+| %[in{}%   | select elements inside a set                              | letters %[in{}% "a"                         |
+| %[in[]%   | select elements inside a closed interval                  | rivers %[in[]% c(500,1000)                  |
+| %[in()%   | select elements inside an open interval                   | rivers %[in()% c(500,1000)                  |
+| %[in[)%   | select elements inside an interval open on the right      | rivers %[in[)% c(500,1000)                  |
+| %[in(]%   | select elements inside an interval open on the left       | rivers %[in(]% c(500,1000)                  |
+| %[in~%    | select elements matching a regular expression             | state.region %[in~% "^N"                    |
+| %[in~p%   | select elements matching a regular perl expression        | state.region %[in~p% "^N"                   |
+| %[in~f%   | select elements matching a regular fixed expression       | state.region %[in~f% "North"                |
+| %[out%    | select elements outside a set                             | letters %[out% "a"                          |
+| %[out{}%  | select elements outside a set                             | letters %[out{}% "a"                        |
+| %[out[]%  | select elements outside a closed interval                 | rivers %[out[]% c(500,1000)                 |
+| %[out()%  | select elements outside an open interval                  | rivers %[out()% c(500,1000)                 |
+| %[out[)%  | select elements outside an interval open on the right     | rivers %[out[)% c(500,1000)                 |
+| %[out(]%  | select elements outside an interval open on the left      | rivers %[out(]% c(500,1000)                 |
+| %[out~%   | select elements not matching a regular expression         | state.region %[out~% "^N"                   |
+| %[out~p%  | select elements not matching a regular perl expression    | state.region %[out~p% "^N"                  |
+| %[out~f%  | select elements not matching a regular fixed expression   | state.region %[out~f% "North"               |
+| %==<-%    | change elements equal to the provided value               | letters == "a" <- "A"                       |
+| %!=<-%    | change elements not equal to the provided value           | letters != "a" <- "not A"                   |
+| %><-%     | change elements greater than the provided value           | rivers > 1000 <- 1000                       |
+| %<<-%     | change elements lower than the provided value             | rivers < 500  <- 500                        |
+| %>=<-%    | change elements greater or equal to the provided value    | rivers >= 1000 <- 1000                      |
+| %<=<-%    | change elements lower or equal to the provided value      | rivers <= 500 <- 500                        |
+| %in{}<-%  | change elements inside a set                              | letters %in{}% "a" <- "A"                   |
+| %in[]<-%  | change elements inside a closed interval                  | rivers %in[]% c(500,1000) <- 750            |
+| %in()<-%  | change elements inside an open interval                   | rivers %in()% c(500,1000) <- 750            |
+| %in[)<-%  | change elements inside an interval open on the right      | rivers %in[)% c(500,1000) <- 750            |
+| %in(]<-%  | change elements inside an interval open on the left       | rivers %in(]% c(500,1000) <- 750            |
+| %in~<-%   | change elements matching a regular expression             | state.region %in~% "^N" <- "North"          |
+| %in~p<-%  | change elements matching a regular perl expression        | state.region %in~p% "^N" <- "North"         |
+| %in~f<-%  | change elements matching a regular fixed expression       | state.region %in~f% "North" <- "North"      |
+| %out<-%   | change elements outside a set                             | letters %out% "a" <- "not A"                |
+| %out{}<-% | change elements outside a set                             | letters %out{}% "a" <- "not A"              |
+| %out[]<-% | change elements outside a closed interval                 | rivers %out[]% c(500,1000) <- NA            |
+| %out()<-% | change elements outside an open interval                  | rivers %out()% c(500,1000) <- NA            |
+| %out[)<-% | change elements outside an interval open on the right     | rivers %out[)% c(500,1000) <- NA            |
+| %out(]<-% | change elements outside an interval open on the left      | rivers %out(]% c(500,1000) <- NA            |
+| %out~<-%  | change elements not matching a regular expression         | state.region %out~% "^N" <- "not North"     |
+| %out~p<-% | change elements not matching a regular perl expression    | state.region %out~p% "^N" <- "not North"    |
+| %out~f<-% | change elements not matching a regular fixed expression   | state.region %out~f% "North" <- "not North" |
+|-----------|-----------------------------------------------------------|---------------------------------------------|
 ```
 
-We won't mention the other "out" operators in the rest of the document, nor the
-behavior of operators on non atomic data datypes, for brievety, but they work
-just the same for other *inops* operator, with the exception of `%out%`, 
-the negation of `%in%` provided for convenience.
+## Notes ##
 
-### Range operations with `%in[]%`, `%in[)%`, `%in(]%` and `%in()`
+To give an assignment counterpart to `<` we had to overload the `<<-` operator, which explains the message when attaching the package.
+This doesn't affect the behavior of the `<<-` assignments.
 
-These check if values are in a given range, the rhs can be a simple pair of
-values or a bigger set, in which case the range of these values will be considered.
-
-`[` and `]` describe closed boundaries while `(` and `)` describe open boundaries.
-
-```{r}
-8:12 %in[]% c(9, 10, 6)
-8:12 %in[)% c(9, 10, 6)
-```
-
-### Regex operations with `%in~%`, `%in~p%` and `%in~f%`
-
-These operators are wrappers around `grepl()`, `%in~%` uses the default parameters
-while `%in~p%` uses `perl = TRUE` and `%in~f%` uses `fixed = TRUE`.
-
-```{r}
-c("foo","bar","baz") %in~% c("^f","z$")
-```
-
-## Subsetting operators
-
-All detection operators have a subsetting operator counterpart, they are of the form
-`%[<in or out><suffix>%`.
-
-`%in%` and `%out%` were given subsetting counterparts `%[in%` and `%[out%` as
-well.
-
-```{r}
-8:12 %[in[)% c(9, 10, 6)
-8:12 %[out% c(5, 7, 9, 11)
-c("foo","bar","baz") %[in~% c("^f","z$")
-```
-
-## Assignment operators
-
-All detection operators have an assignment operator counterpart, it is in practice
-typed just the same, but is followed by an assignment.
-
-`%in%` and `%out%` were also given assignment counterparts `%in%<-` and `%out%<-`,
-as were also `==`, `!=`, `<`, `>`, `<=` and `=>`.
-
-```{r}
-x <- 1:10
-x %in[]% c(4:6) <- 0
-x
-
-x <- c("foo","bar","baz")
-x %in~% c("^f","z$") <- "!!!"
-x
-
-x <- 1:10
-x < 3 <- 0
-x
-```
-
-Note that to give an assignment counterpart to `<` we had to overload the `<<-`
-operator, which explains the message when attaching the package. This doesn't
-affect the behavior of the `<<-` assignments.
