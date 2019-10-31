@@ -44,49 +44,55 @@ NULL
 
 #' @rdname in_check
 #' @export
-`%in{}%` <- function(x, table) {
-  table <- unlist(table)
-  # the lhs must be coercible to an atomic type if it's a list
-  if (is.list(x) && !is.data.frame(x)) {
-    x <- switch(
-      typeof(table),
-      logical = as.logical(x),
-      integer = as.integer(x),
-      double = as.double(x),
-      complex = as.complex(x),
-      character = as.character(x),
-      raw = as.raw(x),
-      x)
-  }
-
-  # convert to character
-  if (is.factor(table)) {
-    table <- levels(table)[table]
-  }
-  if (is.data.frame(x)){
-    res <- sapply(x, `%in%`, table)
-  } else if (is.matrix(x)){
-    res <- apply(x, 2, `%in%`, table)
-  } else if (is.atomic(x)) {
-    if(is.language(table))
-      res <- x == table
-    else
-      res <- x %in% table
-  } else {
-    if(is.language(x)){
-      if(is.language(table))
-        res <- x == table
-      else
-        res <- any(sapply(table, function(a,b)
-          if(is.language(a)) a == b else a %in% b, x))
-    }else
-      res <- sapply(x, function(a,b)
-        if(is.language(a)) any(a == b) else a %in% b, table)
-  }
-
-  if (!is.language(x)) res[is.na(x)] <- NA
-  res
+`%in{}%` <- function(x, table){
+  if(is.language(table)) return(x == table)
+  Reduce(`|`, lapply(unique(table), `==`, x))
 }
+
+# previous impl
+# `%in{}%` <- function(x, table) {
+#   table <- unlist(table)
+#   # the lhs must be coercible to an atomic type if it's a list
+#   if (is.list(x) && !is.data.frame(x)) {
+#     x <- switch(
+#       typeof(table),
+#       logical = as.logical(x),
+#       integer = as.integer(x),
+#       double = as.double(x),
+#       complex = as.complex(x),
+#       character = as.character(x),
+#       raw = as.raw(x),
+#       x)
+#   }
+#
+#   # convert to character
+#   if (is.factor(table)) {
+#     table <- levels(table)[table]
+#   }
+#   if (is.data.frame(x)){
+#     res <- sapply(x, `%in%`, table)
+#   } else if (is.matrix(x)){
+#     res <- apply(x, 2, `%in%`, table)
+#   } else if (is.atomic(x)) {
+#     if(is.language(table))
+#       res <- x == table
+#     else
+#       res <- x %in% table
+#   } else {
+#     if(is.language(x)){
+#       if(is.language(table))
+#         res <- x == table
+#       else
+#         res <- any(sapply(table, function(a,b)
+#           if(is.language(a)) a == b else a %in% b, x))
+#     }else
+#       res <- sapply(x, function(a,b)
+#         if(is.language(a)) any(a == b) else a %in% b, table)
+#   }
+#
+#   if (!is.language(x)) res[is.na(x)] <- NA
+#   res
+# }
 
 #' @rdname in_check
 #' @export

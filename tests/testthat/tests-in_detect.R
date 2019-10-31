@@ -106,9 +106,7 @@ test_that("`%in{}%` is consistent with `==`",{
   expect_same_behavior(
     test_num == 3 | test_num == 4,
     test_num %in{}% c(3,4))
-  expect_same_behavior(
-    test_list1 == 3 | suppressWarnings(test_list1 == 4), # suppressWarnings to have just 5 warnings
-    test_list1 %in{}% c(3,4))
+  expect_warning(test_list1 %in{}% c(3,4))
   expect_same_behavior(test_list2 == 3 | test_list2 == 4, test_list2 %in{}% 3)
   expect_same_behavior(test_df == 3 | test_df == 4, test_df %in{}% c(3,4))
 })
