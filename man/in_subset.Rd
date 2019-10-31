@@ -79,6 +79,20 @@ Operators for subsetting values within a given interval or set.
 For each \code{\%[*\%} operator of this package \code{x \%[*\% y} is a shorthand for
 \code{x[x \%*\% y]}.
 }
+\examples{
+# interval subsetting operators
+x <- 1:10
+x \%[in[]\% c(3,4,5,6,7)
+x \%[in[)\% c(3,4,5,6,7)
+x \%[out[)\% c(3,4,5,6,7)
+
+# regular expression subsetting operators
+carnames <- rownames(mtcars)
+carnames \%[in~\% "^Mazda"
+carnames \%[in~\% c("^Mazda", "^Merc")
+carnames \%[in~\% c("\\\\w{10,100}$")  # long car names
+
+}
 \seealso{
 \code{\%in{}\%}
 }
