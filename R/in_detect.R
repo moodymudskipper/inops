@@ -10,6 +10,7 @@
 #'
 #' @seealso `%in%`
 #'
+#' @name out
 #' @export
 `%out%` <- function(x, table) {
   !x %in% table
