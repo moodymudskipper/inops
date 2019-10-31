@@ -16,6 +16,18 @@
 #'
 #' @return \code{x} with values for which the comparisons evaluate to TRUE replaced with \code{value}.
 #'
+#' @examples
+#' ages <- c(130, 10, 1996, 21, 39, 74, -2, 0)
+#'
+#' ages == 1996 <- as.numeric(format(Sys.Date(), "%Y")) - 1986
+#' ages
+#'
+#' ages > 100 <- NA
+#' ages
+#'
+#' ages <= 0 <- NA
+#' ages
+#'
 #' @seealso \code{`==`}
 #' @name comparison_replace
 NULL

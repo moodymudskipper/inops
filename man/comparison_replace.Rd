@@ -46,6 +46,19 @@ Thanks to these operators :
 \item \code{x > y <- value} is equivalent to \code{x[x > y] <- value}
 }
 }
+\examples{
+ages <- c(130, 10, 1996, 21, 39, 74, -2, 0)
+
+ages == 1996 <- as.numeric(format(Sys.Date(), "\%Y")) - 1986
+ages
+
+ages > 100 <- NA
+ages
+
+ages <= 0 <- NA
+ages
+
+}
 \seealso{
 \code{`==`}
 }

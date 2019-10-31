@@ -10,6 +10,26 @@
 #'
 #' @return `x` with specified values replaced with `value`.
 #'
+#' @examples
+#' # interval replacement operators
+#' x <- 1:10
+#' x %in[]% c(3,4,5,6,7) <- 0
+#' x
+#'
+#' x <- 1:10
+#' x %in[)% c(3,4,5,6,7) <- NA
+#' x
+#'
+#' x <- 1:10
+#' x %out[)% c(3,4,5,6,7) <- x
+#' x
+#'
+#' # regular expression replacement operators
+#' region <- as.character(state.region)
+#' table(region)
+#' region %in~% "^North" <- "North"
+#' table(region)
+#'
 #' @seealso `%in{}%`
 #' @name in_replace
 NULL
