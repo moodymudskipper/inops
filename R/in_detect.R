@@ -125,7 +125,7 @@ NULL
 `%out()%` <- function(x, interval) {
   !(x %in()% interval)
 }
-F
+
 
 #' @rdname in_check
 #' @export
@@ -157,18 +157,19 @@ F
 }
 
 in_regex <- function(x , pattern, ...) {
+  pattern <- unique(unlist(pattern))
   # convert to character
   if (is.factor(x)) {
     x <- levels(x)[x]
   }
   if (is.matrix(x) || is.data.frame(x)) {
-    apply(x, 2, grepl, pattern = pattern, ...)
+    Reduce(`|`, lapply(pattern, function(y, x, ...) apply(x, 2, grepl, pattern = y), x, ...))
   } else {
     # conversion from list to character is done automatically by `==`
     # so we implement it as well here
     if (is.list(x) && !is.data.frame(x))
       x <- as.character(x)
-    grepl(pattern, x, ...)
+    Reduce(`|`, lapply(pattern, grepl, x, ...))
   }
 }
 
