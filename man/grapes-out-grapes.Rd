@@ -6,7 +6,18 @@
 \usage{
 x \%out\% table
 }
+\arguments{
+\item{x}{vector of values to be matched.}
+
+\item{table}{vector or list to be matched against.}
+}
+\value{
+a logical vector or of the same length as \code{x}
+indicating if each value of \code{x} is within the defined subset.
+}
 \description{
-\code{\%out\%} is the negation of \code{\%in\%}, so typing \code{x \%out\% y} is equivalent to
-\code{! x \%in\% y}
+\code{\%out\%} is the negation of \code{\%in\%}, so \code{x \%out\% y} is equivalent to \code{! x \%in\% y}.
+}
+\seealso{
+\code{\%in\%}
 }

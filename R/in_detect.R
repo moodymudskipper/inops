@@ -1,7 +1,15 @@
 #' Detect values that don't match
 #'
-#' `%out%` is the negation of `%in%`, so typing `x %out% y` is equivalent to
-#' `! x %in% y`
+#' `%out%` is the negation of `%in%`, so `x %out% y` is equivalent to `! x %in% y`.
+#'
+#' @param x vector of values to be matched.
+#' @param table vector or list to be matched against.
+#'
+#' @return a logical vector or of the same length as `x`
+#' indicating if each value of `x` is within the defined subset.
+#'
+#' @seealso `%in%`
+#'
 #' @export
 `%out%` <- function(x, table) {
   !x %in% table
