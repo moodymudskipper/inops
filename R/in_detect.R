@@ -8,6 +8,10 @@
 #' @return a logical vector or of the same length as `x`
 #' indicating if each value of `x` is within the defined subset.
 #'
+#' @examples
+#' iris$Species %in% c("setosa", "versicolor")
+#' iris$Species %out% c("setosa", "versicolor")
+#'
 #' @seealso `%in%`
 #'
 #' @name out
@@ -18,21 +22,17 @@
 
 #' Matching Values and Intervals
 #'
-#' Operators for checking which values are within a given interval or set.
+#' Operators for detecting which values are within a given interval or set.
 #'
-#' Parentheses of each operator define the type of matching template:
-#' * `%in{}%` detects the elements of x found in the set of all given by the `table`
-#'   argument. It is a reimplementation of `%in%` that behaves more
-#'   consistently to equality and comparison operators. Like the latter, and
-#'   like the other operators described here it preserves the dimensions of `x`
-#'   and the missing values.
-#' * `%in()%`, `%in[]%`, `%in(]%` and `%in[)%` detect the elements of x included in
-#'   a range computed from the `interval` argument,using `range(interval)`, this range being
-#'   respectively closed, open, open on the left and closed on the right, or
-#'   closed on the left and open on the right
-#' * `%in~%`, `%in~p%` and `%in~f%` detect the elements of x which match the
-#'   regular expression given by `pattern`, they wrap `grepl()` respectively
-#'   with default parameters, with `perl = TRUE`, and with `fixed = TRUE`
+#' Compared with default `%in%` implementation in R the operators implemented here try to be more consistent with other default infix operators like `==` and `<`.
+#' In particular they preserve the dimensions and the missing values (see examples).
+#'
+#' Style of parentheses define the type of matching template:
+#' * `%in{}%` detects which elements of `x` are present in the set given by the `table` argument.
+#' * `%in()%`, `%in[]%`, `%in(]%` and `%in[)%` detect the elements of `x` included in a range of `interval` argument, using `range(interval)`.
+#'   This range being closed, open on both sides, open on the left, or open on the right, respectively.
+#' * `%in~%`, `%in~p%` and `%in~f%` detect the elements of `x` that match the regular expression given by `pattern`.
+#'   They wrap `grepl()` with the default parameters of `perl = TRUE`, and with `fixed = TRUE`, respectively.
 #
 #' Operators of the form `%out<suffix>%` return the negation of `%in<suffix>%`
 #'

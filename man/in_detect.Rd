@@ -68,23 +68,19 @@ a logical vector or an array of the same dimensions as \code{x}
 indicating if each value of \code{x} is within the defined subset.
 }
 \description{
-Operators for checking which values are within a given interval or set.
+Operators for detecting which values are within a given interval or set.
 }
 \details{
-Parentheses of each operator define the type of matching template:
+Compared with default \code{\%in\%} implementation in R the operators implemented here try to be more consistent with other default infix operators like \code{==} and \code{<}.
+In particular they preserve the dimensions and the missing values (see examples).
+
+Style of parentheses define the type of matching template:
 \itemize{
-\item \code{\%in{}\%} detects the elements of x found in the set of all given by the \code{table}
-argument. It is a reimplementation of \code{\%in\%} that behaves more
-consistently to equality and comparison operators. Like the latter, and
-like the other operators described here it preserves the dimensions of \code{x}
-and the missing values.
-\item \code{\%in()\%}, \code{\%in[]\%}, \code{\%in(]\%} and \code{\%in[)\%} detect the elements of x included in
-a range computed from the \code{interval} argument,using \code{range(interval)}, this range being
-respectively closed, open, open on the left and closed on the right, or
-closed on the left and open on the right
-\item \code{\%in~\%}, \code{\%in~p\%} and \code{\%in~f\%} detect the elements of x which match the
-regular expression given by \code{pattern}, they wrap \code{grepl()} respectively
-with default parameters, with \code{perl = TRUE}, and with \code{fixed = TRUE}
+\item \code{\%in{}\%} detects which elements of \code{x} are present in the set given by the \code{table} argument.
+\item \code{\%in()\%}, \code{\%in[]\%}, \code{\%in(]\%} and \code{\%in[)\%} detect the elements of \code{x} included in a range of \code{interval} argument, using \code{range(interval)}.
+This range being closed, open on both sides, open on the left, or open on the right, respectively.
+\item \code{\%in~\%}, \code{\%in~p\%} and \code{\%in~f\%} detect the elements of \code{x} that match the regular expression given by \code{pattern}.
+They wrap \code{grepl()} with the default parameters of \code{perl = TRUE}, and with \code{fixed = TRUE}, respectively.
 Operators of the form \code{\%out<suffix>\%} return the negation of \code{\%in<suffix>\%}
 }
 }

@@ -19,6 +19,11 @@ indicating if each value of \code{x} is within the defined subset.
 \description{
 \code{\%out\%} is the negation of \code{\%in\%}, so \code{x \%out\% y} is equivalent to \code{! x \%in\% y}.
 }
+\examples{
+iris$Species \%in\% c("setosa", "versicolor")
+iris$Species \%out\% c("setosa", "versicolor")
+
+}
 \seealso{
 \code{\%in\%}
 }
