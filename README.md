@@ -23,8 +23,8 @@ Introduction to operator behaviour and design.
 All operators have the same form composed of two distinct parts:
 `%<operation><type>%`.
 
-  - `[operation]` specifies the performed operation and can be either
-    `in`, `out,`\[in`,`\[out\`.
+  - `[operation]` specifies the performed operation and can be one of
+    `in`, `out`, `[in`, `[out`.
   - `[type]` specifies the type of operation and can be one of `{}`,
     `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`.
 
