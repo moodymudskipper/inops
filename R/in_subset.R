@@ -12,9 +12,9 @@
 #' @examples
 #' # interval subsetting operators
 #' x <- 1:10
-#' x %[in[]% c(3,4,5,6,7)
-#' x %[in[)% c(3,4,5,6,7)
-#' x %[out[)% c(3,4,5,6,7)
+#' x %[in[]% c(3,7)
+#' x %[in[)% c(3,7)
+#' x %[out[)% c(3,7)
 #'
 #' # regular expression subsetting operators
 #' carnames <- rownames(mtcars)
