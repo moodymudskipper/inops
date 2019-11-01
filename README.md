@@ -3,63 +3,62 @@
 
 # inops
 
-The package *inops* provides operators which expand to sets, ranges and
-regular expressions the functionality provided by the `%in%` infix
-operator, while keeping their behavior close to the one of equality,
-inequality and comparison operators (see dedicated section).
+Package implementing additional infix operators for R.
 
-Operators can be categorized as follow :
+Implemented operators provide 3 distinct operations: **detection**,
+**subsetting**, and **replacement**.  
+And work with 3 different value types: **sets**, **intervals**, and
+**regular expressions**.
 
-  - **detection operators** return a logical output (as `%in%` does)
-  - **subsetting operators** return a subset of the input.
-  - **assignment operators** overwrite the values of the input matches
-    by the set, range, or regular expression.
-
-Install with:
+Install using the `remotes` package:
 
     remotes::install_github("moodymudskipper/inops")
 
-## Detection operators
+## Operators
 
-Detection operators are the most important as subsetting and assignment
-operators are simple wrappers around them, they are of the form `%<in or
-out><suffix>%`.
+Introduction to operator behaviour and design.
 
-### Set operations with `%in{}%`
+### Form
 
-`%in{}%` is very similar with `%in%` at first sight.
+All operators have the same form composed of two distinct parts:
+`%<operation><type>%`.
 
-``` r
-library(rangeops)
-#> 
-#> Attaching package: 'rangeops'
-#> The following object is masked from 'package:base':
-#> 
-#>     <<-
-8:11 %in{}% 1:10
-#> [1]  TRUE  TRUE  TRUE FALSE
-```
+  - `[operation]` specifies the performed operation and can be one of
+    `in`, `out`, `[in`, `[out`.
+  - `[type]` specifies the type of operation and can be one of `{}`,
+    `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`.
 
-The difference is that it behaves consistently with `==`, which means
-that it can be used on object of different types or classes and the
-output will be of the same shape.
+To understand what each combination does see the table below.
 
-For instance we can use `%in{}%` on data frames :
+### Behaviour
+
+The operators implemented here try to be consistent with the default
+comparison operators like `==` and `<`.  
+Therefore in some scenarios their behaviour differs from `%in%`.  
+For instance:
+
+1)  `%in{}%` can be used on on data frames.
+
+<!-- end list -->
 
 ``` r
 df1 <- data.frame(a = 1:3, b = 2:4, c=letters[1:3])
+
 df1 == 2
 #>          a     b     c
 #> [1,] FALSE  TRUE FALSE
 #> [2,]  TRUE FALSE FALSE
 #> [3,] FALSE FALSE FALSE
+
 df1 %in% 2
 #> [1] FALSE FALSE FALSE
+
 df1 %in{}% 2
 #>          a     b     c
 #> [1,] FALSE  TRUE FALSE
 #> [2,]  TRUE FALSE FALSE
 #> [3,] FALSE FALSE FALSE
+
 df1 %in{}% 2:3
 #>          a     b     c
 #> [1,] FALSE  TRUE FALSE
@@ -67,100 +66,117 @@ df1 %in{}% 2:3
 #> [3,]  TRUE FALSE FALSE
 ```
 
-Missing values are not turned to `FALSE` :
+2)  missing values are not considered as not matching.
+
+<!-- end list -->
 
 ``` r
 NA == 1
 #> [1] NA
+
 NA %in% 1
 #> [1] FALSE
+
 NA %in{}% 1
 #> [1] NA
-c(1,NA, 3) %in{}% 1:10
+
+c(1, NA, 3) %in{}% 1:10
 #> [1] TRUE   NA TRUE
 ```
 
-All “in” operators of this package come with a “out” counterpart.
+### Operations
 
-``` r
-c(1,NA, 3) %out{}% 1:10
-#> [1] FALSE    NA FALSE
-```
+Operators permit three distinct operations:
 
-We won’t mention the other “out” operators in the rest of the document,
-nor the behavior of operators on non atomic data datypes, for brievety,
-but they work just the same for other *inops* operator, with the
-exception of `%out%`, the negation of `%in%` provided for convenience.
+1.  Detect: `x %in{}% set`
+2.  Subset: `x %[in{}% set`
+3.  Replace: `x %in{}% set <- value`
 
-### Range operations with `%in[]%`, `%in[)%`, `%in(]%` and `%in()`
+## Operator List
 
-These check if values are in a given range, the rhs can be a simple pair
-of values or a bigger set, in which case the range of these values will
-be considered.
+Below is a full list of all the implemented operators along with their
+usage examples.
 
-`[` and `]` describe closed boundaries while `(` and `)` describe open
-boundaries.
+### Detection Operators
 
-``` r
-8:12 %in[]% c(9, 10, 6)
-#> [1]  TRUE  TRUE  TRUE FALSE FALSE
-8:12 %in[)% c(9, 10, 6)
-#> [1]  TRUE  TRUE FALSE FALSE FALSE
-```
+    |-----------|-----------------------------------------------------------|-----------------------------|
+    |  Form     |                    Description                            |            Call             |
+    |-----------|-----------------------------------------------------------|-----------------------------|
+    | %in{}%    | is element inside a set                                   | x %in{}% set                |
+    | %in[]%    | is element inside a closed interval                       | x %in[]% interval           |
+    | %in()%    | is element inside an open interval                        | x %in()% interval           |
+    | %in[)%    | is element inside an interval open on the right           | x %in[)% interval           |
+    | %in(]%    | is element inside an interval open on the left            | x %in(]% interval           |
+    | %in~%     | does element match a regular expression                   | x %in~% pattern             |
+    | %in~p%    | does element match a regular perl expression              | x %in~p% pattern            |
+    | %in~f%    | does element match a regular fixed expression             | x %in~f% pattern            |
+    | %out%     | is element outside a set (same as ! x %in% y)             | x %out% set                 |
+    | %out{}%   | is element outside a set                                  | x %out{}% set               |
+    | %out[]%   | is element outside a closed interval                      | x %out[]% interval          |
+    | %out()%   | is element outside an open interval                       | x %out()% interval          |
+    | %out[)%   | is element outside an interval open on the right          | x %out[)% interval          |
+    | %out(]%   | is element outside an interval open on the left           | x %out(]% interval          |
+    | %out~%    | does element not match a regular expression               | x %out~% pattern            |
+    | %out~p%   | does element not match a regular perl expression          | x %out~p% pattern           |
+    | %out~f%   | does element not match a regular fixed expression         | x %out~f% pattern           |
+    |-----------|-----------------------------------------------------------|-----------------------------|
 
-### Regex operations with `%in~%`, `%in~p%` and `%in~f%`
+### Subsetting Operators
 
-These operators are wrappers around `grepl()`, `%in~%` uses the default
-parameters while `%in~p%` uses `perl = TRUE` and `%in~f%` uses `fixed =
-TRUE`.
+    |-----------|-----------------------------------------------------------|-----------------------------|
+    |  Form     |                    Description                            |            Call             |
+    |-----------|-----------------------------------------------------------|-----------------------------|
+    | %[in{}%   | select elements inside a set                              | x %[in{}% set               |
+    | %[in[]%   | select elements inside a closed interval                  | x %[in[]% interval          |
+    | %[in()%   | select elements inside an open interval                   | x %[in()% interval          |
+    | %[in[)%   | select elements inside an interval open on the right      | x %[in[)% interval          |
+    | %[in(]%   | select elements inside an interval open on the left       | x %[in(]% interval          |
+    | %[in~%    | select elements matching a regular expression             | x %[in~% pattern            |
+    | %[in~p%   | select elements matching a regular perl expression        | x %[in~p% pattern           |
+    | %[in~f%   | select elements matching a regular fixed expression       | x %[in~f% pattern           |
+    | %[out%    | select elements outside a set                             | x %[out%  set               |
+    | %[out{}%  | select elements outside a set                             | x %[out{}%  set             |
+    | %[out[]%  | select elements outside a closed interval                 | x %[out[]% interval         |
+    | %[out()%  | select elements outside an open interval                  | x %[out()% interval         |
+    | %[out[)%  | select elements outside an interval open on the right     | x %[out[)% interval         |
+    | %[out(]%  | select elements outside an interval open on the left      | x %[out(]% interval         |
+    | %[out~%   | select elements not matching a regular expression         | x %[out~% pattern           |
+    | %[out~p%  | select elements not matching a regular perl expression    | x %[out~p% pattern          |
+    | %[out~f%  | select elements not matching a regular fixed expression   | x %[out~f% pattern          |
+    |-----------|-----------------------------------------------------------|-----------------------------|
 
-``` r
-c("foo","bar","baz") %in~% c("^f","z$")
-#> [1]  TRUE FALSE  TRUE
-```
+### Replacement Operators
 
-## Subsetting operators
+    |-----------|-----------------------------------------------------------|-----------------------------|
+    |  Form     |                    Description                            |            Call             |
+    |-----------|-----------------------------------------------------------|-----------------------------|
+    | %==<-%    | change elements equal to the provided value               | x == element <- value       |
+    | %!=<-%    | change elements not equal to the provided value           | x != element <- value       |
+    | %><-%     | change elements greater than the provided value           | x > number <- value         |
+    | %<<-%     | change elements lower than the provided value             | x < number  <- value        |
+    | %>=<-%    | change elements greater or equal to the provided value    | x >= number <- value        |
+    | %<=<-%    | change elements lower or equal to the provided value      | x <= number <- value        |
+    | %in{}<-%  | change elements inside a set                              | x %in{}% set <- value       |
+    | %in[]<-%  | change elements inside a closed interval                  | x %in[]% interval <- value  |
+    | %in()<-%  | change elements inside an open interval                   | x %in()% interval <- value  |
+    | %in[)<-%  | change elements inside an interval open on the right      | x %in[)% interval <- value  |
+    | %in(]<-%  | change elements inside an interval open on the left       | x %in(]% interval <- value  |
+    | %in~<-%   | change elements matching a regular expression             | x %in~% pattern <- value    |
+    | %in~p<-%  | change elements matching a regular perl expression        | x %in~p% pattern <- value   |
+    | %in~f<-%  | change elements matching a regular fixed expression       | x %in~f% pattern <- value   |
+    | %out<-%   | change elements outside a set                             | x %out% set <- value        |
+    | %out{}<-% | change elements outside a set                             | x %out{}% set <- value      |
+    | %out[]<-% | change elements outside a closed interval                 | x %out[]% interval <- value |
+    | %out()<-% | change elements outside an open interval                  | x %out()% interval <- value |
+    | %out[)<-% | change elements outside an interval open on the right     | x %out[)% interval <- value |
+    | %out(]<-% | change elements outside an interval open on the left      | x %out(]% interval <- value |
+    | %out~<-%  | change elements not matching a regular expression         | x %out~% pattern <- value   |
+    | %out~p<-% | change elements not matching a regular perl expression    | x %out~p% pattern <- value  |
+    | %out~f<-% | change elements not matching a regular fixed expression   | x %out~f% pattern <- value  |
+    |-----------|-----------------------------------------------------------|-----------------------------|
 
-All detection operators have a subsetting operator counterpart, they are
-of the form `%[<in or out><suffix>%`.
+## Notes
 
-`%in%` and `%out%` were given subsetting counterparts `%[in%` and
-`%[out%` as well.
-
-``` r
-8:12 %[in[)% c(9, 10, 6)
-#> [1] 8 9
-8:12 %[out% c(5, 7, 9, 11)
-#> [1]  8 10 12
-c("foo","bar","baz") %[in~% c("^f","z$")
-#> [1] "foo" "baz"
-```
-
-## Assignment operators
-
-All detection operators have an assignment operator counterpart, it is
-in practice typed just the same, but is followed by an assignment.
-
-`%in%` and `%out%` were also given assignment counterparts `%in%<-` and
-`%out%<-`, as were also `==`, `!=`, `<`, `>`, `<=` and `=>`.
-
-``` r
-x <- 1:10
-x %in[]% c(4:6) <- 0
-x
-#>  [1]  1  2  3  0  0  0  7  8  9 10
-
-x <- c("foo","bar","baz")
-x %in~% c("^f","z$") <- "!!!"
-x
-#> [1] "!!!" "bar" "!!!"
-
-x <- 1:10
-x < 3 <- 0
-x
-#>  [1]  0  0  3  4  5  6  7  8  9 10
-```
-
-Note that to give an assignment counterpart to `<` we had to overload
-the `<<-` operator, which explains the message when attaching the
-package. This doesn’t affect the behavior of the `<<-` assignments.
+To give an assignment counterpart to `<` we had to overload the `<<-`
+operator, which explains the message when attaching the package. This
+doesn’t affect the behavior of the `<<-` assignments.
