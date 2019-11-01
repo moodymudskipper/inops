@@ -33,8 +33,9 @@ To understand what each combination does see the table below.
 ### Behaviour
 
 The operators implemented here try to be consistent with the default
-comparison operators like `==` and `<`. Therefore in some scenarios
-their behaviour differs from `%in%`. For instance:
+comparison operators like `==` and `<`.  
+Therefore in some scenarios their behaviour differs from `%in%`.  
+For instance:
 
 1)  `%in{}%` can be used on on data frames.
 
