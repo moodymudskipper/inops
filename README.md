@@ -14,9 +14,13 @@ Install using the `remotes` package:
 
     remotes::install_github("moodymudskipper/inops")
 
-## Example
+## Examples
 
-Selecting flight records from the `nycflights13` dataset that:
+Simplistic examples for illustration
+
+-----
+
+Selecting flight records from the `flights` dataset that:
 
 1.  Departed and Landed between noon and 5 p.m.
 2.  Were not traveling to “LEX”, “PSP”, nor “HDN”
@@ -28,7 +32,6 @@ Selecting flight records from the `nycflights13` dataset that:
 
 ``` r
 library(nycflights13)
-library(lubridate)
 library(dplyr)
 library(inops)
 
@@ -44,6 +47,39 @@ flights %>%
 #>   <chr>  <chr> <chr>      <int>    <int>    <dbl>
 #> 1 EWR    PHL   N14972      1240     1333       80
 #> 2 JFK    HNL   N391HA      1214     1645     4983
+```
+
+-----
+
+Cleaning up `planes` dataset to:
+
+1.  Clean up names of “AIRBUS”, “CANADAIR” and “MCDONNELL”
+    manufacturers.
+2.  Obtain plane counts for each of the 3 manufacturers mentioned above.
+
+<!-- end list -->
+
+``` r
+library(nycflights13)
+library(inops)
+
+table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
+#> 
+#>                        AIRBUS              AIRBUS INDUSTRIE                      CANADAIR 
+#>                           336                           400                             9 
+#>                  CANADAIR LTD             MCDONNELL DOUGLAS MCDONNELL DOUGLAS AIRCRAFT CO 
+#>                             1                           120                           103 
+#> MCDONNELL DOUGLAS CORPORATION 
+#>                            14
+
+planes$manufacturer %in~% "AIRBUS"    <- "AIRBUS"
+planes$manufacturer %in~% "CANADAIR"  <- "CANADAIR"
+planes$manufacturer %in~% "MCDONNELL" <- "MCDONNELL"
+
+table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
+#> 
+#>    AIRBUS  CANADAIR MCDONNELL 
+#>       736        10       237
 ```
 
 ## Operators

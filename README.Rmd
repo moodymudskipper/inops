@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+options(width=110)
 ```
 
 # inops
@@ -26,9 +28,13 @@ Install using the `remotes` package:
 remotes::install_github("moodymudskipper/inops")
 ```
 
-## Example ##
+## Examples ##
 
-Selecting flight records from the `nycflights13` dataset that:
+Simplistic examples for illustration
+
+---
+
+Selecting flight records from the `flights` dataset that:
 
 1. Departed and Landed between noon and 5 p.m.
 2. Were not traveling to "LEX", "PSP", nor "HDN"
@@ -37,7 +43,6 @@ Selecting flight records from the `nycflights13` dataset that:
 
 ```{r, message=FALSE}
 library(nycflights13)
-library(lubridate)
 library(dplyr)
 library(inops)
 
@@ -48,6 +53,26 @@ flights %>%
   filter(distance %out[]% c(100, 3000)) %>%
   filter(tailnum  %in~%   c("^N1", "^N3")) %>%
   select(origin, dest, tailnum, dep_time, arr_time, distance)
+```
+
+---
+
+Cleaning up `planes` dataset to:
+
+1. Clean up names of "AIRBUS", "CANADAIR" and "MCDONNELL" manufacturers.
+2. Obtain plane counts for each of the 3 manufacturers mentioned above.
+
+```{r, message=FALSE}
+library(nycflights13)
+library(inops)
+
+table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
+
+planes$manufacturer %in~% "AIRBUS"    <- "AIRBUS"
+planes$manufacturer %in~% "CANADAIR"  <- "CANADAIR"
+planes$manufacturer %in~% "MCDONNELL" <- "MCDONNELL"
+
+table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
 
 ```
 
