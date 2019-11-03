@@ -30,7 +30,7 @@ remotes::install_github("moodymudskipper/inops")
 
 ## Examples ##
 
-Simplistic examples for illustration
+Simple examples for illustration.
 
 ---
 
@@ -59,7 +59,7 @@ flights %>%
 
 Cleaning up `planes` dataset to:
 
-1. Clean up names of "AIRBUS", "CANADAIR" and "MCDONNELL" manufacturers.
+1. Standardize names of "AIRBUS", "CANADAIR" and "MCDONNELL" manufacturers.
 2. Obtain plane counts for each of the 3 manufacturers mentioned above.
 
 ```{r, message=FALSE}
@@ -75,6 +75,8 @@ planes$manufacturer %in~% "MCDONNELL" <- "MCDONNELL"
 table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
 
 ```
+
+---
 
 ## Operators
 

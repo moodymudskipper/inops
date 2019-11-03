@@ -16,7 +16,7 @@ Install using the `remotes` package:
 
 ## Examples
 
-Simplistic examples for illustration
+Simple examples for illustration.
 
 -----
 
@@ -53,7 +53,7 @@ flights %>%
 
 Cleaning up `planes` dataset to:
 
-1.  Clean up names of “AIRBUS”, “CANADAIR” and “MCDONNELL”
+1.  Standardize names of “AIRBUS”, “CANADAIR” and “MCDONNELL”
     manufacturers.
 2.  Obtain plane counts for each of the 3 manufacturers mentioned above.
 
@@ -81,6 +81,8 @@ table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
 #>    AIRBUS  CANADAIR MCDONNELL 
 #>       736        10       237
 ```
+
+-----
 
 ## Operators
 
