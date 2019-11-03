@@ -1,4 +1,4 @@
-Package: rangeops
+Package: inops
 Title: Infix Operators for Detection, Subsetting and Replacement
 Version: 0.0.0.9000
 Authors@R: c(
