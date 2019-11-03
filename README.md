@@ -14,6 +14,38 @@ Install using the `remotes` package:
 
     remotes::install_github("moodymudskipper/inops")
 
+## Example
+
+Selecting flight records from the `nycflights13` dataset that:
+
+1.  Departed and Landed between noon and 5 p.m.
+2.  Were not traveling to “LEX”, “PSP”, nor “HDN”
+3.  Travelled distance was either very short (below 100) or very long
+    (above 3000)
+4.  Had a tail number starting with “N1” or “N3”
+
+<!-- end list -->
+
+``` r
+library(nycflights13)
+library(lubridate)
+library(dplyr)
+library(inops)
+
+flights %>%
+  filter(dep_time %in()%  c(1200, 1700)) %>%
+  filter(arr_time %in()%  c(1200, 1700)) %>%
+  filter(dest     %out%   c("LEX", "PSP", "HDN")) %>%
+  filter(distance %out[]% c(100, 3000)) %>%
+  filter(tailnum  %in~%   c("^N1", "^N3")) %>%
+  select(origin, dest, tailnum, dep_time, arr_time, distance)
+#> # A tibble: 2 x 6
+#>   origin dest  tailnum dep_time arr_time distance
+#>   <chr>  <chr> <chr>      <int>    <int>    <dbl>
+#> 1 EWR    PHL   N14972      1240     1333       80
+#> 2 JFK    HNL   N391HA      1214     1645     4983
+```
+
 ## Operators
 
 Introduction to operator behaviour and design.
