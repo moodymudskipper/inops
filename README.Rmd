@@ -85,9 +85,8 @@ Below is a full list of all the implemented operators along with their usage exa
 
 ### Detection Operators ###
 
-|-----------|-----------------------------------------------------------|-----------------------------|
-|  Form     |                    Description                            |            Call             |
-|-----------|-----------------------------------------------------------|-----------------------------|
+|  Form       |                    Description                            |            Call               |
+|-------------|-----------------------------------------------------------|-------------------------------|
 | `%in{}%`    | is element inside a set                                   | `x %in{}% set`                |
 | `%in[]%`    | is element inside a closed interval                       | `x %in[]% interval`           |
 | `%in()%`    | is element inside an open interval                        | `x %in()% interval`           |
@@ -105,13 +104,11 @@ Below is a full list of all the implemented operators along with their usage exa
 | `%out~%`    | does element not match a regular expression               | `x %out~% pattern`            |
 | `%out~p%`   | does element not match a regular perl expression          | `x %out~p% pattern`           |
 | `%out~f%`   | does element not match a regular fixed expression         | `x %out~f% pattern`           |
-|-----------|-----------------------------------------------------------|-----------------------------|
 
 ### Subsetting Operators ###
 
-|-----------|-----------------------------------------------------------|-----------------------------|
-|  Form     |                    Description                            |            Call             |
-|-----------|-----------------------------------------------------------|-----------------------------|
+|  Form       |                    Description                            |            Call               |
+|-------------|-----------------------------------------------------------|-------------------------------|
 | `%[in{}%`   | select elements inside a set                              | `x %[in{}% set`               |
 | `%[in[]%`   | select elements inside a closed interval                  | `x %[in[]% interval`          |
 | `%[in()%`   | select elements inside an open interval                   | `x %[in()% interval`          |
@@ -129,13 +126,11 @@ Below is a full list of all the implemented operators along with their usage exa
 | `%[out~%`   | select elements not matching a regular expression         | `x %[out~% pattern`           |
 | `%[out~p%`  | select elements not matching a regular perl expression    | `x %[out~p% pattern`          |
 | `%[out~f%`  | select elements not matching a regular fixed expression   | `x %[out~f% pattern`          |
-|-----------|-----------------------------------------------------------|-----------------------------|
 
 ### Replacement Operators ###
 
-|-----------|-----------------------------------------------------------|-----------------------------|
-|  Form     |                    Description                            |            Call             |
-|-----------|-----------------------------------------------------------|-----------------------------|
+|  Form       |                    Description                            |            Call               |
+|-------------|-----------------------------------------------------------|-------------------------------|
 | `%==<-%`    | change elements equal to the provided value               | `x == element <- value`       |
 | `%!=<-%`    | change elements not equal to the provided value           | `x != element <- value`       |
 | `%><-%`     | change elements greater than the provided value           | `x > number <- value`         |
@@ -159,7 +154,6 @@ Below is a full list of all the implemented operators along with their usage exa
 | `%out~<-%`  | change elements not matching a regular expression         | `x %out~% pattern <- value`   |
 | `%out~p<-%` | change elements not matching a regular perl expression    | `x %out~p% pattern <- value`  |
 | `%out~f<-%` | change elements not matching a regular fixed expression   | `x %out~f% pattern <- value`  |
-|-----------|-----------------------------------------------------------|-----------------------------|
 
 ## Notes ##
 
