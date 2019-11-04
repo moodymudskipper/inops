@@ -177,6 +177,7 @@ NULL
 
 
 #' @rdname in_detect
+#' @usage x \%in#\% count <- value
 #' @export
 `%in#%<-` <- function(x, count, value) {
   if(is.data.frame(x)) {
@@ -190,6 +191,7 @@ NULL
 }
 
 #' @rdname in_detect
+#' @usage x \%out#\% count <- value
 #' @export
 `%out#%<-` <- function(x, count, value) {
   if(is.data.frame(x)) {

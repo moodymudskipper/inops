@@ -62,9 +62,9 @@ x \%in#\% count
 
 x \%out#\% count
 
-\%in#\%(x, count) <- value
+x \%in#\% count <- value
 
-\%out#\%(x, count) <- value
+x \%out#\% count <- value
 
 x \%[in#\% count
 
