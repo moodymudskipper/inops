@@ -1,10 +1,5 @@
-^infixer\.Rproj$
-^\.Rproj\.user$
 ^exclude$
-^LICENSE\.md$
-<<<<<<< HEAD
-^setops\.Rproj$
-=======
->>>>>>> ce2453b44182e8dcba6f860df158bf5cb6c474f5
-^rangeops\.Rproj$
 ^README\.Rmd$
+^LICENSE\.md$
+^\.Rproj\.user$
+^inops\.Rproj$
