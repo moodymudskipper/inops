@@ -7,28 +7,24 @@ Package implementing additional infix operators for R.
 
 Implemented operators work with 4 different value types: **sets**,
 **intervals**, **regular expressions**, and **counts**.  
-And provide 3 distinct operations: **detection**, **subsetting**, and
-**replacement**.
+And provide 3 distinct functionalities: **detection**, **subsetting**,
+and **replacement**.
 
 Install using the `remotes` package:
 
     remotes::install_github("moodymudskipper/inops")
 
-## Operators
-
-Introduction to operator behaviour and design.
-
-### Form
+### Syntax
 
 All operators have the same form composed of two distinct parts:
 `%<operation><type>%`.
 
-  - `[operation]` specifies the performed operation and can be one of
-    `in`, `out`, `[in`, `[out`.
+  - `[operation]` specifies the performed functionality and can be one
+    of `in`, `out`, `[in`, `[out`.
   - `[type]` specifies the type of operation and can be one of `{}`,
     `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
 
-### Operator Value Types
+### Value Types
 
 1.  **sets**
 
@@ -153,7 +149,7 @@ values %out#% 1:2
 #> [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE
 ```
 
-### Operator Operation Types
+### Operations
 
 1.  **detection**
 
