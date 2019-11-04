@@ -40,8 +40,11 @@ behaviour for `data.frames` and `NA` values.
 
 ``` r
 letters <- letters[1:10]
+letters
+#>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"
 
 # sets
+
 letters %in{}% c("a", "b", "c", "e")
 #>  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 
@@ -63,6 +66,7 @@ letters %out{}% c("a", "b", "c", "e")
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # closed interval
+
 1:10 %in()% c(3,6)
 #>  [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
 
@@ -70,6 +74,7 @@ letters %out{}% c("a", "b", "c", "e")
 #>  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 # open interval
+
 1:10 %in[]% c(3,6)
 #>  [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
 
@@ -77,6 +82,7 @@ letters %out{}% c("a", "b", "c", "e")
 #>  [1]  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
 
 # open on the right
+
 1:10 %in(]% c(3,6)
 #>  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
 
@@ -84,6 +90,7 @@ letters %out{}% c("a", "b", "c", "e")
 #>  [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
 
 # open on the left
+
 1:10 %in[)% c(3,6)
 #>  [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
 
@@ -106,6 +113,7 @@ month.name
 #>  [9] "September" "October"   "November"  "December"
 
 # regular expressions
+
 month.name %in~% "^M.*"
 #>  [1] FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
@@ -113,6 +121,7 @@ month.name %out~% "^M.*"
 #>  [1]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 # fixed string regular expressions
+
 month.name %in~f% "^M.*"
 #>  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
@@ -120,6 +129,7 @@ month.name %out~f% "^M.*"
 #>  [1]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 # perl regular expressions
+
 month.name %in~p% "^(?=.*r)(?!.*er)"
 #>  [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
@@ -142,6 +152,7 @@ values
 #> [1] "a" "a" "b" "b" "b" "c"
 
 # number of occurances
+
 values %in#% 1:2
 #> [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE
 

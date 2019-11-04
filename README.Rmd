@@ -48,8 +48,10 @@ Work with the same values as `%in%` does but provide a more consistent behaviour
 
 ```{r}
 letters <- letters[1:10]
+letters
 
 # sets
+
 letters %in{}% c("a", "b", "c", "e")
 
 letters %out{}% c("a", "b", "c", "e")
@@ -66,21 +68,25 @@ letters %out{}% c("a", "b", "c", "e")
 1:10
 
 # closed interval
+
 1:10 %in()% c(3,6)
 
 1:10 %out()% c(3,6)
 
 # open interval
+
 1:10 %in[]% c(3,6)
 
 1:10 %out[]% c(3,6)
 
 # open on the right
+
 1:10 %in(]% c(3,6)
 
 1:10 %out(]% c(3,6)
 
 # open on the left
+
 1:10 %in[)% c(3,6)
 
 1:10 %out[)% c(3,6)
@@ -97,16 +103,19 @@ letters %out{}% c("a", "b", "c", "e")
 month.name
 
 # regular expressions
+
 month.name %in~% "^M.*"
 
 month.name %out~% "^M.*"
 
 # fixed string regular expressions
+
 month.name %in~f% "^M.*"
 
 month.name %out~f% "^M.*"
 
 # perl regular expressions
+
 month.name %in~p% "^(?=.*r)(?!.*er)"
 
 month.name %out~p% "^(?=.*r)(?!.*er)"
@@ -125,6 +134,7 @@ values <- c("a", "a", "b", "b", "b", "c")
 values
 
 # number of occurances
+
 values %in#% 1:2
 
 values %out#% 1:2
