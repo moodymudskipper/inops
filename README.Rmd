@@ -120,6 +120,10 @@ NA %in% 1
 
 NA %in{}% 1
 
+NA %in% NA
+
+NA %in{}% NA
+
 c(1, NA, 3) %in{}% 1:10
 ```
 

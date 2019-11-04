@@ -150,6 +150,12 @@ NA %in% 1
 NA %in{}% 1
 #> [1] NA
 
+NA %in% NA
+#> [1] TRUE
+
+NA %in{}% NA
+#> [1] NA
+
 c(1, NA, 3) %in{}% 1:10
 #> [1] TRUE   NA TRUE
 ```
