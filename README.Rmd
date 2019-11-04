@@ -39,16 +39,7 @@ All operators have the same form composed of two distinct parts: `%<operation><t
 * `[operation]` specifies the performed operation and can be one of `in`, `out`, `[in`, `[out`.
 * `[type]` specifies the type of operation and can be one of `{}`, `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
 
-To understand what each combination does see the table below.
-
 ### Operator Value Types ###
-
-Operators work with 4 different value types
-
-1. Sets: `x %in{}% set`
-2. Ranges: `x %in[] range`
-3. Patterns: `x %in~% pattern`
-4. Counts: `x %in#% count`
 
 1. **sets**
 
@@ -145,12 +136,6 @@ values %out#% 1:2
 ```
 
 ### Operator Operation Types ###
-
-Operators permit three distinct operations:
-
-1. Detect: `x %in{}% set`
-2. Subset: `x %[in{}% set`
-3. Replace: `x %in{}% set <- value`
 
 1. **detection**
 
