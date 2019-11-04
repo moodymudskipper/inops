@@ -28,14 +28,14 @@ Install using the `remotes` package:
 remotes::install_github("moodymudskipper/inops")
 ```
 
-### Syntax ###
+## Syntax ##
 
 All operators have the same form composed of two distinct parts: `%<operation><type>%`.
 
 * `[operation]` specifies the performed functionality and can be one of `in`, `out`, `[in`, `[out`.
 * `[type]` specifies the type of operation and can be one of `{}`, `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
 
-### Value Types ###
+## Value Types ##
 
 1. **sets**
 
@@ -131,7 +131,7 @@ values %out#% 1:2
 
 ```
 
-### Operations ###
+## Operations ##
 
 1. **detection**
 
@@ -167,7 +167,7 @@ month.name %in~% c("^A", "^M") <- "A or M"
 month.name
 ```
 
-### Behaviour ###
+## Behaviour ##
 
 The operators implemented here try to be consistent with the default comparison operators like `==` and `<`.\
 Therefore in some scenarios their behaviour differs from `%in%`.\

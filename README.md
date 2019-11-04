@@ -14,7 +14,7 @@ Install using the `remotes` package:
 
     remotes::install_github("moodymudskipper/inops")
 
-### Syntax
+## Syntax
 
 All operators have the same form composed of two distinct parts:
 `%<operation><type>%`.
@@ -24,7 +24,7 @@ All operators have the same form composed of two distinct parts:
   - `[type]` specifies the type of operation and can be one of `{}`,
     `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
 
-### Value Types
+## Value Types
 
 1.  **sets**
 
@@ -149,7 +149,7 @@ values %out#% 1:2
 #> [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE
 ```
 
-### Operations
+## Operations
 
 1.  **detection**
 
@@ -195,7 +195,7 @@ month.name
 #>  [9] "September" "October"   "November"  "December"
 ```
 
-### Behaviour
+## Behaviour
 
 The operators implemented here try to be consistent with the default
 comparison operators like `==` and `<`.  
