@@ -176,7 +176,7 @@ NULL
 }
 
 
-#' @rdname in_detect
+#' @rdname in_replace
 #' @usage x \%in#\% count <- value
 #' @export
 `%in#%<-` <- function(x, count, value) {
@@ -190,7 +190,7 @@ NULL
   x
 }
 
-#' @rdname in_detect
+#' @rdname in_replace
 #' @usage x \%out#\% count <- value
 #' @export
 `%out#%<-` <- function(x, count, value) {
