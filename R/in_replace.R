@@ -182,7 +182,7 @@ NULL
   if(is.data.frame(x)) {
     x <- as.matrix(x)
   }
-  ns <- ave(as.numeric(factor(x)), x, x, FUN=length)
+  ns <- ave(as.numeric(factor(x)), x, FUN=length)
   dim(ns) <- dim(x)
   x[ns %in{}% count] <- value
   x
@@ -194,7 +194,7 @@ NULL
   if(is.data.frame(x)) {
     x <- as.matrix(x)
   }
-  ns <- ave(as.numeric(factor(x)), x, x, FUN=length)
+  ns <- ave(as.numeric(factor(x)), x, FUN=length)
   dim(ns) <- dim(x)
   x[ns %out{}% count] <- value
   x
