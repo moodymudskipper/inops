@@ -20,6 +20,8 @@
 \alias{\%out~p\%<-}
 \alias{\%in\%<-}
 \alias{\%out\%<-}
+\alias{\%in#\%<-}
+\alias{\%out#\%<-}
 \title{Replacing Values and Intervals}
 \usage{
 x \%in{}\% table <- value
@@ -57,6 +59,10 @@ x \%out~p\% pattern <- value
 x \%in\% table <- value
 
 x \%out\% table <- value
+
+x \%in#\% count <- value
+
+x \%out#\% count <- value
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -68,6 +74,8 @@ x \%out\% table <- value
 \item{interval}{numeric vector defining a range to be matched against.}
 
 \item{pattern}{pattern to be matched against.}
+
+\item{count}{numeric vector defining counts for count-based selection.}
 }
 \value{
 \code{x} with specified values replaced with \code{value}.

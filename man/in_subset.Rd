@@ -20,6 +20,8 @@
 \alias{\%[out~f\%}
 \alias{\%[in\%}
 \alias{\%[out\%}
+\alias{\%[in#\%}
+\alias{\%[out#\%}
 \title{Subsetting Values and Intervals}
 \usage{
 x \%[in{}\% table
@@ -57,6 +59,10 @@ x \%[out~f\% pattern
 x \%[in\% table
 
 x \%[out\% table
+
+x \%[in#\% count
+
+x \%[out#\% count
 }
 \arguments{
 \item{x}{vector or array of values to be matched.}
@@ -66,6 +72,8 @@ x \%[out\% table
 \item{interval}{numeric vector defining a range to be matched against.}
 
 \item{pattern}{pattern to be matched against.}
+
+\item{count}{numeric vector defining counts for count-based selection.}
 }
 \value{
 \code{x} with specified values replaced with \code{value}.

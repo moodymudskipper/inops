@@ -1,4 +1,4 @@
 library(testthat)
-library(rangeops)
+library(inops)
 
-test_check("rangeops")
+test_check("inops")

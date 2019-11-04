@@ -148,7 +148,7 @@ NULL
 }
 
 
-#' @rdname in_detect
+#' @rdname in_subset
 #' @export
 `%[in#%` <- function(x, count) {
   if(is.data.frame(x)) {
@@ -160,7 +160,7 @@ NULL
   x %[in% set
 }
 
-#' @rdname in_detect
+#' @rdname in_subset
 #' @export
 `%[out#%` <- function(x, count) {
   if(is.data.frame(x)) {
