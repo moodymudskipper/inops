@@ -19,8 +19,8 @@ options(width=110)
 
 Package implementing additional infix operators for R.
 
-Implemented operators provide 3 distinct operations: **detection**, **subsetting**, and **replacement**.\
-And work with 4 different value types: **sets**, **intervals**, **regular expressions**, and **counts**.
+Implemented operators work with 4 different value types: **sets**, **intervals**, **regular expressions**, and **counts**.\
+And provide 3 distinct operations: **detection**, **subsetting**, and **replacement**.
 
 Install using the `remotes` package:
 
@@ -28,7 +28,201 @@ Install using the `remotes` package:
 remotes::install_github("moodymudskipper/inops")
 ```
 
-## Examples ##
+## Operators
+
+Introduction to operator behaviour and design.
+
+### Form ###
+
+All operators have the same form composed of two distinct parts: `%<operation><type>%`.
+
+* `[operation]` specifies the performed operation and can be one of `in`, `out`, `[in`, `[out`.
+* `[type]` specifies the type of operation and can be one of `{}`, `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
+
+To understand what each combination does see the table below.
+
+### Operator Value Types ###
+
+Operators work with 4 different value types
+
+1. Sets: `x %in{}% set`
+2. Ranges: `x %in[] range`
+3. Patterns: `x %in~% pattern`
+4. Counts: `x %in#% count`
+
+1. **sets**
+
+```
+ %in{}%
+%out{}%
+```
+
+Work with the same values as `%in%` does but provide a more consistent behaviour for `data.frames` and `NA` values.
+
+```{r}
+letters
+
+# sets
+letters %in{}% c("a", "b", "c", "x")
+
+letters %out{}% c("a", "b", "c", "x")
+```
+
+2. **ranges**
+
+```
+ %in()%   %in[]%   %in[)%   %in(]%
+%out()%  %out[]%  %out[)%  %out(]%
+```
+
+```{r}
+1:10
+
+# closed interval
+1:10 %in()% c(3,6)
+
+1:10 %out()% c(3,6)
+
+# open interval
+1:10 %in[]% c(3,6)
+
+1:10 %out[]% c(3,6)
+
+# open on the right
+1:10 %in(]% c(3,6)
+
+1:10 %out(]% c(3,6)
+
+# open on the left
+1:10 %in[)% c(3,6)
+
+1:10 %out[)% c(3,6)
+```
+
+3. **patterns**
+
+```
+ %in~%   %in~f%   %in~p%
+%out~%  %out~f%  %out~p%
+```
+
+```{r}
+month.name
+
+# regular expressions
+month.name %in~% "^M.*"
+
+month.name %out~% "^M.*"
+
+# fixed string regular expressions
+month.name %in~f% "^M.*"
+
+month.name %out~f% "^M.*"
+
+# perl regular expressions
+month.name %in~p% "^(?=.*r)(?!.*er)"
+
+month.name %out~p% "^(?=.*r)(?!.*er)"
+
+```
+
+4. **counts**
+
+```
+ %in#%
+%out#%
+```
+
+```{r}
+values <- c("a", "a", "b", "b", "b", "c")
+values
+
+# number of occurances
+values %in#% 1:2
+
+values %out#% 1:2
+
+```
+
+### Operator Operation Types ###
+
+Operators permit three distinct operations:
+
+1. Detect: `x %in{}% set`
+2. Subset: `x %[in{}% set`
+3. Replace: `x %in{}% set <- value`
+
+1. **detection**
+
+Same form as examples shown above.
+
+```{r}
+month.name
+
+month.name %in~% c("^A", "^M")
+```
+
+2. **subsetting**
+
+Used for obtaining actual values.\
+Starts with `[`.
+
+```{r}
+month.name
+
+month.name %[in~% c("^A", "^M")
+```
+
+3. **replacement**
+
+Used for replacing the matched elements with new values.\
+Called with assignment `<-` at the end.
+
+```{r}
+month.name
+
+month.name %in~% c("^A", "^M") <- "A or M"
+
+month.name
+```
+
+### Behaviour ###
+
+The operators implemented here try to be consistent with the default comparison operators like `==` and `<`.\
+Therefore in some scenarios their behaviour differs from `%in%`.\
+For instance:
+
+1) `%in{}%` can be used on on data frames.
+
+```{r}
+df1 <- data.frame(a = 1:3, b = 2:4, c=letters[1:3])
+
+df1 == 2
+
+df1 %in% 2
+
+df1 %in{}% 2
+
+df1 %in{}% 2:3
+```
+
+2) missing values are not considered as not matching.
+
+```{r}
+NA == 1
+
+NA %in% 1
+
+NA %in{}% 1
+
+NA %in% NA
+
+NA %in{}% NA
+
+c(1, NA, 3) %in{}% 1:10
+```
+
+## Additional Examples ##
 
 Simple examples for illustration.
 
@@ -94,64 +288,7 @@ table(planes$engine)
 
 ---
 
-## Operators
-
-Introduction to operator behaviour and design.
-
-### Form ###
-
-All operators have the same form composed of two distinct parts: `%<operation><type>%`.
-
-* `[operation]` specifies the performed operation and can be one of `in`, `out`, `[in`, `[out`.
-* `[type]` specifies the type of operation and can be one of `{}`, `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
-
-To understand what each combination does see the table below.
-
-### Behaviour ###
-
-The operators implemented here try to be consistent with the default comparison operators like `==` and `<`.\
-Therefore in some scenarios their behaviour differs from `%in%`.\
-For instance:
-
-1) `%in{}%` can be used on on data frames.
-
-```{r}
-df1 <- data.frame(a = 1:3, b = 2:4, c=letters[1:3])
-
-df1 == 2
-
-df1 %in% 2
-
-df1 %in{}% 2
-
-df1 %in{}% 2:3
-```
-
-2) missing values are not considered as not matching.
-
-```{r}
-NA == 1
-
-NA %in% 1
-
-NA %in{}% 1
-
-NA %in% NA
-
-NA %in{}% NA
-
-c(1, NA, 3) %in{}% 1:10
-```
-
-### Operations ###
-
-Operators permit three distinct operations:
-
-1. Detect: `x %in{}% set`
-2. Subset: `x %[in{}% set`
-3. Replace: `x %in{}% set <- value`
-
-## Operator List ##
+## Full List ##
 
 Below is a full list of all the implemented operators along with their usage examples.
 
