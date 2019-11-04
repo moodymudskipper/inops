@@ -232,7 +232,7 @@ in_regex <- function(x , pattern, ...) {
 #' @export
 `%out#%` <- function(x, count) {
   if(is.data.frame(x)) {
-    x <- table(as.matrix(x))
+    x <- as.matrix(x)
   }
   ns <- ave(as.numeric(factor(x)), x, FUN=length)
   dim(ns) <- dim(x)
