@@ -63,9 +63,7 @@ x \%[out\% table
 
 \item{table}{vector or list to be matched against.}
 
-\item{interval}{numeric vector defining a range to be matched against.
-\code{as.numeric()} is used on lists, it will succeed on flat lists but fail on
-nested lists}
+\item{interval}{numeric vector defining a range to be matched against.}
 
 \item{pattern}{pattern to be matched against.}
 }
@@ -91,6 +89,10 @@ carnames <- rownames(mtcars)
 carnames \%[in~\% "^Mazda"
 carnames \%[in~\% c("^Mazda", "^Merc")
 carnames \%[in~\% c("\\\\w{10,100}$")  # long car names
+
+# count-based subsetting operators
+mtcars$cyl \%[in#\% 1:10
+mtcars$cyl \%[out#\% 1:10
 
 }
 \seealso{

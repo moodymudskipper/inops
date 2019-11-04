@@ -14,6 +14,38 @@
 #'
 #' @seealso `%in%`
 #'
+#' @name out
+#' @export
+`%out%` <- function(x, table) {
+  !x %in% table
+}
+
+#' Matching Values and Intervals
+#'
+#' Operators for detecting which values are within a given interval or set.
+#'
+#' Compared with default `%in%` implementation in R the operators implemented here try to be more consistent with other default infix operators like `==` and `<`.
+#' In particular they preserve the dimensions and the missing values (see examples).
+#'
+#' Style of parentheses define the type of matching template:
+#' * `%in{}%` detects which elements of `x` are present in the set given by the `table` argument.
+#' * `%in()%`, `%in[]%`, `%in(]%` and `%in[)%` detect the elements of `x` included in a range of `interval` argument, using `range(interval)`.
+#'   This range being closed, open on both sides, open on the left, or open on the right, respectively.
+#' * `%in~%`, `%in~p%` and `%in~f%` detect the elements of `x` that match the regular expression given by `pattern`.
+#'   They wrap `grepl()` with the default parameters of `perl = TRUE`, and with `fixed = TRUE`, respectively.
+#' * `%in#%` detects the elements that occur a specified number of times.
+#
+#' Operators of the form `%out<suffix>%` return the negation of `%in<suffix>%`
+#'
+#' @param x vector or array of values to be matched.
+#' @param table vector or list to be matched against.
+#' @param interval numeric vector defining a range to be matched against.
+#' @param pattern pattern to be matched against.
+#' @param count numeric vector defining counts for count-based selection.
+#'
+#' @return a logical vector or an array of the same dimensions as `x`
+#' indicating if each value of `x` is within the defined subset.
+#'
 #' @examples
 #' # difference in behaviour with dimensions when compared to %in%
 #' iris[1:10,] %in% "setosa"
@@ -44,41 +76,14 @@
 #' iris$Species %in~f% "versicolor"
 #' iris$Species %in~f% c("versicolor", "virginica")
 #'
-#' @name out
-#' @export
-`%out%` <- function(x, table) {
-  !x %in% table
-}
-
-#' Matching Values and Intervals
-#'
-#' Operators for detecting which values are within a given interval or set.
-#'
-#' Compared with default `%in%` implementation in R the operators implemented here try to be more consistent with other default infix operators like `==` and `<`.
-#' In particular they preserve the dimensions and the missing values (see examples).
-#'
-#' Style of parentheses define the type of matching template:
-#' * `%in{}%` detects which elements of `x` are present in the set given by the `table` argument.
-#' * `%in()%`, `%in[]%`, `%in(]%` and `%in[)%` detect the elements of `x` included in a range of `interval` argument, using `range(interval)`.
-#'   This range being closed, open on both sides, open on the left, or open on the right, respectively.
-#' * `%in~%`, `%in~p%` and `%in~f%` detect the elements of `x` that match the regular expression given by `pattern`.
-#'   They wrap `grepl()` with the default parameters of `perl = TRUE`, and with `fixed = TRUE`, respectively.
-#
-#' Operators of the form `%out<suffix>%` return the negation of `%in<suffix>%`
-#'
-#' @param x vector or array of values to be matched.
-#' @param table vector or list to be matched against.
-#' @param interval numeric vector defining a range to be matched against.
-#' `as.numeric()` is used on lists, it will succeed on flat lists but fail on
-#' nested lists
-#' @param pattern pattern to be matched against.
-#'
-#' @return a logical vector or an array of the same dimensions as `x`
-#' indicating if each value of `x` is within the defined subset.
+#' # selecting by number of occurances
+#' mtcars$gear %in#% 1:5
+#' mtcars$gear %out#% 1:5
 #'
 #' @seealso `%in%`
 #' @name in_detect
 NULL
+
 
 #' @rdname in_detect
 #' @export
@@ -86,51 +91,6 @@ NULL
   if(is.language(table)) return(x == table)
   Reduce(`|`, lapply(unique(table), `==`, x))
 }
-
-# previous impl
-# `%in{}%` <- function(x, table) {
-#   table <- unlist(table)
-#   # the lhs must be coercible to an atomic type if it's a list
-#   if (is.list(x) && !is.data.frame(x)) {
-#     x <- switch(
-#       typeof(table),
-#       logical = as.logical(x),
-#       integer = as.integer(x),
-#       double = as.double(x),
-#       complex = as.complex(x),
-#       character = as.character(x),
-#       raw = as.raw(x),
-#       x)
-#   }
-#
-#   # convert to character
-#   if (is.factor(table)) {
-#     table <- levels(table)[table]
-#   }
-#   if (is.data.frame(x)){
-#     res <- sapply(x, `%in%`, table)
-#   } else if (is.matrix(x)){
-#     res <- apply(x, 2, `%in%`, table)
-#   } else if (is.atomic(x)) {
-#     if(is.language(table))
-#       res <- x == table
-#     else
-#       res <- x %in% table
-#   } else {
-#     if(is.language(x)){
-#       if(is.language(table))
-#         res <- x == table
-#       else
-#         res <- any(sapply(table, function(a,b)
-#           if(is.language(a)) a == b else a %in% b, x))
-#     }else
-#       res <- sapply(x, function(a,b)
-#         if(is.language(a)) any(a == b) else a %in% b, table)
-#   }
-#
-#   if (!is.language(x)) res[is.na(x)] <- NA
-#   res
-# }
 
 #' @rdname in_detect
 #' @export
@@ -200,6 +160,7 @@ NULL
   !(x %in[)% interval)
 }
 
+
 in_regex <- function(x , pattern, ...) {
   pattern <- unique(unlist(pattern))
   # convert to character
@@ -229,6 +190,7 @@ in_regex <- function(x , pattern, ...) {
   !x %in~% pattern
 }
 
+
 #' @rdname in_detect
 #' @export
 `%in~p%` <- function(x , pattern) {
@@ -241,6 +203,7 @@ in_regex <- function(x , pattern, ...) {
   !x %in~p% pattern
 }
 
+
 #' @rdname in_detect
 #' @export
 `%in~f%` <- function(x , pattern) {
@@ -252,3 +215,29 @@ in_regex <- function(x , pattern, ...) {
 `%out~f%` <- function(x, pattern) {
   !x %in~p% pattern
 }
+
+
+#' @rdname in_detect
+#' @export
+`%in#%` <- function(x, count) {
+  if(is.data.frame(x)) {
+    tb <- table(as.matrix(x))
+  } else {
+    tb <- table(x)
+  }
+  set <- names(tb[tb %in% count])
+  x %in% set
+}
+
+#' @rdname in_detect
+#' @export
+`%out#%` <- function(x, count) {
+  if(is.data.frame(x)) {
+    tb <- table(as.matrix(x))
+  } else {
+    tb <- table(x)
+  }
+  set <- names(tb[tb %in% count])
+  x %out% set
+}
+

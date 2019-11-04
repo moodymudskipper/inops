@@ -30,6 +30,12 @@
 #' region %in~% "^North" <- "North"
 #' table(region)
 #'
+#' # count based replacement operators
+#' carb <- mtcars$carb
+#' table(carb, useNA="always")
+#' carb %in#% 1 <- NA
+#' table(carb, useNA="always")
+#'
 #' @seealso `%in{}%`
 #' @name in_replace
 NULL
@@ -124,6 +130,7 @@ NULL
   replace(x, x %out~% pattern, value)
 }
 
+
 #' @rdname in_replace
 #' @usage x \%in~f\% pattern <- value
 #' @export
@@ -161,11 +168,37 @@ NULL
   replace(x, x %in% table, value)
 }
 
-
 #' @rdname in_replace
 #' @usage x \%out\% table <- value
 #' @export
 `%out%<-`  <- function(x, table, value) {
   replace(x, x %out% table, value)
+}
+
+
+#' @rdname in_detect
+#' @export
+`%in#%<-` <- function(x, count, value) {
+  if(is.data.frame(x)) {
+    tb <- table(as.matrix(x))
+  } else {
+    tb <- table(x)
+  }
+  set <- names(tb[tb %in% count])
+  x %in% set <- value
+  x
+}
+
+#' @rdname in_detect
+#' @export
+`%out#%<-` <- function(x, count, value) {
+  if(is.data.frame(x)) {
+    tb <- table(as.matrix(x))
+  } else {
+    tb <- table(x)
+  }
+  set <- names(tb[tb %in% count])
+  x %out% set <- value
+  x
 }
 
