@@ -118,7 +118,7 @@ All operators have the same form composed of two distinct parts:
   - `[operation]` specifies the performed operation and can be one of
     `in`, `out`, `[in`, `[out`.
   - `[type]` specifies the type of operation and can be one of `{}`,
-    `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`.
+    `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
 
 To understand what each combination does see the table below.
 
