@@ -157,7 +157,7 @@ NULL
     tb <- table(x)
   }
   set <- names(tb[tb %in% count])
-  x %[in{}% set
+  x %[in% set
 }
 
 #' @rdname in_detect
@@ -169,6 +169,6 @@ NULL
     tb <- table(x)
   }
   set <- names(tb[tb %in% count])
-  x %[out{}% set
+  x %[out% set
 }
 

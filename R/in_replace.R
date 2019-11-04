@@ -185,7 +185,7 @@ NULL
     tb <- table(x)
   }
   set <- names(tb[tb %in% count])
-  x %in{}% set <- value
+  x %in% set <- value
   x
 }
 
@@ -198,7 +198,7 @@ NULL
     tb <- table(x)
   }
   set <- names(tb[tb %in% count])
-  x %out{}% set <- value
+  x %out% set <- value
   x
 }
 

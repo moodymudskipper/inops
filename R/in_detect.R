@@ -226,7 +226,7 @@ in_regex <- function(x , pattern, ...) {
     tb <- table(x)
   }
   set <- names(tb[tb %in% count])
-  x %in{}% set
+  x %in% set
 }
 
 #' @rdname in_detect
@@ -238,6 +238,6 @@ in_regex <- function(x , pattern, ...) {
     tb <- table(x)
   }
   set <- names(tb[tb %in% count])
-  x %out{}% set
+  x %out% set
 }
 
