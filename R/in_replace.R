@@ -181,12 +181,11 @@ NULL
 #' @export
 `%in#%<-` <- function(x, count, value) {
   if(is.data.frame(x)) {
-    tb <- table(as.matrix(x))
-  } else {
-    tb <- table(x)
+    x <- as.matrix(x)
   }
-  set <- names(tb[tb %in% count])
-  x %in% set <- value
+  ns <- ave(as.numeric(factor(x)), x, FUN=length)
+  dim(ns) <- dim(x)
+  x[ns %in{}% count] <- value
   x
 }
 
@@ -195,12 +194,11 @@ NULL
 #' @export
 `%out#%<-` <- function(x, count, value) {
   if(is.data.frame(x)) {
-    tb <- table(as.matrix(x))
-  } else {
-    tb <- table(x)
+    x <- as.matrix(x)
   }
-  set <- names(tb[tb %in% count])
-  x %out% set <- value
+  ns <- ave(as.numeric(factor(x)), x, FUN=length)
+  dim(ns) <- dim(x)
+  x[ns %out{}% count] <- value
   x
 }
 
