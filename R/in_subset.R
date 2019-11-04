@@ -152,23 +152,21 @@ NULL
 #' @export
 `%[in#%` <- function(x, count) {
   if(is.data.frame(x)) {
-    tb <- table(as.matrix(x))
-  } else {
-    tb <- table(x)
+    x <- as.matrix(x)
   }
-  set <- names(tb[tb %in% count])
-  x %[in% set
+  ns <- ave(as.numeric(factor(x)), x, x, FUN=length)
+  dim(ns) <- dim(x)
+  x[ns %in{}% count]
 }
 
 #' @rdname in_detect
 #' @export
 `%[out#%` <- function(x, count) {
   if(is.data.frame(x)) {
-    tb <- table(as.matrix(x))
-  } else {
-    tb <- table(x)
+    x <- as.matrix(x)
   }
-  set <- names(tb[tb %in% count])
-  x %[out% set
+  ns <- ave(as.numeric(factor(x)), x, x, FUN=length)
+  dim(ns) <- dim(x)
+  x[ns %out{}% count]
 }
 
