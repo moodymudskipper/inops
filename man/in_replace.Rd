@@ -65,9 +65,7 @@ x \%out\% table <- value
 
 \item{value}{replacement value.}
 
-\item{interval}{numeric vector defining a range to be matched against.
-\code{as.numeric()} is used on lists, it will succeed on flat lists but fail on
-nested lists}
+\item{interval}{numeric vector defining a range to be matched against.}
 
 \item{pattern}{pattern to be matched against.}
 }
@@ -100,6 +98,12 @@ region <- as.character(state.region)
 table(region)
 region \%in~\% "^North" <- "North"
 table(region)
+
+# count based replacement operators
+carb <- mtcars$carb
+table(carb, useNA="always")
+carb \%in#\% 1 <- NA
+table(carb, useNA="always")
 
 }
 \seealso{

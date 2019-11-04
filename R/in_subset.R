@@ -22,6 +22,10 @@
 #' carnames %[in~% c("^Mazda", "^Merc")
 #' carnames %[in~% c("\\w{10,100}$")  # long car names
 #'
+#' # count-based subsetting operators
+#' mtcars$cyl %[in#% 1:10
+#' mtcars$cyl %[out#% 1:10
+#'
 #' @seealso `%in{}%`
 #' @name in_subset
 NULL
@@ -91,6 +95,7 @@ NULL
   x[ x %out[)% interval]
 }
 
+
 #' @rdname in_subset
 #' @export
 `%[in~%` <- function(x, pattern) {
@@ -102,6 +107,7 @@ NULL
 `%[out~%` <- function(x, pattern) {
   x[ x %out~% pattern]
 }
+
 
 #' @rdname in_subset
 #' @export
@@ -115,6 +121,7 @@ NULL
   x[ x %out~p% pattern]
 }
 
+
 #' @rdname in_subset
 #' @export
 `%[in~f%` <- function(x, pattern) {
@@ -127,6 +134,7 @@ NULL
   x[ x %out~f% pattern]
 }
 
+
 #' @rdname in_subset
 #' @export
 `%[in%` <- function(x, table) {
@@ -138,3 +146,29 @@ NULL
 `%[out%` <- function(x, table) {
   x[x %out% table]
 }
+
+
+#' @rdname in_detect
+#' @export
+`%[in#%` <- function(x, count) {
+  if(is.data.frame(x)) {
+    tb <- table(as.matrix(x))
+  } else {
+    tb <- table(x)
+  }
+  set <- names(tb[tb %in% count])
+  x %[in{}% set
+}
+
+#' @rdname in_detect
+#' @export
+`%[out#%` <- function(x, count) {
+  if(is.data.frame(x)) {
+    tb <- table(as.matrix(x))
+  } else {
+    tb <- table(x)
+  }
+  set <- names(tb[tb %in% count])
+  x %[out{}% set
+}
+

@@ -7,8 +7,8 @@ Package implementing additional infix operators for R.
 
 Implemented operators provide 3 distinct operations: **detection**,
 **subsetting**, and **replacement**.  
-And work with 3 different value types: **sets**, **intervals**, and
-**regular expressions**.
+And work with 4 different value types: **sets**, **intervals**,
+**regular expressions**, and **counts**.
 
 Install using the `remotes` package:
 
@@ -51,7 +51,7 @@ flights %>%
 
 -----
 
-Cleaning up `planes` dataset to:
+Cleaning up `planes` dataset in order to:
 
 1.  Standardize names of “AIRBUS”, “CANADAIR” and “MCDONNELL”
     manufacturers.
@@ -80,6 +80,28 @@ table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
 #> 
 #>    AIRBUS  CANADAIR MCDONNELL 
 #>       736        10       237
+```
+
+-----
+
+Combine engine models that in the dataset occur less than 6 times under
+the “Other” group.
+
+``` r
+library(nycflights13)
+library(inops)
+
+table(planes$engine)
+#> 
+#>       4 Cycle Reciprocating     Turbo-fan     Turbo-jet    Turbo-prop   Turbo-shaft 
+#>             2            28          2750           535             2             5
+
+planes$engine %in#% 1:5 <- "Other"
+
+table(planes$engine)
+#> 
+#>         Other Reciprocating     Turbo-fan     Turbo-jet 
+#>             9            28          2750           535
 ```
 
 -----
@@ -175,77 +197,83 @@ usage examples.
 
 ### Detection Operators
 
-| Form      | Description                                       | Call                 |
-| --------- | ------------------------------------------------- | -------------------- |
-| `%in{}%`  | is element inside a set                           | `x %in{}% set`       |
-| `%in[]%`  | is element inside a closed interval               | `x %in[]% interval`  |
-| `%in()%`  | is element inside an open interval                | `x %in()% interval`  |
-| `%in[)%`  | is element inside an interval open on the right   | `x %in[)% interval`  |
-| `%in(]%`  | is element inside an interval open on the left    | `x %in(]% interval`  |
-| `%in~%`   | does element match a regular expression           | `x %in~% pattern`    |
-| `%in~p%`  | does element match a regular perl expression      | `x %in~p% pattern`   |
-| `%in~f%`  | does element match a regular fixed expression     | `x %in~f% pattern`   |
-| `%out%`   | is element outside a set (same as \! x %in% y)    | `x %out% set`        |
-| `%out{}%` | is element outside a set                          | `x %out{}% set`      |
-| `%out[]%` | is element outside a closed interval              | `x %out[]% interval` |
-| `%out()%` | is element outside an open interval               | `x %out()% interval` |
-| `%out[)%` | is element outside an interval open on the right  | `x %out[)% interval` |
-| `%out(]%` | is element outside an interval open on the left   | `x %out(]% interval` |
-| `%out~%`  | does element not match a regular expression       | `x %out~% pattern`   |
-| `%out~p%` | does element not match a regular perl expression  | `x %out~p% pattern`  |
-| `%out~f%` | does element not match a regular fixed expression | `x %out~f% pattern`  |
+| Form      | Description                                                 | Call                 |
+| --------- | ----------------------------------------------------------- | -------------------- |
+| `%in{}%`  | which elements are inside a set                             | `x %in{}% set`       |
+| `%in[]%`  | which elements are inside a closed interval                 | `x %in[]% interval`  |
+| `%in()%`  | which elements are inside an open interval                  | `x %in()% interval`  |
+| `%in[)%`  | which elements are inside an interval open on the right     | `x %in[)% interval`  |
+| `%in(]%`  | which elements are inside an interval open on the left      | `x %in(]% interval`  |
+| `%in~%`   | which elements match a regular expression                   | `x %in~% pattern`    |
+| `%in~p%`  | which elements match a regular perl expression              | `x %in~p% pattern`   |
+| `%in~f%`  | which elements match a regular fixed expression             | `x %in~f% pattern`   |
+| `%in#%`   | which elements occur a specified number of times            | `x %in#% count`      |
+| `%out%`   | which elements are outside a set (same as \! x %in% y)      | `x %out% set`        |
+| `%out{}%` | which elements are outside a set                            | `x %out{}% set`      |
+| `%out[]%` | which elements are outside a closed interval                | `x %out[]% interval` |
+| `%out()%` | which elements are outside an open interval                 | `x %out()% interval` |
+| `%out[)%` | which elements are outside an interval open on the right    | `x %out[)% interval` |
+| `%out(]%` | which elements are outside an interval open on the left     | `x %out(]% interval` |
+| `%out~%`  | which elements do not match a regular expression            | `x %out~% pattern`   |
+| `%out~p%` | which elements do not match a regular perl expression       | `x %out~p% pattern`  |
+| `%out~f%` | which elements do not match a regular fixed expression      | `x %out~f% pattern`  |
+| `%out#%`  | which elements occur other than a specified number of times | `x %out#% count`     |
 
 ### Subsetting Operators
 
-| Form       | Description                                             | Call                  |
-| ---------- | ------------------------------------------------------- | --------------------- |
-| `%[in%`    | select elements inside a set                            | `x %[in% set`         |
-| `%[in{}%`  | select elements inside a set                            | `x %[in{}% set`       |
-| `%[in[]%`  | select elements inside a closed interval                | `x %[in[]% interval`  |
-| `%[in()%`  | select elements inside an open interval                 | `x %[in()% interval`  |
-| `%[in[)%`  | select elements inside an interval open on the right    | `x %[in[)% interval`  |
-| `%[in(]%`  | select elements inside an interval open on the left     | `x %[in(]% interval`  |
-| `%[in~%`   | select elements matching a regular expression           | `x %[in~% pattern`    |
-| `%[in~p%`  | select elements matching a regular perl expression      | `x %[in~p% pattern`   |
-| `%[in~f%`  | select elements matching a regular fixed expression     | `x %[in~f% pattern`   |
-| `%[out%`   | select elements outside a set                           | `x %[out%  set`       |
-| `%[out{}%` | select elements outside a set                           | `x %[out{}%  set`     |
-| `%[out[]%` | select elements outside a closed interval               | `x %[out[]% interval` |
-| `%[out()%` | select elements outside an open interval                | `x %[out()% interval` |
-| `%[out[)%` | select elements outside an interval open on the right   | `x %[out[)% interval` |
-| `%[out(]%` | select elements outside an interval open on the left    | `x %[out(]% interval` |
-| `%[out~%`  | select elements not matching a regular expression       | `x %[out~% pattern`   |
-| `%[out~p%` | select elements not matching a regular perl expression  | `x %[out~p% pattern`  |
-| `%[out~f%` | select elements not matching a regular fixed expression | `x %[out~f% pattern`  |
+| Form       | Description                                                     | Call                  |
+| ---------- | --------------------------------------------------------------- | --------------------- |
+| `%[in%`    | select elements inside a set                                    | `x %[in% set`         |
+| `%[in{}%`  | select elements inside a set                                    | `x %[in{}% set`       |
+| `%[in[]%`  | select elements inside a closed interval                        | `x %[in[]% interval`  |
+| `%[in()%`  | select elements inside an open interval                         | `x %[in()% interval`  |
+| `%[in[)%`  | select elements inside an interval open on the right            | `x %[in[)% interval`  |
+| `%[in(]%`  | select elements inside an interval open on the left             | `x %[in(]% interval`  |
+| `%[in~%`   | select elements matching a regular expression                   | `x %[in~% pattern`    |
+| `%[in~p%`  | select elements matching a regular perl expression              | `x %[in~p% pattern`   |
+| `%[in~f%`  | select elements matching a regular fixed expression             | `x %[in~f% pattern`   |
+| `%[in#%`   | select elements that occur a specified number of times          | `x %[in#% count`      |
+| `%[out%`   | select elements outside a set                                   | `x %[out%  set`       |
+| `%[out{}%` | select elements outside a set                                   | `x %[out{}%  set`     |
+| `%[out[]%` | select elements outside a closed interval                       | `x %[out[]% interval` |
+| `%[out()%` | select elements outside an open interval                        | `x %[out()% interval` |
+| `%[out[)%` | select elements outside an interval open on the right           | `x %[out[)% interval` |
+| `%[out(]%` | select elements outside an interval open on the left            | `x %[out(]% interval` |
+| `%[out~%`  | select elements not matching a regular expression               | `x %[out~% pattern`   |
+| `%[out~p%` | select elements not matching a regular perl expression          | `x %[out~p% pattern`  |
+| `%[out~f%` | select elements not matching a regular fixed expression         | `x %[out~f% pattern`  |
+| `%[out#%`  | select elements that occur other than specified number of times | `x %[out% count`      |
 
 ### Replacement Operators
 
-| Form        | Description                                             | Call                          |
-| ----------- | ------------------------------------------------------- | ----------------------------- |
-| `==<-`      | change elements equal to the provided value             | `x == element <- value`       |
-| `!=<-`      | change elements not equal to the provided value         | `x != element <- value`       |
-| `><-`       | change elements greater than the provided value         | `x > number <- value`         |
-| `<<-`       | change elements lower than the provided value           | `x < number  <- value`        |
-| `>=<-`      | change elements greater or equal to the provided value  | `x >= number <- value`        |
-| `<=<-`      | change elements lower or equal to the provided value    | `x <= number <- value`        |
-| `%in<-%`    | change elements inside a set                            | `x %in% set <- value`         |
-| `%in{}<-%`  | change elements inside a set                            | `x %in{}% set <- value`       |
-| `%in[]<-%`  | change elements inside a closed interval                | `x %in[]% interval <- value`  |
-| `%in()<-%`  | change elements inside an open interval                 | `x %in()% interval <- value`  |
-| `%in[)<-%`  | change elements inside an interval open on the right    | `x %in[)% interval <- value`  |
-| `%in(]<-%`  | change elements inside an interval open on the left     | `x %in(]% interval <- value`  |
-| `%in~<-%`   | change elements matching a regular expression           | `x %in~% pattern <- value`    |
-| `%in~p<-%`  | change elements matching a regular perl expression      | `x %in~p% pattern <- value`   |
-| `%in~f<-%`  | change elements matching a regular fixed expression     | `x %in~f% pattern <- value`   |
-| `%out<-%`   | change elements outside a set                           | `x %out% set <- value`        |
-| `%out{}<-%` | change elements outside a set                           | `x %out{}% set <- value`      |
-| `%out[]<-%` | change elements outside a closed interval               | `x %out[]% interval <- value` |
-| `%out()<-%` | change elements outside an open interval                | `x %out()% interval <- value` |
-| `%out[)<-%` | change elements outside an interval open on the right   | `x %out[)% interval <- value` |
-| `%out(]<-%` | change elements outside an interval open on the left    | `x %out(]% interval <- value` |
-| `%out~<-%`  | change elements not matching a regular expression       | `x %out~% pattern <- value`   |
-| `%out~p<-%` | change elements not matching a regular perl expression  | `x %out~p% pattern <- value`  |
-| `%out~f<-%` | change elements not matching a regular fixed expression | `x %out~f% pattern <- value`  |
+| Form        | Description                                                     | Call                          |
+| ----------- | --------------------------------------------------------------- | ----------------------------- |
+| `==<-`      | change elements equal to the provided value                     | `x == element <- value`       |
+| `!=<-`      | change elements not equal to the provided value                 | `x != element <- value`       |
+| `><-`       | change elements greater than the provided value                 | `x > number <- value`         |
+| `<<-`       | change elements lower than the provided value                   | `x < number  <- value`        |
+| `>=<-`      | change elements greater or equal to the provided value          | `x >= number <- value`        |
+| `<=<-`      | change elements lower or equal to the provided value            | `x <= number <- value`        |
+| `%in<-%`    | change elements inside a set                                    | `x %in% set <- value`         |
+| `%in{}<-%`  | change elements inside a set                                    | `x %in{}% set <- value`       |
+| `%in[]<-%`  | change elements inside a closed interval                        | `x %in[]% interval <- value`  |
+| `%in()<-%`  | change elements inside an open interval                         | `x %in()% interval <- value`  |
+| `%in[)<-%`  | change elements inside an interval open on the right            | `x %in[)% interval <- value`  |
+| `%in(]<-%`  | change elements inside an interval open on the left             | `x %in(]% interval <- value`  |
+| `%in~<-%`   | change elements matching a regular expression                   | `x %in~% pattern <- value`    |
+| `%in~p<-%`  | change elements matching a regular perl expression              | `x %in~p% pattern <- value`   |
+| `%in~f<-%`  | change elements matching a regular fixed expression             | `x %in~f% pattern <- value`   |
+| `%in#<-%`   | change elements that occur specified number of times            | `x %in#% count <- value`      |
+| `%out<-%`   | change elements outside a set                                   | `x %out% set <- value`        |
+| `%out{}<-%` | change elements outside a set                                   | `x %out{}% set <- value`      |
+| `%out[]<-%` | change elements outside a closed interval                       | `x %out[]% interval <- value` |
+| `%out()<-%` | change elements outside an open interval                        | `x %out()% interval <- value` |
+| `%out[)<-%` | change elements outside an interval open on the right           | `x %out[)% interval <- value` |
+| `%out(]<-%` | change elements outside an interval open on the left            | `x %out(]% interval <- value` |
+| `%out~<-%`  | change elements not matching a regular expression               | `x %out~% pattern <- value`   |
+| `%out~p<-%` | change elements not matching a regular perl expression          | `x %out~p% pattern <- value`  |
+| `%out~f<-%` | change elements not matching a regular fixed expression         | `x %out~f% pattern <- value`  |
+| `%out#<-%`  | change elements that occur other than specified number of times | `x %out#% count <- value`     |
 
 ## Notes
 
