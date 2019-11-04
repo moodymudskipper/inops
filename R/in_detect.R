@@ -14,36 +14,6 @@
 #'
 #' @seealso `%in%`
 #'
-#' @examples
-#' # difference in behaviour with dimensions when compared to %in%
-#' iris[1:10,] %in% "setosa"
-#' iris[1:10,] == "setosa"
-#' iris[1:10,] %in{}% "setosa"
-#'
-#' # difference in behaviour with missing values when compared to %in%
-#' x <- c(1,2,3,NA,4)
-#' x %in% c(1,2,3)
-#' x %in{}% c(1,2,3)
-#'
-#' # other interval oparators
-#' x <- 1:10
-#' x %in[]% c(3,7)
-#' x %in()% c(3,7)
-#' x %in(]% c(3,7)
-#' x %in[)% c(3,7)
-#' x %out[]% c(3,7)
-#'
-#' # when more than 2 numbers are provided for the interval - range is used
-#' x <- 1:10
-#' all.equal(x %in[]% c(2,4), x %in[]% c(2,3,4))
-#' all.equal(x %in[]% c(2,4), x %in[]% range(c(2,3,4)))
-#'
-#' # matching according to regular expressions
-#' iris$Species %in~% "^v"
-#' iris$Species %in~f% "^v"
-#' iris$Species %in~f% "versicolor"
-#' iris$Species %in~f% c("versicolor", "virginica")
-#'
 #' @name out
 #' @export
 `%out%` <- function(x, table) {
@@ -75,6 +45,36 @@
 #'
 #' @return a logical vector or an array of the same dimensions as `x`
 #' indicating if each value of `x` is within the defined subset.
+#'
+#' @examples
+#' # difference in behaviour with dimensions when compared to %in%
+#' iris[1:10,] %in% "setosa"
+#' iris[1:10,] == "setosa"
+#' iris[1:10,] %in{}% "setosa"
+#'
+#' # difference in behaviour with missing values when compared to %in%
+#' x <- c(1,2,3,NA,4)
+#' x %in% c(1,2,3)
+#' x %in{}% c(1,2,3)
+#'
+#' # other interval oparators
+#' x <- 1:10
+#' x %in[]% c(3,7)
+#' x %in()% c(3,7)
+#' x %in(]% c(3,7)
+#' x %in[)% c(3,7)
+#' x %out[]% c(3,7)
+#'
+#' # when more than 2 numbers are provided for the interval - range is used
+#' x <- 1:10
+#' all.equal(x %in[]% c(2,4), x %in[]% c(2,3,4))
+#' all.equal(x %in[]% c(2,4), x %in[]% range(c(2,3,4)))
+#'
+#' # matching according to regular expressions
+#' iris$Species %in~% "^v"
+#' iris$Species %in~f% "^v"
+#' iris$Species %in~f% "versicolor"
+#' iris$Species %in~f% c("versicolor", "virginica")
 #'
 #' @seealso `%in%`
 #' @name in_detect
