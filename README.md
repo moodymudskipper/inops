@@ -254,26 +254,26 @@ usage examples.
 | `<<-`       | change elements lower than the provided value                   | `x < number  <- value`        |
 | `>=<-`      | change elements greater or equal to the provided value          | `x >= number <- value`        |
 | `<=<-`      | change elements lower or equal to the provided value            | `x <= number <- value`        |
-| `%in<-%`    | change elements inside a set                                    | `x %in% set <- value`         |
-| `%in{}<-%`  | change elements inside a set                                    | `x %in{}% set <- value`       |
-| `%in[]<-%`  | change elements inside a closed interval                        | `x %in[]% interval <- value`  |
-| `%in()<-%`  | change elements inside an open interval                         | `x %in()% interval <- value`  |
-| `%in[)<-%`  | change elements inside an interval open on the right            | `x %in[)% interval <- value`  |
-| `%in(]<-%`  | change elements inside an interval open on the left             | `x %in(]% interval <- value`  |
-| `%in~<-%`   | change elements matching a regular expression                   | `x %in~% pattern <- value`    |
-| `%in~p<-%`  | change elements matching a regular perl expression              | `x %in~p% pattern <- value`   |
-| `%in~f<-%`  | change elements matching a regular fixed expression             | `x %in~f% pattern <- value`   |
-| `%in#<-%`   | change elements that occur specified number of times            | `x %in#% count <- value`      |
-| `%out<-%`   | change elements outside a set                                   | `x %out% set <- value`        |
-| `%out{}<-%` | change elements outside a set                                   | `x %out{}% set <- value`      |
-| `%out[]<-%` | change elements outside a closed interval                       | `x %out[]% interval <- value` |
-| `%out()<-%` | change elements outside an open interval                        | `x %out()% interval <- value` |
-| `%out[)<-%` | change elements outside an interval open on the right           | `x %out[)% interval <- value` |
-| `%out(]<-%` | change elements outside an interval open on the left            | `x %out(]% interval <- value` |
-| `%out~<-%`  | change elements not matching a regular expression               | `x %out~% pattern <- value`   |
-| `%out~p<-%` | change elements not matching a regular perl expression          | `x %out~p% pattern <- value`  |
-| `%out~f<-%` | change elements not matching a regular fixed expression         | `x %out~f% pattern <- value`  |
-| `%out#<-%`  | change elements that occur other than specified number of times | `x %out#% count <- value`     |
+| `%in%<-`    | change elements inside a set                                    | `x %in% set <- value`         |
+| `%in{}%<-`  | change elements inside a set                                    | `x %in{}% set <- value`       |
+| `%in[]%<-`  | change elements inside a closed interval                        | `x %in[]% interval <- value`  |
+| `%in()%<-`  | change elements inside an open interval                         | `x %in()% interval <- value`  |
+| `%in[)%<-`  | change elements inside an interval open on the right            | `x %in[)% interval <- value`  |
+| `%in(]%<-`  | change elements inside an interval open on the left             | `x %in(]% interval <- value`  |
+| `%in~%<-`   | change elements matching a regular expression                   | `x %in~% pattern <- value`    |
+| `%in~p%<-`  | change elements matching a regular perl expression              | `x %in~p% pattern <- value`   |
+| `%in~f%<-`  | change elements matching a regular fixed expression             | `x %in~f% pattern <- value`   |
+| `%in#%<-`   | change elements that occur specified number of times            | `x %in#% count <- value`      |
+| `%out%<-`   | change elements outside a set                                   | `x %out% set <- value`        |
+| `%out{}%<-` | change elements outside a set                                   | `x %out{}% set <- value`      |
+| `%out[]%<-` | change elements outside a closed interval                       | `x %out[]% interval <- value` |
+| `%out()%<-` | change elements outside an open interval                        | `x %out()% interval <- value` |
+| `%out[)%<-` | change elements outside an interval open on the right           | `x %out[)% interval <- value` |
+| `%out(]%<-` | change elements outside an interval open on the left            | `x %out(]% interval <- value` |
+| `%out~%<-`  | change elements not matching a regular expression               | `x %out~% pattern <- value`   |
+| `%out~p%<-` | change elements not matching a regular perl expression          | `x %out~p% pattern <- value`  |
+| `%out~f%<-` | change elements not matching a regular fixed expression         | `x %out~f% pattern <- value`  |
+| `%out#%<-`  | change elements that occur other than specified number of times | `x %out#% count <- value`     |
 
 ## Notes
 
