@@ -193,6 +193,7 @@ usage examples.
 
 | Form       | Description                                             | Call                  |
 | ---------- | ------------------------------------------------------- | --------------------- |
+| `%[in%`    | select elements inside a set                            | `x %[in% set`         |
 | `%[in{}%`  | select elements inside a set                            | `x %[in{}% set`       |
 | `%[in[]%`  | select elements inside a closed interval                | `x %[in[]% interval`  |
 | `%[in()%`  | select elements inside an open interval                 | `x %[in()% interval`  |
@@ -215,12 +216,13 @@ usage examples.
 
 | Form        | Description                                             | Call                          |
 | ----------- | ------------------------------------------------------- | ----------------------------- |
-| `%==<-%`    | change elements equal to the provided value             | `x == element <- value`       |
-| `%!=<-%`    | change elements not equal to the provided value         | `x != element <- value`       |
-| `%><-%`     | change elements greater than the provided value         | `x > number <- value`         |
-| `%<<-%`     | change elements lower than the provided value           | `x < number  <- value`        |
-| `%>=<-%`    | change elements greater or equal to the provided value  | `x >= number <- value`        |
-| `%<=<-%`    | change elements lower or equal to the provided value    | `x <= number <- value`        |
+| `==<-`      | change elements equal to the provided value             | `x == element <- value`       |
+| `!=<-`      | change elements not equal to the provided value         | `x != element <- value`       |
+| `><-`       | change elements greater than the provided value         | `x > number <- value`         |
+| `<<-`       | change elements lower than the provided value           | `x < number  <- value`        |
+| `>=<-`      | change elements greater or equal to the provided value  | `x >= number <- value`        |
+| `<=<-`      | change elements lower or equal to the provided value    | `x <= number <- value`        |
+| `%in<-%`    | change elements inside a set                            | `x %in% set <- value`         |
 | `%in{}<-%`  | change elements inside a set                            | `x %in{}% set <- value`       |
 | `%in[]<-%`  | change elements inside a closed interval                | `x %in[]% interval <- value`  |
 | `%in()<-%`  | change elements inside an open interval                 | `x %in()% interval <- value`  |
