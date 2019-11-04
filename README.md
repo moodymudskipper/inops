@@ -43,17 +43,14 @@ Work with the same values as `%in%` does but provide a more consistent
 behaviour for `data.frames` and `NA` values.
 
 ``` r
-letters
-#>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+letters <- letters[1:10]
 
 # sets
-letters %in{}% c("a", "b", "c", "x")
-#>  [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [18] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+letters %in{}% c("a", "b", "c", "e")
+#>  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 
-letters %out{}% c("a", "b", "c", "x")
-#>  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-#> [18]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
+letters %out{}% c("a", "b", "c", "e")
+#>  [1] FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
 ```
 
 2.  **ranges**

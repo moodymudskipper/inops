@@ -51,12 +51,12 @@ All operators have the same form composed of two distinct parts: `%<operation><t
 Work with the same values as `%in%` does but provide a more consistent behaviour for `data.frames` and `NA` values.
 
 ```{r}
-letters
+letters <- letters[1:10]
 
 # sets
-letters %in{}% c("a", "b", "c", "x")
+letters %in{}% c("a", "b", "c", "e")
 
-letters %out{}% c("a", "b", "c", "x")
+letters %out{}% c("a", "b", "c", "e")
 ```
 
 2. **ranges**
