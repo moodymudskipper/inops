@@ -17,6 +17,9 @@ test_that("assignment range ops work", {
   x <- 1:3
   x %in[]% c(2, 4) <- 4
   expect_equal(x, c(1,4,4))
+  x <- c(1,1,3)
+  x %in#% 2 <- 0
+  expect_equal(x, c(0,0,3))
   x <- 1:3
   x %out% c(2, 4) <- 4
   expect_equal(x, c(4, 2, 4))
@@ -35,6 +38,9 @@ test_that("assignment range ops work", {
   x <- 1:3
   x %out[]% c(2, 4) <- 4
   expect_equal(x, c(4, 2, 3))
+  x <- c(1,1,3)
+  x %out#% 2 <- 0
+  expect_equal(x, c(1,1,0))
 })
 
 
@@ -57,5 +63,4 @@ test_that("assignment regex ops work",{
   x <- letters[1:2]
   x %out~f% "a" <- "c"
   expect_equal(x, c("a", "c"))
-
 })
