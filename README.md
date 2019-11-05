@@ -5,127 +5,17 @@
 
 Package implementing additional infix operators for R.
 
-Operators provide 3 distinct operations:
+Implemented operators work with 4 different value types: **sets**,
+**intervals**, **regular expressions**, and **counts**.  
+And provide 3 distinct functionalities: **detection**, **subsetting**,
+and **replacement**.
 
-1.  detection    `x %in()% interval`
-2.  subsetting   `x %[in()% interval`
-3.  replacement `x %in()% interval <- new_value`
+![inops\_table](http://karolis.koncevicius.lt/data/inops/inops_table.png)
 
-And work with 4 different value types:
-
-1.  sets `x %in{}% set`
-2.  intervals `x %in()% interval`
-3.  patterns `x %in~% pattern`
-4.  counts `x %in#% counts`
-
+For more examples please see the vignette.  
 For a complete list of available operators consult the tables below.
 
-## Examples
-
-Simple examples for illustration.
-
------
-
-Selecting flight records from the `flights` dataset that:
-
-1.  Departed and Landed between noon and 5 p.m.
-2.  Were not traveling to “LEX”, “PSP”, nor “HDN”
-3.  Travelled distance was either very short (below 100) or very long
-    (above 3000)
-4.  Had a tail number starting with “N1” or “N3”
-
-<!-- end list -->
-
-``` r
-library(nycflights13)
-library(dplyr)
-library(inops)
-
-flights <- as.data.frame(select(flights, origin, dest, tailnum, dep_time, arr_time, distance))
-head(flights)
-#>   origin dest tailnum dep_time arr_time distance
-#> 1    EWR  IAH  N14228      517      830     1400
-#> 2    LGA  IAH  N24211      533      850     1416
-#> 3    JFK  MIA  N619AA      542      923     1089
-#> 4    JFK  BQN  N804JB      544     1004     1576
-#> 5    LGA  ATL  N668DN      554      812      762
-#> 6    EWR  ORD  N39463      554      740      719
-
-filter(flights,
-       dep_time %in()%  c(1200, 1700),
-       arr_time %in()%  c(1200, 1700),
-       dest     %out%   c("LEX", "PSP", "HDN"),
-       distance %out[]% c(100, 3000),
-       tailnum  %in~%   c("^N1", "^N3")
-       )
-#>   origin dest tailnum dep_time arr_time distance
-#> 1    EWR  PHL  N14972     1240     1333       80
-#> 2    JFK  HNL  N391HA     1214     1645     4983
-```
-
------
-
-Cleaning up `planes` dataset in order to:
-
-1.  Standardize names of “AIRBUS”, “CANADAIR” and “MCDONNELL”
-    manufacturers.
-2.  Obtain plane counts for each of the 3 manufacturers mentioned above.
-
-<!-- end list -->
-
-``` r
-library(nycflights13)
-library(inops)
-
-table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
-#> 
-#>                        AIRBUS              AIRBUS INDUSTRIE                      CANADAIR 
-#>                           336                           400                             9 
-#>                  CANADAIR LTD             MCDONNELL DOUGLAS MCDONNELL DOUGLAS AIRCRAFT CO 
-#>                             1                           120                           103 
-#> MCDONNELL DOUGLAS CORPORATION 
-#>                            14
-
-planes$manufacturer %in~% "AIRBUS"    <- "AIRBUS"
-planes$manufacturer %in~% "CANADAIR"  <- "CANADAIR"
-planes$manufacturer %in~% "MCDONNELL" <- "MCDONNELL"
-
-table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
-#> 
-#>    AIRBUS  CANADAIR MCDONNELL 
-#>       736        10       237
-```
-
------
-
-Combine engine models that in the dataset occur less than 6 times under
-the “Other” group.
-
-``` r
-library(nycflights13)
-library(inops)
-
-table(planes$engine)
-#> 
-#>       4 Cycle Reciprocating     Turbo-fan     Turbo-jet    Turbo-prop   Turbo-shaft 
-#>             2            28          2750           535             2             5
-
-planes$engine %in#% 1:5 <- "Other"
-
-table(planes$engine)
-#> 
-#>         Other Reciprocating     Turbo-fan     Turbo-jet 
-#>             9            28          2750           535
-```
-
------
-
-## Full List
-
-Below is a full list of all the implemented operators along with their
-usage examples.
-
-### Syntax
+## Syntax
 
 All operators have the same form composed of two distinct parts:
 `%<operation><type>%`.
