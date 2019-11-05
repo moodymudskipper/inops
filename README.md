@@ -5,268 +5,22 @@
 
 Package implementing additional infix operators for R.
 
-Implemented operators work with 4 different value types: **sets**,
-**intervals**, **regular expressions**, and **counts**.  
-And provide 3 distinct functionalities: **detection**, **subsetting**,
-and **replacement**.
+Operators provide 3 distinct operations:
 
-Install using the `remotes` package:
+1.  detection    `x %in()% interval`
+2.  subsetting   `x %[in()% interval`
+3.  replacement `x %in()% interval <- new_value`
 
-    remotes::install_github("moodymudskipper/inops")
+And work with 4 different value types:
 
-## Syntax
+1.  sets `x %in{}% set`
+2.  intervals `x %in()% interval`
+3.  patterns `x %in~% pattern`
+4.  counts `x %in#% counts`
 
-All operators have the same form composed of two distinct parts:
-`%<operation><type>%`.
+For a complete list of available operators consult the tables below.
 
-  - `[operation]` specifies the performed functionality and can be one
-    of `in`, `out`, `[in`, `[out`.
-  - `[type]` specifies the type of operation and can be one of `{}`,
-    `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
-
-## Value Types
-
-1.  **sets**
-
-<!-- end list -->
-
-``` 
- %in{}%
-%out{}%
-```
-
-Work with the same values as `%in%` does but provide a more consistent
-behaviour for `data.frames` and `NA` values.
-
-``` r
-letters <- letters[1:10]
-letters
-#>  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"
-
-# sets
-
-letters %in{}% c("a", "b", "c", "e")
-#>  [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
-
-letters %out{}% c("a", "b", "c", "e")
-#>  [1] FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-```
-
-2.  **ranges**
-
-<!-- end list -->
-
-``` 
- %in()%   %in[]%   %in[)%   %in(]%
-%out()%  %out[]%  %out[)%  %out(]%
-```
-
-``` r
-1:10
-#>  [1]  1  2  3  4  5  6  7  8  9 10
-
-# closed interval
-
-1:10 %in()% c(3,6)
-#>  [1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
-
-1:10 %out()% c(3,6)
-#>  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-
-# open interval
-
-1:10 %in[]% c(3,6)
-#>  [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
-
-1:10 %out[]% c(3,6)
-#>  [1]  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
-
-# open on the right
-
-1:10 %in(]% c(3,6)
-#>  [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
-
-1:10 %out(]% c(3,6)
-#>  [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
-
-# open on the left
-
-1:10 %in[)% c(3,6)
-#>  [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
-
-1:10 %out[)% c(3,6)
-#>  [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-```
-
-3.  **patterns**
-
-<!-- end list -->
-
-``` 
- %in~%   %in~f%   %in~p%
-%out~%  %out~f%  %out~p%
-```
-
-``` r
-month.name
-#>  [1] "January"   "February"  "March"     "April"     "May"       "June"      "July"      "August"   
-#>  [9] "September" "October"   "November"  "December"
-
-# regular expressions
-
-month.name %in~% "^M.*"
-#>  [1] FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-
-month.name %out~% "^M.*"
-#>  [1]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-
-# fixed string regular expressions
-
-month.name %in~f% "^M.*"
-#>  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-
-month.name %out~f% "^M.*"
-#>  [1]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-
-# perl regular expressions
-
-month.name %in~p% "^(?=.*r)(?!.*er)"
-#>  [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-
-month.name %out~p% "^(?=.*r)(?!.*er)"
-#>  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-```
-
-4.  **counts**
-
-<!-- end list -->
-
-``` 
- %in#%
-%out#%
-```
-
-``` r
-values <- c("a", "a", "b", "b", "b", "c")
-values
-#> [1] "a" "a" "b" "b" "b" "c"
-
-# number of occurances
-
-values %in#% 1:2
-#> [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE
-
-values %out#% 1:2
-#> [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE
-```
-
-## Operations
-
-1.  **detection**
-
-Same form as examples shown above.
-
-``` r
-month.name
-#>  [1] "January"   "February"  "March"     "April"     "May"       "June"      "July"      "August"   
-#>  [9] "September" "October"   "November"  "December"
-
-month.name %in~% c("^A", "^M")
-#>  [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
-```
-
-2.  **subsetting**
-
-Used for obtaining actual values.  
-Starts with `[`.
-
-``` r
-month.name
-#>  [1] "January"   "February"  "March"     "April"     "May"       "June"      "July"      "August"   
-#>  [9] "September" "October"   "November"  "December"
-
-month.name %[in~% c("^A", "^M")
-#> [1] "March"  "April"  "May"    "August"
-```
-
-3.  **replacement**
-
-Used for replacing the matched elements with new values.  
-Called with assignment `<-` at the end.
-
-``` r
-month.name
-#>  [1] "January"   "February"  "March"     "April"     "May"       "June"      "July"      "August"   
-#>  [9] "September" "October"   "November"  "December"
-
-month.name %in~% c("^A", "^M") <- "A or M"
-
-month.name
-#>  [1] "January"   "February"  "A or M"    "A or M"    "A or M"    "June"      "July"      "A or M"   
-#>  [9] "September" "October"   "November"  "December"
-```
-
-## Behaviour
-
-The operators implemented here try to be consistent with the default
-comparison operators like `==` and `<`.  
-Therefore in some scenarios their behaviour differs from `%in%`.  
-For instance:
-
-1)  `%in{}%` can be used on on data frames.
-
-<!-- end list -->
-
-``` r
-df1 <- data.frame(a = 1:3, b = 2:4, c=letters[1:3])
-
-df1 == 2
-#>          a     b     c
-#> [1,] FALSE  TRUE FALSE
-#> [2,]  TRUE FALSE FALSE
-#> [3,] FALSE FALSE FALSE
-
-df1 %in% 2
-#> [1] FALSE FALSE FALSE
-
-df1 %in{}% 2
-#>          a     b     c
-#> [1,] FALSE  TRUE FALSE
-#> [2,]  TRUE FALSE FALSE
-#> [3,] FALSE FALSE FALSE
-
-df1 %in{}% 2:3
-#>          a     b     c
-#> [1,] FALSE  TRUE FALSE
-#> [2,]  TRUE  TRUE FALSE
-#> [3,]  TRUE FALSE FALSE
-```
-
-2)  missing values are not considered as not matching.
-
-<!-- end list -->
-
-``` r
-NA == 1
-#> [1] NA
-
-NA %in% 1
-#> [1] FALSE
-
-NA %in{}% 1
-#> [1] NA
-
-NA %in% NA
-#> [1] TRUE
-
-NA %in{}% NA
-#> [1] NA
-
-c(1, NA, 3) %in{}% 1:10
-#> [1] TRUE   NA TRUE
-```
-
-## Additional Examples
+## Examples
 
 Simple examples for illustration.
 
@@ -287,18 +41,26 @@ library(nycflights13)
 library(dplyr)
 library(inops)
 
-flights %>%
-  filter(dep_time %in()%  c(1200, 1700)) %>%
-  filter(arr_time %in()%  c(1200, 1700)) %>%
-  filter(dest     %out%   c("LEX", "PSP", "HDN")) %>%
-  filter(distance %out[]% c(100, 3000)) %>%
-  filter(tailnum  %in~%   c("^N1", "^N3")) %>%
-  select(origin, dest, tailnum, dep_time, arr_time, distance)
-#> # A tibble: 2 x 6
-#>   origin dest  tailnum dep_time arr_time distance
-#>   <chr>  <chr> <chr>      <int>    <int>    <dbl>
-#> 1 EWR    PHL   N14972      1240     1333       80
-#> 2 JFK    HNL   N391HA      1214     1645     4983
+flights <- as.data.frame(select(flights, origin, dest, tailnum, dep_time, arr_time, distance))
+head(flights)
+#>   origin dest tailnum dep_time arr_time distance
+#> 1    EWR  IAH  N14228      517      830     1400
+#> 2    LGA  IAH  N24211      533      850     1416
+#> 3    JFK  MIA  N619AA      542      923     1089
+#> 4    JFK  BQN  N804JB      544     1004     1576
+#> 5    LGA  ATL  N668DN      554      812      762
+#> 6    EWR  ORD  N39463      554      740      719
+
+filter(flights,
+       dep_time %in()%  c(1200, 1700),
+       arr_time %in()%  c(1200, 1700),
+       dest     %out%   c("LEX", "PSP", "HDN"),
+       distance %out[]% c(100, 3000),
+       tailnum  %in~%   c("^N1", "^N3")
+       )
+#>   origin dest tailnum dep_time arr_time distance
+#> 1    EWR  PHL  N14972     1240     1333       80
+#> 2    JFK  HNL  N391HA     1214     1645     4983
 ```
 
 -----
@@ -362,6 +124,16 @@ table(planes$engine)
 
 Below is a full list of all the implemented operators along with their
 usage examples.
+
+### Syntax
+
+All operators have the same form composed of two distinct parts:
+`%<operation><type>%`.
+
+  - `[operation]` specifies the performed functionality and can be one
+    of `in`, `out`, `[in`, `[out`.
+  - `[type]` specifies the type of operation and can be one of `{}`,
+    `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
 
 ### Detection Operators
 
