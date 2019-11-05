@@ -180,25 +180,13 @@ NULL
 #' @usage x \%in#\% count <- value
 #' @export
 `%in#%<-` <- function(x, count, value) {
-  if(is.data.frame(x)) {
-    x <- as.matrix(x)
-  }
-  ns <- stats::ave(as.numeric(factor(x)), x, FUN=length)
-  dim(ns) <- dim(x)
-  x[ns %in{}% count] <- value
-  x
+  replace(x, x %in#% count, value)
 }
 
 #' @rdname in_replace
 #' @usage x \%out#\% count <- value
 #' @export
 `%out#%<-` <- function(x, count, value) {
-  if(is.data.frame(x)) {
-    x <- as.matrix(x)
-  }
-  ns <- stats::ave(as.numeric(factor(x)), x, FUN=length)
-  dim(ns) <- dim(x)
-  x[ns %out{}% count] <- value
-  x
+  replace(x, x %out#% count, value)
 }
 

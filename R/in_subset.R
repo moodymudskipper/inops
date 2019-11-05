@@ -151,22 +151,12 @@ NULL
 #' @rdname in_subset
 #' @export
 `%[in#%` <- function(x, count) {
-  if(is.data.frame(x)) {
-    x <- as.matrix(x)
-  }
-  ns <- stats::ave(as.numeric(factor(x)), x, FUN=length)
-  dim(ns) <- dim(x)
-  x[ns %in{}% count]
+  x[x %in#% count]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out#%` <- function(x, count) {
-  if(is.data.frame(x)) {
-    x <- as.matrix(x)
-  }
-  ns <- stats::ave(as.numeric(factor(x)), x, FUN=length)
-  dim(ns) <- dim(x)
-  x[ns %out{}% count]
+  x[x %out#% count]
 }
 
