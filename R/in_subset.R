@@ -7,7 +7,7 @@
 #'
 #' @inheritParams in_detect
 #'
-#' @return `x` with specified values replaced with `value`.
+#' @return elements of `x` matched by the used infix operator type.
 #'
 #' @examples
 #' # interval subsetting operators

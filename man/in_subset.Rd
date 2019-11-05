@@ -76,7 +76,7 @@ x \%[out#\% count
 \item{count}{numeric vector defining counts for count-based selection.}
 }
 \value{
-\code{x} with specified values replaced with \code{value}.
+elements of \code{x} matched by the used infix operator type.
 }
 \description{
 Operators for subsetting values within a given interval or set.
