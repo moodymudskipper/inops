@@ -22,7 +22,7 @@ Package implementing additional infix operators for R.
 Implemented operators work with 4 different value types: **sets**, **intervals**, **regular expressions**, and **counts**.\
 And provide 3 distinct functionalities: **detection**, **subsetting**, and **replacement**.
 
-![inops_table](http://karolis.koncevicius.lt/data/inops/inops_table.png)
+![inops_table](http://karolis.koncevicius.lt/data/inops/operator_table.png)
 
 For more examples please see the vignette.\
 For a complete list of available operators consult the tables below.
