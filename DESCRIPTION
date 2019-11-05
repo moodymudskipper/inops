@@ -3,7 +3,7 @@ Title: Infix Operators for Detection, Subsetting and Replacement
 Version: 0.0.0.9000
 Authors@R: c(
     person("Antoine", "Fabri", email = "antoine.fabri@gmail.com", role = c("aut", "cre")),
-    person("Karolis", "Koncevi\u00e7ius", email = "karolis.koncevicius@gmail.com", role = "aut")
+    person("Karolis", "Koncevičius", email = "karolis.koncevicius@gmail.com", role = "aut")
     )
 Description: Provides infix operators to detect, subset, and replace the elements matched by a given condition.
   The functions have several variants of operator types, including subsets, ranges, regular expressions and others.
