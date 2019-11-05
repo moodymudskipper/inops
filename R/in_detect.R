@@ -150,6 +150,8 @@ NULL
 #' @rdname in_detect
 #' @export
 `%in[)%` <- function(x, interval) {
+  # fail on nested lists
+  if (is.list(interval)) interval <- as.numeric(interval)
   interval <- range(interval, na.rm = TRUE)
   x >= interval[1] & x < interval[2]
 }
