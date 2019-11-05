@@ -10,7 +10,7 @@ Implemented operators work with 4 different value types: **sets**,
 And provide 3 distinct functionalities: **detection**, **subsetting**,
 and **replacement**.
 
-![inops\_table](http://karolis.koncevicius.lt/data/inops/operator_table.png)
+![inops\_operator\_table](http://karolis.koncevicius.lt/data/inops/inops_operator_table.png)
 
 For more examples please see the vignette.  
 For a complete list of available operators consult the tables below.
