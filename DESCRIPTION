@@ -15,5 +15,10 @@ LazyData: true
 RoxygenNote: 6.1.1
 Suggests: 
     testthat (>= 2.1.0),
-    purrr
+    purrr,
+    knitr,
+    rmarkdown,
+    dplyr,
+    nycflights13
+VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

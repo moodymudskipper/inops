@@ -5,195 +5,25 @@
 
 Package implementing additional infix operators for R.
 
-Implemented operators provide 3 distinct operations: **detection**,
-**subsetting**, and **replacement**.  
-And work with 4 different value types: **sets**, **intervals**,
-**regular expressions**, and **counts**.
+Implemented operators work with 4 different value types: **sets**,
+**intervals**, **regular expressions**, and **counts**.  
+And provide 3 distinct functionalities: **detection**, **subsetting**,
+and **replacement**.
 
-Install using the `remotes` package:
+![inops\_table](http://karolis.koncevicius.lt/data/inops/operator_table.png)
 
-    remotes::install_github("moodymudskipper/inops")
+For more examples please see the vignette.  
+For a complete list of available operators consult the tables below.
 
-## Examples
-
-Simple examples for illustration.
-
------
-
-Selecting flight records from the `flights` dataset that:
-
-1.  Departed and Landed between noon and 5 p.m.
-2.  Were not traveling to “LEX”, “PSP”, nor “HDN”
-3.  Travelled distance was either very short (below 100) or very long
-    (above 3000)
-4.  Had a tail number starting with “N1” or “N3”
-
-<!-- end list -->
-
-``` r
-library(nycflights13)
-library(dplyr)
-library(inops)
-
-flights %>%
-  filter(dep_time %in()%  c(1200, 1700)) %>%
-  filter(arr_time %in()%  c(1200, 1700)) %>%
-  filter(dest     %out%   c("LEX", "PSP", "HDN")) %>%
-  filter(distance %out[]% c(100, 3000)) %>%
-  filter(tailnum  %in~%   c("^N1", "^N3")) %>%
-  select(origin, dest, tailnum, dep_time, arr_time, distance)
-#> # A tibble: 2 x 6
-#>   origin dest  tailnum dep_time arr_time distance
-#>   <chr>  <chr> <chr>      <int>    <int>    <dbl>
-#> 1 EWR    PHL   N14972      1240     1333       80
-#> 2 JFK    HNL   N391HA      1214     1645     4983
-```
-
------
-
-Cleaning up `planes` dataset in order to:
-
-1.  Standardize names of “AIRBUS”, “CANADAIR” and “MCDONNELL”
-    manufacturers.
-2.  Obtain plane counts for each of the 3 manufacturers mentioned above.
-
-<!-- end list -->
-
-``` r
-library(nycflights13)
-library(inops)
-
-table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
-#> 
-#>                        AIRBUS              AIRBUS INDUSTRIE                      CANADAIR 
-#>                           336                           400                             9 
-#>                  CANADAIR LTD             MCDONNELL DOUGLAS MCDONNELL DOUGLAS AIRCRAFT CO 
-#>                             1                           120                           103 
-#> MCDONNELL DOUGLAS CORPORATION 
-#>                            14
-
-planes$manufacturer %in~% "AIRBUS"    <- "AIRBUS"
-planes$manufacturer %in~% "CANADAIR"  <- "CANADAIR"
-planes$manufacturer %in~% "MCDONNELL" <- "MCDONNELL"
-
-table(planes$manufacturer %[in~% c("AIRBUS", "CANADAIR", "MCDONNELL"))
-#> 
-#>    AIRBUS  CANADAIR MCDONNELL 
-#>       736        10       237
-```
-
------
-
-Combine engine models that in the dataset occur less than 6 times under
-the “Other” group.
-
-``` r
-library(nycflights13)
-library(inops)
-
-table(planes$engine)
-#> 
-#>       4 Cycle Reciprocating     Turbo-fan     Turbo-jet    Turbo-prop   Turbo-shaft 
-#>             2            28          2750           535             2             5
-
-planes$engine %in#% 1:5 <- "Other"
-
-table(planes$engine)
-#> 
-#>         Other Reciprocating     Turbo-fan     Turbo-jet 
-#>             9            28          2750           535
-```
-
------
-
-## Operators
-
-Introduction to operator behaviour and design.
-
-### Form
+## Syntax
 
 All operators have the same form composed of two distinct parts:
 `%<operation><type>%`.
 
-  - `[operation]` specifies the performed operation and can be one of
-    `in`, `out`, `[in`, `[out`.
+  - `[operation]` specifies the performed functionality and can be one
+    of `in`, `out`, `[in`, `[out`.
   - `[type]` specifies the type of operation and can be one of `{}`,
     `[]`, `()`, `[)`, `(]`, `~`, `~p`, `~f`, `#`.
-
-To understand what each combination does see the table below.
-
-### Behaviour
-
-The operators implemented here try to be consistent with the default
-comparison operators like `==` and `<`.  
-Therefore in some scenarios their behaviour differs from `%in%`.  
-For instance:
-
-1)  `%in{}%` can be used on on data frames.
-
-<!-- end list -->
-
-``` r
-df1 <- data.frame(a = 1:3, b = 2:4, c=letters[1:3])
-
-df1 == 2
-#>          a     b     c
-#> [1,] FALSE  TRUE FALSE
-#> [2,]  TRUE FALSE FALSE
-#> [3,] FALSE FALSE FALSE
-
-df1 %in% 2
-#> [1] FALSE FALSE FALSE
-
-df1 %in{}% 2
-#>          a     b     c
-#> [1,] FALSE  TRUE FALSE
-#> [2,]  TRUE FALSE FALSE
-#> [3,] FALSE FALSE FALSE
-
-df1 %in{}% 2:3
-#>          a     b     c
-#> [1,] FALSE  TRUE FALSE
-#> [2,]  TRUE  TRUE FALSE
-#> [3,]  TRUE FALSE FALSE
-```
-
-2)  missing values are not considered as not matching.
-
-<!-- end list -->
-
-``` r
-NA == 1
-#> [1] NA
-
-NA %in% 1
-#> [1] FALSE
-
-NA %in{}% 1
-#> [1] NA
-
-NA %in% NA
-#> [1] TRUE
-
-NA %in{}% NA
-#> [1] NA
-
-c(1, NA, 3) %in{}% 1:10
-#> [1] TRUE   NA TRUE
-```
-
-### Operations
-
-Operators permit three distinct operations:
-
-1.  Detect: `x %in{}% set`
-2.  Subset: `x %[in{}% set`
-3.  Replace: `x %in{}% set <- value`
-
-## Operator List
-
-Below is a full list of all the implemented operators along with their
-usage examples.
 
 ### Detection Operators
 
