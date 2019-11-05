@@ -1,4 +1,4 @@
-test_that("comparison/equality assignment ops with work", {
+test_that("comparison/equality assignment ops are working", {
   x <- 1:3
   x == 2 <- 4
   expect_equal(x, c(1,4,3))

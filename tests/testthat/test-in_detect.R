@@ -28,6 +28,7 @@ test_that("%out()% works", expect_true(3 %out()% 1:2))
 test_that("%out[)% works", expect_true(3 %out[)% 1:2))
 test_that("%out(]% works", expect_true(3 %out(]% 1:2))
 test_that("%out[]% works", expect_true(3 %out[]% 1:2))
+test_that("%out# works", expect_true(3 %out#% 2:3))
 
 test_that("%in{}% works with factors", expect_true("a" %in{}% factor(c("a","b"))))
 test_that("%in{}% works with matrices", {
@@ -76,6 +77,20 @@ test_that("regex ops work with factors", {
   expect_true("a" %in~% factor("a"))
 expect_true(factor("a") %in~% "a")
 expect_true(factor("a") %in~% factor("a"))
+})
+
+test_that("count ops work", {
+  expect_equal(c(1,1,2,3,4,4) %in#% 2, c(TRUE,TRUE,FALSE,FALSE,TRUE,TRUE))
+  expect_equal(c(1,1,2,3,4,4) %out#% 2, c(FALSE,FALSE,TRUE,TRUE,FALSE,FALSE))
+})
+
+test_that("count ops work with matrices", {
+  expect_identical(matrix(c(1,2,3,1),2) %in#% 2,
+                   matrix(c(T,F,F,T),2))
+})
+
+test_that("count ops work with factors", {
+  expect_equal(factor(c("a", "b", "a")) %in#% 2, c(TRUE, FALSE, TRUE))
 })
 
 context("consistency of check ops with equality/comparison ops")

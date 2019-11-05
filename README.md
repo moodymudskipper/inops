@@ -53,6 +53,12 @@ All operators have the same form composed of two distinct parts:
 
 | Form       | Description                                                     | Call                  |
 | ---------- | --------------------------------------------------------------- | --------------------- |
+| `%[==%`    | select elements equal to the provided value                     | `x %[==% element`     |
+| `%[!=%`    | select elements not equal to the provided value                 | `x %[!=% element`     |
+| `%[>%`     | select elements greater than the provided value                 | `x %[>% number`       |
+| `%[<%`     | select elements lower than the provided value                   | `x %[<% number`       |
+| `%[>=%`    | select elements greater or equal to the provided value          | `x %[>=% number`      |
+| `%[<=%`    | select elements lower or equal to the provided value            | `x %[<=% number`      |
 | `%[in%`    | select elements inside a set                                    | `x %[in% set`         |
 | `%[in{}%`  | select elements inside a set                                    | `x %[in{}% set`       |
 | `%[in[]%`  | select elements inside a closed interval                        | `x %[in[]% interval`  |
@@ -81,7 +87,7 @@ All operators have the same form composed of two distinct parts:
 | `==<-`      | change elements equal to the provided value                     | `x == element <- value`       |
 | `!=<-`      | change elements not equal to the provided value                 | `x != element <- value`       |
 | `><-`       | change elements greater than the provided value                 | `x > number <- value`         |
-| `<<-`       | change elements lower than the provided value                   | `x < number  <- value`        |
+| `<<-`       | change elements lower than the provided value                   | `x < number <- value`         |
 | `>=<-`      | change elements greater or equal to the provided value          | `x >= number <- value`        |
 | `<=<-`      | change elements lower or equal to the provided value            | `x <= number <- value`        |
 | `%in%<-`    | change elements inside a set                                    | `x %in% set <- value`         |
