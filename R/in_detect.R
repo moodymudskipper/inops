@@ -223,7 +223,7 @@ in_regex <- function(x , pattern, ...) {
   if(is.data.frame(x)) {
     x <- as.matrix(x)
   }
-  ns <- ave(as.numeric(factor(x)), x, FUN=length)
+  ns <- stats::ave(as.numeric(factor(x)), x, FUN=length)
   dim(ns) <- dim(x)
   ns %in{}% count
 }
@@ -234,7 +234,7 @@ in_regex <- function(x , pattern, ...) {
   if(is.data.frame(x)) {
     x <- as.matrix(x)
   }
-  ns <- ave(as.numeric(factor(x)), x, FUN=length)
+  ns <- stats::ave(as.numeric(factor(x)), x, FUN=length)
   dim(ns) <- dim(x)
   ns %out{}% count
 }
