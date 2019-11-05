@@ -236,13 +236,16 @@ library(nycflights13)
 library(dplyr)
 library(inops)
 
-flights %>%
-  filter(dep_time %in()%  c(1200, 1700)) %>%
-  filter(arr_time %in()%  c(1200, 1700)) %>%
-  filter(dest     %out%   c("LEX", "PSP", "HDN")) %>%
-  filter(distance %out[]% c(100, 3000)) %>%
-  filter(tailnum  %in~%   c("^N1", "^N3")) %>%
-  select(origin, dest, tailnum, dep_time, arr_time, distance)
+flights <- select(flights, origin, dest, tailnum, dep_time, arr_time, distance)
+flights
+
+filter(flights,
+       dep_time %in()%  c(1200, 1700),
+       arr_time %in()%  c(1200, 1700),
+       dest     %out%   c("LEX", "PSP", "HDN"),
+       distance %out[]% c(100, 3000),
+       tailnum  %in~%   c("^N1", "^N3")
+       )
 ```
 
 ---

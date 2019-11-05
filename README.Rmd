@@ -122,6 +122,17 @@ All operators have the same form composed of two distinct parts: `%<operation><t
 
 ## Notes ##
 
+1. **Overloading**
+
 To give an assignment counterpart to `<` we had to overload the `<<-` operator, which explains the message when attaching the package.
 This doesn't affect the behavior of the `<<-` assignments.
+
+2. **Behaviour**
+
+Detection operators should be seen as an extension of the standard infix operators implemented in R (i.e. `==`, `>`, etc).
+For this reason the implemented operators differ from standard `%in%` and behave more like `==` on `data.frames` and objects with `NA` values.
+
+Subsetting and replacement operators are wrappers around detection operators.\
+Subsetting: `x[ x %in{}% set]`.\
+Replacement: `replace(x, x %in{}% set, value)`.
 
