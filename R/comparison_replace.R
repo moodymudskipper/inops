@@ -35,28 +35,28 @@ NULL
 #' @rdname comparison_replace
 #' @usage x >= y <- value
 #' @export
-`>=<-` <- function(x, y, value){
+`>=<-` <- function(x, y, value) {
   replace(x, x >= y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x > y <- value
 #' @export
-`><-` <- function(x, y, value){
+`><-` <- function(x, y, value) {
   replace(x, x > y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x <= y <- value
 #' @export
-`<=<-` <- function(x, y, value){
+`<=<-` <- function(x, y, value) {
   replace(x, x <= y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x < y <- value
 #' @export
-`<<-` <- function(x, y, value){
+`<<-` <- function(x, y, value) {
   # this one needs extra care so standard base::`<<-` still works
   if (missing(value)) {
     eval.parent(substitute(.Primitive("<<-")(x, y)))
@@ -68,14 +68,14 @@ NULL
 #' @rdname comparison_replace
 #' @usage x == y <- value
 #' @export
-`==<-` <- function(x, y, value){
+`==<-` <- function(x, y, value) {
   replace(x, x == y, value)
 }
 
 #' @rdname comparison_replace
 #' @usage x != y <- value
 #' @export
-`!=<-` <- function(x, y, value){
+`!=<-` <- function(x, y, value) {
   replace(x, x != y, value)
 }
 

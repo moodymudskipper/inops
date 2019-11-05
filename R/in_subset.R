@@ -34,104 +34,104 @@ NULL
 #' @rdname in_subset
 #' @export
 `%[in{}%` <- function(x, table) {
-  x[ x %in{}% table]
+  x[x %in{}% table]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out{}%` <- function(x, table) {
-  x[ x %out{}% table]
+  x[x %out{}% table]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in[]%` <- function(x, interval) {
-  x[ x %in[]% interval]
+  x[x %in[]% interval]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out[]%` <- function(x, interval) {
-  x[ x %out[]% interval]
+  x[x %out[]% interval]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in()%` <- function(x, interval) {
-  x[ x %in()% interval]
+  x[x %in()% interval]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out()%` <- function(x, interval) {
-  x[ x %out()% interval]
+  x[x %out()% interval]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in(]%` <- function(x, interval) {
-  x[ x %in(]% interval]
+  x[x %in(]% interval]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out(]%` <- function(x, interval) {
-  x[ x %out(]% interval]
+  x[x %out(]% interval]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in[)%` <- function(x, interval) {
-  x[ x %in[)% interval]
+  x[x %in[)% interval]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out[)%` <- function(x, interval) {
-  x[ x %out[)% interval]
+  x[x %out[)% interval]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in~%` <- function(x, pattern) {
-  x[ x %in~% pattern]
+  x[x %in~% pattern]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out~%` <- function(x, pattern) {
-  x[ x %out~% pattern]
+  x[x %out~% pattern]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in~p%` <- function(x, pattern) {
-  x[ x %in~p% pattern]
+  x[x %in~p% pattern]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out~p%` <- function(x, pattern) {
-  x[ x %out~p% pattern]
+  x[x %out~p% pattern]
 }
 
 
 #' @rdname in_subset
 #' @export
 `%[in~f%` <- function(x, pattern) {
-  x[ x %in~f% pattern]
+  x[x %in~f% pattern]
 }
 
 #' @rdname in_subset
 #' @export
 `%[out~f%` <- function(x, pattern) {
-  x[ x %out~f% pattern]
+  x[x %out~f% pattern]
 }
 
 
