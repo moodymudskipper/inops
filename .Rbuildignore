@@ -5,3 +5,5 @@
 ^inops\.Rproj$
 ^doc$
 ^Meta$
+^CRAN-RELEASE$
+^cran-comments\.md$
