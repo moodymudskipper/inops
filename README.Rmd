@@ -140,8 +140,9 @@ Replacement: `replace(x, x %in{}% set, value)`.
 
 Other similar packages you might be interested in.
 
-1. [operators](https://github.com/romainfrancois/operators)
-2. [infix](https://github.com/ebeneditos/infix)
-3. [invctr](https://github.com/FredHasselman/invctr)
-4. [grapes](https://github.com/wlandau/grapes)
+1. [intrval](https://github.com/psolymos/intrval)
+2. [operators](https://github.com/romainfrancois/operators)
+3. [infix](https://github.com/ebeneditos/infix)
+4. [invctr](https://github.com/FredHasselman/invctr)
+5. [grapes](https://github.com/wlandau/grapes)
 
