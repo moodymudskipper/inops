@@ -130,3 +130,13 @@ Subsetting and replacement operators are wrappers around detection
 operators.  
 Subsetting: `x[ x %in{}% set]`.  
 Replacement: `replace(x, x %in{}% set, value)`.
+
+## See Also
+
+Other similar packages you might be interested in.
+
+1.  [intrval](https://github.com/psolymos/intrval)
+2.  [operators](https://github.com/romainfrancois/operators)
+3.  [infix](https://github.com/ebeneditos/infix)
+4.  [invctr](https://github.com/FredHasselman/invctr)
+5.  [grapes](https://github.com/wlandau/grapes)
