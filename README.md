@@ -1,3 +1,5 @@
+[![CRAN version](https://www.r-pkg.org/badges/version/inops)](https://cran.r-project.org/package=inops)
+[![dependencies](https://tinyverse.netlify.com/badge/inops)](https://CRAN.R-project.org/package=inops)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
